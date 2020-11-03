@@ -1,0 +1,50 @@
+{
+  "name": "bpmn-js-example-modeler",
+  "version": "0.0.0",
+  "description": "A simple modeler built with bpmn-js",
+  "scripts": {
+    "all": "run-s lint build",
+    "build": "webpack --mode production",
+    "dev": "webpack-dev-server --content-base=public --open",
+    "lint": "eslint .",
+    "start": "run-s dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bpmn-io/bpmn-js-examples"
+  },
+  "keywords": [
+    "bpmnjs-example"
+  ],
+  "author": {
+    "name": "Nico Rehwaldt",
+    "url": "https://github.com/nikku"
+  },
+  "contributors": [
+    {
+      "name": "bpmn.io contributors",
+      "url": "https://github.com/bpmn-io"
+    }
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "copy-webpack-plugin": "^5.0.4",
+    "eslint": "^6.5.1",
+    "eslint-plugin-bpmn-io": "^0.10.0",
+    "npm-run-all": "^4.1.5",
+    "raw-loader": "^3.1.0",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.9.0",
+    "ids": "latest"
+  },
+  "dependencies": {
+    "bpmn-js": "^5.1.1",
+    "diagram-js": "^5.1.1",
+    "jquery": "^3.4.1",
+    "tiny-svg": "latest",
+    "min-dash": "latest",
+    "inherits": "latest",
+    "bpmn-moddle": "latest"
+  }
+}

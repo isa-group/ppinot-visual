@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>bpmn-js modeler demo</title>
+  <meta charset="utf-8">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <link rel="stylesheet" href="vendor/bpmn-js/assets/diagram-js.css" />
+  <link rel="stylesheet" href="vendor/bpmn-js/assets/bpmn-font/css/bpmn.css" />
+  <link rel="stylesheet" href="vendor/bpmn-js/assets/bpmn-font/css/bpmn-embedded.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" />
+
+  <link rel="stylesheet" href="css/app.css" />
+
+  <style type="text/css">
+    html, body, #canvas, #canvas > div {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    /* .icon-custom-clock {
+      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'><path d='M 15 15 h 50 v 50 h -50 v -50 h 5 m 0 5 h 40 v 40 h -40 v -40 h 20 m 0 1 a 15 15 79 0 0 0 38 a 15 15 79 0 0 0 -38  m 0 19 l 5 -10 m -5 10 l 12 10Z' fill='white' stroke='black' stroke-width='3'/></svg>");
+    } */
+
+    .icon-custom-time-slot {
+      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><path d='M 30 90 a 23 23 0 0 0 22 20 h 76 a 23 23 0 0 0 22 -20 a 23 23 0 0 0 -22 -20 h -76 a 23 23 0 0 0 -22 20Z' fill='white' stroke='black' stroke-width='3'/></svg>");
+    }
+
+    .icon-custom-resource {
+      background:  url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M 55 20 a 1 1 0 1 0 0 3 a 1 1 0 1 0 0 -3 m -10 0 a 1 1 0 0 0 0 3 a 1 1 0 0 0 0 -3 m 0 9 h 10 m 5 8 a 14 14 79 0 0 5 -10 a 6 6 79 0 0 -30 0 a 14 14 0 0 0 5 10 a 60 60 0 0 0 -15 50 h 50 a 60 60 0 0 0 -15 -50Z' fill='white' stroke='black' stroke-width='3'/></svg>");
+    }
+
+    .icon-custom-resource-absence {
+      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M 55 20 a 1 1 0 1 0 0 3 a 1 1 0 1 0 0 -3 m -10 0 a 1 1 0 0 0 0 3 a 1 1 0 0 0 0 -3 m 0 9 h 10 m 5 8 a 14 14 79 0 0 5 -10 a 6 6 79 0 0 -30 0 a 14 14 0 0 0 5 10 a 60 60 0 0 0 -15 50 h 50 a 60 60 0 0 0 -15 -50 M 20 8 l 60 83 M 80 8 l -60 83Z' fill='white' stroke='black' stroke-width='3'/></svg>");
+    }
+
+    .icon-custom-role {
+      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M 75 87 v -75 h -50 v 75 M 55 20 a 1 1 0 1 0 0 3 a 1 1 0 1 0 0 -3 m -10 0 a 1 1 0 0 0 0 3 a 1 1 0 0 0 0 -3 m 0 9 h 10 m 5 8 a 14 14 79 0 0 5 -10 a 6 6 79 0 0 -30 0 a 14 14 0 0 0 5 10 a 60 60 0 0 0 -15 50 h 50 a 60 60 0 0 0 -15 -50Z' fill='white' stroke='black' stroke-width='3'/></svg>");
+    }
+
+    .icon-custom-role-absence {
+      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M 75 87 v -75 h -50 v 75 M 75 87 l -50 -75 M 25 87 l 50 -75 M 55 20 a 1 1 0 1 0 0 3 a 1 1 0 1 0 0 -3 m -10 0 a 1 1 0 0 0 0 3 a 1 1 0 0 0 0 -3 m 0 9 h 10 m 5 8 a 14 14 79 0 0 5 -10 a 6 6 79 0 0 -30 0 a 14 14 0 0 0 5 10 a 60 60 0 0 0 -15 50 h 50 a 60 60 0 0 0 -15 -50Z' fill='white' stroke='black' stroke-width='3'/></svg>");
+    }
+
+    .icon-custom-group {
+      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' style='fill:white; stroke:black; stroke-width:3'><path d='M 62 36 a 14 14 79 0 0 5 -10 a 6 6 79 0 0 -30 0 a 14 14 79 0 0 5 10 a 60 60 0 0 0 -15 50 h 50  a 60 60 0 0 0 -15 -50 z' /><path d='M 57 38 a 14 14 79 0 0 5 -10 a 6 6 79 0 0 -30 0 a 14 14 79 0 0 5 10 a 60 60 0 0 0 -15 50 h 50  a 60 60 0 0 0 -15 -50 z' /></svg></svg>");
+    }
+
+    .icon-custom-group-absence {
+      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' style='fill:white; stroke:black; stroke-width:3'><path d='M 62 36 a 14 14 79 0 0 5 -10 a 6 6 79 0 0 -30 0 a 14 14 79 0 0 5 10 a 60 60 0 0 0 -15 50 h 50  a 60 60 0 0 0 -15 -50 z' /><path d='M 57 38 a 14 14 79 0 0 5 -10 a 6 6 79 0 0 -30 0 a 14 14 79 0 0 5 10 a 60 60 0 0 0 -15 50 h 50  a 60 60 0 0 0 -15 -50 M 20 15 l 60 78 M 80 15 l -60 78z' /></svg></svg>");
+    }
+
+    .icon-custom-avion {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns:inkscape='http://www.inkscape.org/namespaces/inkscape' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns%23' xmlns='http://www.w3.org/2000/svg' xmlns:cc='http://web.resource.org/cc/' xmlns:dc='http://purl.org/dc/elements/1.1/' xmlns:sodipodi='http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd' xmlns:svg='http://www.w3.org/2000/svg' xmlns:ns1='http://sozi.baierouge.fr' xmlns:xlink='http://www.w3.org/1999/xlink' id='svg2905' sodipodi:docname='AIGA_Departing_Flights.svg' viewBox='0 0 440.48 436.6' sodipodi:version='0.32' inkscape:version='0.41' sodipodi:docbase='/datas/Projs/Cliparts Stocker/tmp/AIGA' %3E%3Csodipodi:namedview id='base' bordercolor='%23666666' inkscape:pageshadow='2' inkscape:window-width='640' pagecolor='%23ffffff' inkscape:zoom='0.43415836' inkscape:window-x='5' borderopacity='1.0' inkscape:current-layer='svg2905' inkscape:cx='305.25953' inkscape:cy='417.84947' inkscape:window-y='70' inkscape:window-height='543' inkscape:pageopacity='0.0' /%3E%3Cg id='g2915' %3E%3Cpath id='path2917' style='fill:%23000000' d='m430.37 48.711c29.15-29.153-11.17-67.267-39.96-38.479l-106.3 106.3-243.52-64.372-40.59 40.595 200.71 105.71-81.18 81.17-63.104-7.75-32.106 32.11 71.595 37.64 37.645 71.6 32.1-32.11-7.38-62.74 81.18-81.17 103.43 199.39 40.6-40.6-61.63-238.58 108.51-108.71z' /%3E%3C/g %3E%3Cmetadata %3E%3Crdf:RDF %3E%3Ccc:Work %3E%3Cdc:format %3Eimage/svg+xml%3C/dc:format %3E%3Cdc:type rdf:resource='http://purl.org/dc/dcmitype/StillImage' /%3E%3Ccc:license rdf:resource='http://creativecommons.org/licenses/publicdomain/' /%3E%3Cdc:publisher %3E%3Ccc:Agent rdf:about='http://openclipart.org/' %3E%3Cdc:title %3EOpenclipart%3C/dc:title %3E%3C/cc:Agent %3E%3C/dc:publisher %3E%3Cdc:title %3Eaiga departures%3C/dc:title %3E%3Cdc:date %3E2009-05-28T17:35:18%3C/dc:date %3E%3Cdc:description %3ESet of international airport symbols. Source: http://www.aiga.org/content.cfm/symbol-signs Converted to SVG by Jean-Victor Balin.%3C/dc:description %3E%3Cdc:source %3Ehttps://openclipart.org/detail/26332/aiga-departures-by-anonymous%3C/dc:source %3E%3Cdc:creator %3E%3Ccc:Agent %3E%3Cdc:title %3EAnonymous%3C/dc:title %3E%3C/cc:Agent %3E%3C/dc:creator %3E%3Cdc:subject %3E%3Crdf:Bag %3E%3Crdf:li %3Eaiga%3C/rdf:li %3E%3Crdf:li %3Eaiga no bg%3C/rdf:li %3E%3Crdf:li %3Eairplane%3C/rdf:li %3E%3Crdf:li %3Eblack and white%3C/rdf:li %3E%3Crdf:li %3Edeparture%3C/rdf:li %3E%3Crdf:li %3Eexternalsource%3C/rdf:li %3E%3Crdf:li %3Eflight%3C/rdf:li %3E%3Crdf:li %3Emap symbol%3C/rdf:li %3E%3Crdf:li %3Esign%3C/rdf:li %3E%3Crdf:li %3Esilhouette%3C/rdf:li %3E%3Crdf:li %3Esymbol%3C/rdf:li %3E%3Crdf:li %3Etake off%3C/rdf:li %3E%3C/rdf:Bag %3E%3C/dc:subject %3E%3C/cc:Work %3E%3Ccc:License rdf:about='http://creativecommons.org/licenses/publicdomain/' %3E%3Ccc:permits rdf:resource='http://creativecommons.org/ns%23Reproduction' /%3E%3Ccc:permits rdf:resource='http://creativecommons.org/ns%23Distribution' /%3E%3Ccc:permits rdf:resource='http://creativecommons.org/ns%23DerivativeWorks' /%3E%3C/cc:License %3E%3C/rdf:RDF %3E%3C/metadata %3E%3C/svg%0A%3E");
+    } 
+
+    .icon-custom-aggregatedMeasure {
+      background-image: url("data:image/svg+xml,%3Csvg width='71' height='49' viewBox='0 0 120 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Ctitle%3Ebackground%3C/title%3E%3Crect fill='none' id='canvas_background' height='51' width='73' y='-1' x='-1'/%3E%3C/g%3E%3Cg%3E%3Ctitle%3ELayer 1%3C/title%3E%3Cg id='svg_1'%3E%3Cg id='aggregatedMeasure'%3E%3Crect id='svg_2' fill='white' stroke='black' height='32' width='48' y='13' x='5'/%3E%3Cpath id='svg_3' d='m8,40l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5' stroke='black' fill='none'/%3E%3Cpath id='svg_4' d='m11,13l0,-4l48,0l0,32l-6,0m3,-5l0,5' stroke='black' fill='none'/%3E%3Cpath id='svg_5' d='m17,9l0,-4l48,0l0,32l-6,0m3,-5l0,5' stroke='black' fill='none'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    } 
+
+    .icon-custom-countAggregatedMeasure {
+      background-image: url("data:image/svg+xml,%3Csvg width='71' height='49' viewBox= '0 0 120 70' xmlns='http://www.w3.org/2000/svg'%3E%3C!-- %3Coryx:magnets%3E%3Coryx:magnet oryx:cx='0' oryx:cy='42' oryx:anchors='left' /%3E%3Coryx:magnet oryx:cx='24' oryx:cy='58' oryx:anchors='bottom' /%3E%3Coryx:magnet oryx:cx='48' oryx:cy='42' oryx:anchors='right' /%3E%3Coryx:magnet oryx:cx='20' oryx:cy='26' oryx:anchors='top' /%3E%3Coryx:magnet oryx:cx='24' oryx:cy='42' oryx:default='yes' /%3E%3C/oryx:magnets%3E --%3E%3Cg%3E%3Ctitle%3Ebackground%3C/title%3E%3Crect fill='none' id='canvas_background' height='64' width='74' y='-1' x='-1'/%3E%3C/g%3E%3Cg%3E%3Ctitle%3ELayer 1%3C/title%3E%3Cg id='svg_1'%3E%3Cg id='timeAggregatedMeasure'%3E%3Crect id='svg_2' fill='white' stroke='black' height='32' width='48' y='26' x='7'/%3E%3Cpath id='svg_3' d='m10,53l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5' stroke='black' fill='none'/%3E%3Cpath id='svg_4' d='m13,26l0,-4l48,0l0,32l-6,0m3,-5l0,5' stroke='black' fill='none'/%3E%3Cpath id='svg_5' d='m19,22l0,-4l48,0l0,32l-6,0m3,-5l0,5' stroke='black' fill='none'/%3E%3C!-- count icon --%3E%3Cellipse id='svg_6' fill='white' ry='7' rx='12' cy='9' cx='18'/%3E%3Ctext id='svg_7' text-anchor='middle' font-size='7' fill='black' y='11' x='9'%3E1%3C/text%3E%3Ctext id='svg_8' text-anchor='middle' font-size='7' fill='black' y='14' x='15'%3E2%3C/text%3E%3Ctext id='svg_9' text-anchor='middle' font-size='7' fill='black' y='11' x='21'%3E3%3C/text%3E%3C/g%3E%3C!-- %3Ctext font-size='12' id='minimum' x='10' y='38' oryx:align='middle left' oryx:fittoelem='timeAggregatedMeasure'%3E MIN %3C/text%3E%3Ctext font-size='12' id='maximum' x='10' y='38' oryx:align='middle left' oryx:fittoelem='timeAggregatedMeasure'%3E MAX %3C/text%3E%3Ctext font-size='12' id='average' x='10' y='38' oryx:align='middle left' oryx:fittoelem='timeAggregatedMeasure'%3E AVG %3C/text%3E%3Ctext font-size='12' id='sum' x='10' y='38' oryx:align='middle left' oryx:fittoelem='timeAggregatedMeasure'%3E SUM %3C/text%3E%3Ctext font-size='11' id='text' x='30' y='60' oryx:align='top center' stroke='black'%3E%3C/text%3E --%3E%3C!-- %3Ctext font-size='10' id='unitOfMeasure' x='35' y='38' oryx:align='middle center' stroke='black' oryx:fittoelem='aggregateMeasure'%3E%3C/text%3E --%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    } 
+
+    .icon-custom-countMeasure {
+      background-image: url("data:image/svg+xml,%3Csvg width='68' height='49' viewBox= '0 0 120 70' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Ctitle%3Ebackground%3C/title%3E%3Crect fill='none' id='canvas_background' height='64' width='74' y='-1' x='-1'/%3E%3C/g%3E%3Cg%3E%3Ctitle%3ELayer 1%3C/title%3E%3Cg id='svg_1'%3E%3Cg id='countMeasure'%3E%3Crect id='svg_2' fill='white' stroke='black' height='40' width='60' y='19' x='7'/%3E%3Cpath id='svg_3' d='m10,54l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5' stroke='black' fill='none'/%3E%3Cellipse id='svg_4' fill='white' ry='7' rx='12' cy='10' cx='18'/%3E%3Ctext id='svg_5' text-anchor='middle' font-size='7' fill='black' y='12' x='9'%3E1%3C/text%3E%3Ctext id='svg_6' text-anchor='middle' font-size='7' fill='black' y='15' x='15'%3E2%3C/text%3E%3Ctext id='svg_7' text-anchor='middle' font-size='7' fill='black' y='12' x='21'%3E3%3C/text%3E%3C/g%3E%3Ctext stroke='black' y='61' x='37' id='text' font-size='11'/%3E%3C!-- %3Ctext font-size='10' id='unitOfMeasure' x='35' y='33' oryx:align='middle center' stroke='black' oryx:fittoelem='baseMeasure'%3E%3C/text%3E --%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    } 
+     
+    .icon-custom-dataAggregatedMeasure {
+      background-image: url("data:image/svg+xml,%3Csvg width='72' height='62' viewBox= '0 0 120 95' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Ctitle%3Ebackground%3C/title%3E%3Crect fill='none' id='canvas_background' height='64' width='74' y='-1' x='-1'/%3E%3C/g%3E%3Cg%3E%3Ctitle%3ELayer 1%3C/title%3E%3Cg id='svg_1'%3E%3Cg id='dataAggregatedMeasure'%3E%3Crect id='svg_2' fill='white' stroke='black' height='32' width='48' y='26' x='6'/%3E%3Cpath id='svg_3' d='m9,53l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5' stroke='black' fill='none'/%3E%3Cpath id='svg_4' d='m12,26l0,-4l48,0l0,32l-6,0m3,-5l0,5' stroke='black' fill='none'/%3E%3Cpath id='svg_5' d='m18,22l0,-4l48,0l0,32l-6,0m3,-5l0,5' stroke='black' fill='none'/%3E%3C!-- Data icon --%3E%3Cellipse id='svg_6' fill='none' stroke='black' ry='2' rx='2' cy='4' cx='12'/%3E%3Cpath id='svg_7' d='m12,6l0,2m0,-1l-2,1m2,-1l2,1m-2,8l-3,3m3,-3l3,3m-7.25,-3l0,-1m0.25,1l0,-1m0.25,1l0,-1m7.5,1l0,-1m0.25,1l0,-1m0.25,1l0,-1' stroke='black' fill='none'/%3E%3Cpath id='svg_8' d='m6,8l12,0l0,8l-12,0l0,-8l6,4l6,-4' stroke='black' fill='none'/%3E%3C/g%3E%3C!-- %3Ctext y='38' x='16' id='minimum' font-size='12'%3EMIN%3C/text%3E%3Ctext y='38' x='16' id='maximum' font-size='12'%3EMAX%3C/text%3E%3Ctext y='38' x='16' id='average' font-size='12'%3EAVG%3C/text%3E%3Ctext y='38' x='16' id='sum' font-size='12'%3ESUM%3C/text%3E --%3E%3Ctext stroke='black' y='60' x='36' id='text' font-size='11'/%3E%3C!-- %3Ctext font-size='10' id='unitOfMeasure' x='35' y='38' oryx:align='middle center' stroke='black' oryx:fittoelem='aggregateMeasure'%3E%3C/text%3E --%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    } 
+
+    .icon-custom-dataMeasure {
+      background-image: url("data:image/svg+xml,%3Csvg width='72' height='72' viewBox= '0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Ctitle%3Ebackground%3C/title%3E%3Crect fill='none' id='canvas_background' height='74' width='74' y='-1' x='-1'/%3E%3C/g%3E%3Cg%3E%3Ctitle%3ELayer 1%3C/title%3E%3Cg id='svg_1'%3E%3Cg id='dataMeasure'%3E%3Crect id='svg_2' fill='white' stroke='black' height='40' width='60' y='21' x='6'/%3E%3Cpath id='svg_3' d='m9,56l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5' stroke='black' fill='none'/%3E%3Cellipse id='svg_4' fill='none' stroke='black' ry='2' rx='2' cy='5' cx='12'/%3E%3Cpath id='svg_5' d='m12,7l0,2m0,-1l-2,1m2,-1l2,1m-2,8l-3,3m3,-3l3,3m-7.25,-3l0,-1m0.25,1l0,-1m0.25,1l0,-1m7.5,1l0,-1m0.25,1l0,-1m0.25,1l0,-1' stroke='black' fill='none'/%3E%3Cpath id='svg_6' d='m6,9l12,0l0,8l-12,0l0,-8l6,4l6,-4' stroke='black' fill='none'/%3E%3C/g%3E%3Ctext stroke='black' y='63' x='36' id='text' font-size='11'/%3E%3C!-- %3Ctext font-size='10' id='unitOfMeasure' x='35' y='33' oryx:align='middle center' stroke='black' oryx:fittoelem='baseMeasure'%3E%3C/text%3E --%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .icon-custom-dataPropertyConditionAggregatedMeasure {
+      background-image: url("data:image/svg+xml,%3Csvg width='72' height='72' viewBox= '0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Ctitle%3Ebackground%3C/title%3E%3Crect fill='none' id='canvas_background' height='74' width='74' y='-1' x='-1'/%3E%3C/g%3E%3Cg%3E%3Ctitle%3ELayer 1%3C/title%3E%3Cg id='svg_1'%3E%3Cg id='timeAggregatedMeasure'%3E%3Crect stroke='black' id='svg_2' fill='white' height='32' width='48' y='37' x='8'/%3E%3Cpath id='svg_3' d='m11,64l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5' stroke='black' fill='none'/%3E%3Cpath id='svg_4' d='m15,37l0,-4l48,0l0,32l-6,0m3,-5l0,5' stroke='black' fill='none'/%3E%3Cpath stroke='black' id='svg_5' d='m19,33l0,-4l51,0l0,32l-6.375,0m3.1875,-5l0,5' fill='none'/%3E%3C!-- dataCondition icon --%3E%3Cellipse id='svg_6' fill='white' ry='11' rx='20' cy='16' cx='30'/%3E%3Cellipse stroke='black' id='svg_7' fill='none' ry='2' rx='2' cy='13' cx='32'/%3E%3Cpath id='svg_8' d='m26,16l12,0l0,8l-12,0l0,-8l6,4l6,-4' stroke='black' fill='none'/%3E%3Cpath id='svg_9' fill='none' stroke='black'/%3E%3C/g%3E%3Ctext y='51' x='20' id='sum' font-size='12'%3ESUM%3C/text%3E%3Ctext stroke='black' y='69' x='-11' id='text' font-size='11'/%3E%3C!-- %3Ctext font-size='10' id='unitOfMeasure' x='35' y='38' oryx:align='middle center' stroke='black' oryx:fittoelem='aggregateMeasure'%3E%3C/text%3E --%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .icon-custom-dataPropertyConditionMeasure {
+      background-image: url("data:image/svg+xml,%3Csvg width='72' height='72' viewBox= '0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Ctitle%3Ebackground%3C/title%3E%3Crect fill='none' id='canvas_background' height='74' width='74' y='-1' x='-1'/%3E%3C/g%3E%3Cg%3E%3Ctitle%3ELayer 1%3C/title%3E%3Cg id='svg_1'%3E%3Cg stroke='null' id='dataMeasure'%3E%3Crect stroke='black' id='svg_2' fill='white' height='40' width='60' y='22' x='4'/%3E%3Cpath stroke='black' id='svg_3' d='m7,57l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5' fill='none'/%3E%3Cellipse stroke='null' id='svg_4' fill='white' ry='11' rx='20' cy='9' cx='26'/%3E%3Cellipse stroke='black' id='svg_5' fill='none' ry='2' rx='2' cy='4' cx='20'/%3E%3Cpath stroke='black' id='svg_6' d='m14,7l12,0l0,8l-12,0l0,-8l6,4l6,-4' fill='none'/%3E%3Cpath stroke='black' id='svg_7' fill='none'/%3E%3C/g%3E%3Ctext stroke='black' y='64' x='35' id='text' font-size='11'/%3E%3C!-- %3Ctext font-size='10' id='unitOfMeasure' x='35' y='33' oryx:align='middle center' stroke='black' oryx:fittoelem='baseMeasure'%3E%3C/text%3E --%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .icon-custom-derivedMultiInstanceMeasure {
+      background-image: url("data:image/svg+xml,%3Csvg width='72' height='52' viewBox= '0 0 110 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg%3E%3Ctitle%3Ebackground%3C/title%3E%3Crect fill='none' id='canvas_background' height='54' width='74' y='-1' x='-1'/%3E%3C/g%3E%3Cg%3E%3Ctitle%3ELayer 1%3C/title%3E%3Cg id='svg_1'%3E%3Cg id='derivedProcessMeasure'%3E%3Cg id='rectangle'%3E%3Crect id='svg_2' fill='white' stroke='black' height='32' width='48' y='14' x='4'/%3E%3C/g%3E%3Cpath id='svg_3' d='m7,41l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5m3,-10l0,10m3,-5l0,5m3,-5l0,5m3,-5l0,5' stroke='black' fill='none'/%3E%3Cpath id='svg_4' d='m10,14l0,-4l20,0m8,0l20,0l0,32l-6,0m3,-5l0,5' stroke='black' fill='none'/%3E%3Cpath id='svg_5' d='m16,10l0,-4l20,0m8,0l20,0l0,32l-6,0m3,-5l0,5' stroke='black' fill='none'/%3E%3Cpath id='svg_6' d='m36,6l-12,8l0,8l8,0l0,-8l12,-8m-18,12l4,0m-2,-2l0,4' stroke='black' fill='none'/%3E%3Cpath id='svg_7' d='m24,14l8,0' stroke='white' fill='none'/%3E%3Ctext stroke='black' y='33' x='9' id='function' font-size='12'/%3E%3Ctext stroke='black' y='48' x='34' id='text' font-size='11'/%3E%3C!-- %3Ctext font-size='12' id='text' x='5' y='45' oryx:align='bottom left' stroke='black' oryx:fittoelem='rectangle'%3E%3C/text%3E%3Ctext font-size='10' id='unitOfMeasure' x='35' y='45' oryx:align='middle center' stroke='black' oryx:fittoelem='rectangle'%3E%3C/text%3E --%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+
+  </style>
+</head>
+<body>
+<div class="content" id="js-drop-zone">
+
+  <div class="message intro">
+    <div class="note">
+      Drop BPMN diagram from your desktop or <a class="js-create-diagram" href>create a new diagram</a> to get started.
+    </div>
+  </div>
+
+  <div class="message error">
+    <div class="note">
+      <p>Ooops, we could not display the BPMN 2.0 diagram.</p>
+
+      <div class="details">
+        <span>cause of the problem</span>
+        <pre></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="canvas" id="js-canvas"></div>
+</div>
+<div class="io-import-export">
+  <ul class="io-import io-control io-control-list io-horizontal">
+    <li>
+      <button title="open BPMN diagram from local file system" id="js-open-diagram">
+        <i class="fas fa-folder-open"></i>
+      </button>
+    </li>
+    <li class="vr" style="margin-left: 2px"></li>
+    <li>
+      <button title="create new BPMN diagram" class="js-create-diagram">
+        <i class="fas fa-plus-circle"></i>
+      </button>
+    </li>
+  </ul>
+  <ul class="io-export io-control io-control-list io-horizontal">
+    <li>
+      <a id="js-download-diagram" href="#" title="download BPMN diagram" onclick="downloadAll()">
+        <i class="fas fa-download"></i>
+      </a>
+    </li>
+    <li>
+      <a id="js-download-svg" href title="download as SVG image">
+        <i class="far fa-image"></i>
+      </a>
+    </li>
+    <li>
+      <a id="js-add-colors" href="#" title="add colors to model">
+        <i class="fas fa-palette"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+<!--  <ul class="buttons">-->
+<!--    <li>-->
+<!--      download-->
+<!--    </li>-->
+<!--    <li>-->
+<!--      <a id="js-download-diagram" href title="download BPMN diagram">-->
+<!--        BPMN diagram-->
+<!--      </a>-->
+<!--    </li>-->
+<!--    <li>-->
+<!--      <a id="js-download-svg" href title="download as SVG image">-->
+<!--        SVG image-->
+<!--      </a>-->
+<!--    </li>-->
+<!--  </ul>-->
+
+<script src="app.js"></script>
+<script>
+  function downloadAll() {
+    console.log("download")
+    console.log(window.localStorage.getItem("diagram"))
+    console.log(window.localStorage.getItem("custom"))
+
+    if(window.localStorage.getItem("diagram")) {
+      var link = document.createElement('a');
+      link.style.display = 'none';
+      document.body.appendChild(link);
+      link.setAttribute('download', "diagram.bpmn");
+      link.setAttribute('href', 'data:application/bpmn20-xml;charset=UTF-8,' + window.localStorage.getItem("diagram"));
+      link.click();
+
+      link.setAttribute('download', "customElements.cbpmn");
+      link.setAttribute('href', 'data:text/json;charset=UTF-8,' + window.localStorage.getItem("custom"));
+      link.click();
+
+      window.localStorage.clear()
+
+      document.body.removeChild(link);
+    }
+    else
+      window.alert("No change to save")
+  }
+</script>
+</body>
+</html>
