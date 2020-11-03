@@ -416,6 +416,17 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     return derivedMultiInstanceMeasure;
   };
 
+  function drawDerivedSingleInstanceMeasure(element){
+    var derivedSingleInstanceMeasure = svgCreate('image', {
+      x: 0,
+      y: 0,
+      width: element.width,
+      height: element.height,
+      href: Svg.dataURLderivedSingleInstanceMeasure
+    })
+    return derivedSingleInstanceMeasure;
+  };
+
   function drawTimeSlot(width, height, color) {
     var attrs = computeStyle(attrs, {
       stroke: color || '#fff',
@@ -566,7 +577,14 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       svgAppend(p, derivedMultiInstanceMeasure);
       // renderEmbeddedLabel(p, element, 'center-middle');
 
-      return derivedMultiInstanceMeasure;
+      return derivedMultiInstanceMeasure; 
+    },
+    'custom:DerivedSingleInstanceMeasure': (p, element) => {
+      let derivedSingleInstanceMeasure = drawDerivedSingleInstanceMeasure(element)
+      svgAppend(p, derivedSingleInstanceMeasure);
+      // renderEmbeddedLabel(p, element, 'center-middle');
+
+      return derivedSingleInstanceMeasure; 
     },
     'custom:Resource': (p, element) => {
       var attrs = computeStyle(attrs, {
@@ -1025,6 +1043,25 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     },
 
     'custom:DerivedMultiInstanceMeasure': (element) => {
+      var x = element.x,
+          y = element.y,
+          width = element.width,
+          height = element.height;
+          
+
+      var d = [
+        ['M', x , y],
+        ['h', 50 ],
+        ['v', 50 ],
+        ['h', -50 ],
+        ['v', -50 ],
+        ['z']
+      ]
+
+      return componentsToPath(d);
+    },
+
+    'custom:DerivedSingleInstanceMeasure': (element) => {
       var x = element.x,
           y = element.y,
           width = element.width,

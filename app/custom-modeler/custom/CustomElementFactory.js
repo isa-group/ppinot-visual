@@ -170,7 +170,8 @@ CustomElementFactory.prototype._getCustomElementSize = function(type) {
     'custom:DataMeasure':{width: 130, height: 130}, 
     'custom:DataPropertyConditionAggregatedMeasure':{width: 160, height: 160},
     'custom:DataPropertyConditionMeasure':{width: 130, height: 130},
-    'custom:DerivedMultiInstanceMeasure':{width: 140, height: 110}
+    'custom:DerivedMultiInstanceMeasure':{width: 140, height: 110},
+    'custom:DerivedSingleInstanceMeasure':{width: 130, height: 100}
   };
 
   return shapes[type] || shapes.__default;

@@ -16,7 +16,8 @@ export const label = [
     'custom:DataPropertyConditionAggregatedMeasure',
 
     'custom:DataPropertyConditionMeasure',
-    'custom:DerivedMultiInstanceMeasure'
+    'custom:DerivedMultiInstanceMeasure',
+    'custom:DerivedSingleInstanceMeasure'
     
 ]
 

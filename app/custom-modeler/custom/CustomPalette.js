@@ -246,6 +246,9 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     ),
     'custom-derivedMultiInstanceMeasure': createAction(
       'custom:DerivedMultiInstanceMeasure', 'custom', 'icon-custom-derivedMultiInstanceMeasure'
+    ),
+    'custom-derivedSingleInstanceMeasure': createAction(
+      'custom:DerivedSingleInstanceMeasure', 'custom', 'icon-custom-derivedSingleInstanceMeasure'
     )
     
     
