@@ -24,6 +24,7 @@ function isDefaultValid(element) {
   return element && (is(element, 'bpmn:Task') || is(element, 'bpmn:Event'))
 }
 
+
 /**
  * Specific rules for custom elements
  */
@@ -69,16 +70,16 @@ function canConnect(source, target, connection) {
     else
       return false
   }
-  else if(is(target, 'custom:Avion')) {
-    if(isDefaultValid(source)) {
-      if(connection === 'custom:TimeDistandStartArc')
-        return { type: connection }
-      else
-        return { type: 'custom:MyConnection' }
-    }
-    else
-      return false
-  }
+  // else if(is(target, 'custom:Avion')) {
+  //   if(isDefaultValid(source)) {
+  //     if(connection === 'custom:TimeDistandStartArc')
+  //       return { type: connection }
+  //     else
+  //       return { type: 'custom:MyConnection' }
+  //   }
+  //   else
+  //     return false
+  // }
   else if((isDefaultValid(source) && isCustomShape(target) && isCustomResourceArcElement(source))  || (isCustomShape(source) && isDefaultValid(target) && isCustomResourceArcElement(target)))
     return { type: 'custom:ResourceArc'
   }
@@ -118,7 +119,7 @@ function canConnect2(source, target, connection) {
     else if((isDefaultValid(source) && isCustomResourceArcElement(target)) || (isDefaultValid(target) && isCustomResourceArcElement(source))) {
       return {type: 'custom:ResourceArc'}
     }
-    else if((isDefaultValid(source) && isCustomMyConnectionElement(target)) || (isDefaultValid(target) && isCustomMyConnectionElement(source))) {
+    else if((isCustom(source) && isCustomMyConnectionElement(target)) || (isCustom(target) && isCustomMyConnectionElement(source))) {
       return {type: 'custom:MyConnection'}
     }
     else
@@ -153,6 +154,16 @@ CustomRules.prototype.init = function() {
         return {type1: 'custom:ResourceArc', type2:'custom:ConsequenceFlow'}
       else if(type === 'custom:TimeDistance')
         return {type1: 'custom:TimeDistanceArcStart', type2:'custom:TimeDistanceArcEnd'}
+        // AÑADIDO
+      // else if(type === 'custom:Avion')
+      //   return {type1: 'custom:ResourceArc', type2:'custom:MyConnection'}
+    }
+  }
+
+  function canConnectMultipleCustomElement(source, target, type) {
+    if (is(target, customElements) && is(source, customElements)) {
+      if(type === 'custom:Avion')
+        return {type1: 'custom:ResourceArc', type2:'custom:MyConnection'}
     }
   }
 

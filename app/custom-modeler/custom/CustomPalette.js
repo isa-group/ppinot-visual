@@ -202,12 +202,12 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     'custom-time-slot': createAction(
         'custom:TimeSlot', 'custom', 'icon-custom-time-slot'
     ),
-    'custom-resource': createAction(
-        'custom:Resource', 'custom', 'icon-custom-resource'
-    ),
-    'custom-resource-absence': createAction(
-        'custom:ResourceAbsence', 'custom', 'icon-custom-resource-absence'
-    ),
+    // 'custom-resource': createAction(
+    //     'custom:Resource', 'custom', 'icon-custom-resource'
+    // ),
+    // 'custom-resource-absence': createAction(
+    //     'custom:ResourceAbsence', 'custom', 'icon-custom-resource-absence'
+    // ),
     // 'custom-role': createAction(
     //     'custom:Role', 'custom', 'icon-custom-role'
     // ),

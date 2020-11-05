@@ -65,8 +65,7 @@ export const directEdit = [
 ]
 
 export const myConnectionElements = [
-    'custom:Avion',
-    'custom:CountMeasure'
+    'custom:Avion'
 ]
 
 export const resourceArcElements = [
@@ -78,7 +77,7 @@ export const resourceArcElements = [
     'custom:Group',
     'custom:GroupAbsence',
     'custom:TimeSlot',
-    // 'custom:Avion',
+    'custom:Avion',
     'custom:AggregatedMeasure',
     'custom:CountAggregatedMeasure',
     'custom:CountMeasure',

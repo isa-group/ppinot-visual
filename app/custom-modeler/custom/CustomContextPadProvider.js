@@ -100,33 +100,33 @@ export default function CustomContextPadProvider(config, injector, elementFactor
         connect.customStart2(event, element, 'custom:ConsequenceTimedFlow', elementFactory, autoActivate);
     }
 
-    if (isAny(businessObject, resourceArcElements) && element.type !== 'label') {
-        assign(actions, {
-          'connect': {
-              group: 'connect',
-              className: 'bpmn-icon-connection-multi',
-              title: translate('Connect using custom connection'),
-              action: {
-                  click: startConnect,
-                  dragstart: startConnect
-              }
-          }
-        });
-    }
+    // if (isAny(businessObject, resourceArcElements) && element.type !== 'label') {
+    //     assign(actions, {
+    //       'connect': {
+    //           group: 'connect',
+    //           className: 'bpmn-icon-connection-multi',
+    //           title: translate('Connect using custom connection'),
+    //           action: {
+    //               click: startConnect,
+    //               dragstart: startConnect
+    //           }
+    //       }
+    //     });
+    // }
 
-    if (isAny(businessObject, myConnectionElements) && element.type !== 'label') {
-        assign(actions, {
-          'connect': {
-              group: 'connect',
-              className: 'bpmn-icon-connection-multi',
-              title: translate('My connection'),
-              action: {
-                  click: startConnect,
-                  dragstart: startConnect
-              }
-          }
-        });
-    }
+    // if (isAny(businessObject, myConnectionElements) && element.type !== 'label') {
+    //     assign(actions, {
+    //       'connect': {
+    //           group: 'connect',
+    //           className: 'bpmn-icon-lane-divide-two',
+    //           title: translate('My connection'),
+    //           action: {
+    //               click: startConnect,
+    //               dragstart: startConnect
+    //           }
+    //       }
+    //     });
+    // }
 
     // ESTO CREO QUE HAY QUE MODIFICAR PARA VARIAS CONEXIONES
     
@@ -150,20 +150,21 @@ export default function CustomContextPadProvider(config, injector, elementFactor
         });
     }
 
-    // if(is(businessObject, 'custom:Avion') && element.type !== 'label') {
-    //     assign(actions, {
-    //         'connect1': appendConnectAction(
-    //             'custom:ResourceArc',
-    //             'bpmn-icon-connection-multi',
-    //             'Connect using custom connection'
-    //         ),
-    //         'connect2': appendConnectAction(
-    //             'custom:MyConnection',
-    //             'bpmn-icon-connection-multi',
-    //             'My connection'
-    //         ),
-    //     });
-    // }
+    if(isAny(businessObject, myConnectionElements) && element.type !== 'label') {
+        assign(actions, {
+            'connect1': appendConnectAction(
+                'custom:ResourceArc',
+                'bpmn-icon-connection-multi',
+                'Connect using custom connection'
+            ),
+            'connect2': appendConnectAction(
+                'custom:MyConnection',
+                'bpmn-icon-connection-multi',
+                // 'bpmn-icon-lane-divide-two', -- mirar ContextPadProvider
+                'My connection'
+            ),
+        });
+    }
 
     return actions;
   };
