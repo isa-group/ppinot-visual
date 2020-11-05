@@ -10,7 +10,7 @@ import {
 
 import RuleProvider from 'diagram-js/lib/features/rules/RuleProvider';
 import {isAny} from "bpmn-js/lib/features/modeling/util/ModelingUtil";
-import {isCustomResourceArcElement, isCustomShape} from "./Types";
+import {isCustomResourceArcElement, isCustomShape, isCustomMyConnectionElement} from "./Types";
 import {isLabel} from "bpmn-js/lib/util/LabelUtil";
 
 var HIGH_PRIORITY = 1500;
@@ -64,14 +64,27 @@ function canConnect(source, target, connection) {
       if(connection === 'custom:TimeDistandStartArc')
         return { type: connection }
       else
-        return { type: 'custom:ResourceArc'}
+        return { type: 'custom:ResourceArc' }
     }
     else
       return false
   }
-  else if((isDefaultValid(source) && isCustomShape(target)) || (isCustomShape(source) && isDefaultValid(target)))
-    return { type: 'custom:ResourceArc' }
-  else
+  else if(is(target, 'custom:Avion')) {
+    if(isDefaultValid(source)) {
+      if(connection === 'custom:TimeDistandStartArc')
+        return { type: connection }
+      else
+        return { type: 'custom:MyConnection' }
+    }
+    else
+      return false
+  }
+  else if((isDefaultValid(source) && isCustomShape(target) && isCustomResourceArcElement(source))  || (isCustomShape(source) && isDefaultValid(target) && isCustomResourceArcElement(target)))
+    return { type: 'custom:ResourceArc'
+  }
+  else if((isDefaultValid(source) && isCustomShape(target) && isCustomMyConnectionElement(source)) || (isCustomShape(source) && isDefaultValid(target) && isCustomMyConnectionElement(source)))
+    return { type: 'custom:MyConnection'}
+  else 
     return;
 }
 
@@ -104,6 +117,9 @@ function canConnect2(source, target, connection) {
       return;
     else if((isDefaultValid(source) && isCustomResourceArcElement(target)) || (isDefaultValid(target) && isCustomResourceArcElement(source))) {
       return {type: 'custom:ResourceArc'}
+    }
+    else if((isDefaultValid(source) && isCustomMyConnectionElement(target)) || (isDefaultValid(target) && isCustomMyConnectionElement(source))) {
+      return {type: 'custom:MyConnection'}
     }
     else
       return
@@ -153,7 +169,13 @@ CustomRules.prototype.init = function() {
           return false
       }
       else if(connection.type === 'custom:ResourceArc') {
-        if((!isCustom(source) && isCustomShape(target)) || (isCustomShape(source) && !isCustom(target)))
+        if((!isCustom(source) && isCustomShape(target)) || (isCustomShape(source) && !isCustom(target) ))
+          return { type: connection.type }
+        else
+          return;
+      }
+      else if(connection.type === 'custom:MyConnection') {
+        if((!isCustom(source) && isCustomShape(target) ) || (isCustomShape(source) && !isCustom(target) ))
           return { type: connection.type }
         else
           return;

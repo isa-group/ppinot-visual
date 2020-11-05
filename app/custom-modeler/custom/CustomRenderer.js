@@ -859,6 +859,17 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
 
       return svgAppend(p, createLine(element.waypoints, attrs));
     },
+
+    // DEFINO LA NUEVA CONEXIÓN
+    'custom:MyConnection': (p, element) => {
+      var attrs = computeStyle(attrs, {
+        stroke: COLOR_RED,
+        strokeWidth: 1.5,
+        strokeDasharray: [10,7]
+      });
+
+      return svgAppend(p, createLine(element.waypoints, attrs));
+    },
     'custom:ConsequenceFlow': (p, element) => {
       var attrs = {
         strokeLinejoin: 'round',

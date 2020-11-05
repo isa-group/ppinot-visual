@@ -43,6 +43,10 @@ export const connections = [
     'custom:ConsequenceFlow',
     'custom:TimeDistanceArcStart',
     'custom:TimeDistanceArcEnd',
+
+    'custom:MyConnection'
+
+    
 ]
 
 export const directEdit = [
@@ -60,6 +64,11 @@ export const directEdit = [
     'custom:DataPropertyConditionAggregatedMeasure'
 ]
 
+export const myConnectionElements = [
+    'custom:Avion',
+    'custom:CountMeasure'
+]
+
 export const resourceArcElements = [
     'custom:Clock',
     'custom:Resource',
@@ -69,7 +78,7 @@ export const resourceArcElements = [
     'custom:Group',
     'custom:GroupAbsence',
     'custom:TimeSlot',
-    'custom:Avion',
+    // 'custom:Avion',
     'custom:AggregatedMeasure',
     'custom:CountAggregatedMeasure',
     'custom:CountMeasure',
@@ -97,7 +106,11 @@ export const custom = [
     'custom:CountMeasure',
     'custom:DataAggregatedMeasure',
     'custom:DataMeasure',
-    'custom:DataPropertyConditionAggregatedMeasure'
+    'custom:DataPropertyConditionAggregatedMeasure',
+
+    'custom:MyConnection'
+
+    
 ]
 
 export function isCustomShape(type) {
@@ -119,4 +132,11 @@ export function isCustomResourceArcElement(type) {
         type = type.type
     }
     return resourceArcElements.includes(type)
+}
+
+export function isCustomMyConnectionElement(type) {
+    if (typeof type === 'object') {
+        type = type.type
+    }
+    return myConnectionElements.includes(type)
 }

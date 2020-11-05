@@ -14,7 +14,7 @@ import {
 } from 'min-dash';
 import {isLabel} from "./utils/LabelUtil";
 
-import {resourceArcElements} from "./Types";
+import {resourceArcElements, myConnectionElements} from "./Types";
 
 
 export default function CustomContextPadProvider(config, injector, elementFactory, connect, create, translate) {
@@ -113,6 +113,23 @@ export default function CustomContextPadProvider(config, injector, elementFactor
           }
         });
     }
+
+    if (isAny(businessObject, myConnectionElements) && element.type !== 'label') {
+        assign(actions, {
+          'connect': {
+              group: 'connect',
+              className: 'bpmn-icon-connection-multi',
+              title: translate('My connection'),
+              action: {
+                  click: startConnect,
+                  dragstart: startConnect
+              }
+          }
+        });
+    }
+
+    // ESTO CREO QUE HAY QUE MODIFICAR PARA VARIAS CONEXIONES
+    
     if(is(businessObject, 'bpmn:BaseElement') && element.type !== 'label') {
         assign(actions, {
             'connect1': appendConnectAction(
@@ -132,6 +149,21 @@ export default function CustomContextPadProvider(config, injector, elementFactor
             ),
         });
     }
+
+    // if(is(businessObject, 'custom:Avion') && element.type !== 'label') {
+    //     assign(actions, {
+    //         'connect1': appendConnectAction(
+    //             'custom:ResourceArc',
+    //             'bpmn-icon-connection-multi',
+    //             'Connect using custom connection'
+    //         ),
+    //         'connect2': appendConnectAction(
+    //             'custom:MyConnection',
+    //             'bpmn-icon-connection-multi',
+    //             'My connection'
+    //         ),
+    //     });
+    // }
 
     return actions;
   };
