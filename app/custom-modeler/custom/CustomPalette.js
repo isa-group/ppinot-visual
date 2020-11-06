@@ -249,6 +249,9 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     ),
     'custom-derivedSingleInstanceMeasure': createAction(
       'custom:DerivedSingleInstanceMeasure', 'custom', 'icon-custom-derivedSingleInstanceMeasure'
+    ),
+    'custom-timeMeasure': createAction(
+      'custom:TimeMeasure', 'custom', 'icon-custom-timeMeasure'
     )
     
     

@@ -361,6 +361,17 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     return countMeasure;
   };
 
+  function drawTimeMeasure(element){
+    var countMeasure = svgCreate('image', {
+      x: 0,
+      y: 0,
+      width: element.width,
+      height: element.height,
+      href: Svg.dataURLtimeMeasure
+    })
+    return countMeasure;
+  };
+
   function drawDataAggregatedMeasure(element){
     var dataAggregatedMeasure = svgCreate('image', {
       x: 0,
@@ -473,116 +484,77 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     'custom:Avion': (p, element) => {
       let avion = drawAvion(element)
       svgAppend(p, avion);
-      // renderEmbeddedLabel(p, element, 'center-middle');
+      renderEmbeddedLabel(p, element, 'center-middle');
 
       return avion;
-
-      //console.log(element)
-      // var attrs = computeStyle(attrs, {
-      //   stroke: element.color,
-      //   strokeWidth: 2,
-      //   fill: '#fff'
-      // });
-
-      // var path = svgCreate('path');
-
-      // var d = [
-      //   ['M', 0 , 0],
-      //   ['h', 50 ],
-      //   ['v', 50 ],
-      //   ['h', -50 ],
-      //   ['v', -50 ],
-      //   ['h', 5 ],
-      //   ['m', 0, 5],
-      //   ['h', 40 ],
-      //   ['v', 40 ],
-      //   ['h', -40 ],
-      //   ['v', -40 ],
-      //   ['h', 20 ],
-      //   ['m', 0, 1],
-      //   ['a', 15, 15, 79, 0, 0, 0, 38],
-      //   ['a', 15, 15, 79, 0, 0, 0, -38],
-      //   ['m', 0 , 19],
-      //   ['l', 5, -10 ],
-      //   ['m', -5 , 10],
-      //   ['l', 12, 10 ],
-      //   ['z']
-      // ]
-
-      // svgAttr(path, {
-      //   width: element.width,
-      //   height: element.height,
-      //   color: element.color || '#fff',
-      //   // d: componentsToPath(d)
-     
-      // });
-
-      // svgAttr(path, attrs);
-
-      // svgAppend(p, path);
-
-      // return path;
     },
     'custom:AggregatedMeasure': (p, element) => {
       let aggregatedMeasure = drawAggregatedMeasure(element)
       svgAppend(p, aggregatedMeasure);
-      // renderEmbeddedLabel(p, element, 'center-middle');
+      renderEmbeddedLabel(p, element, 'center-middle');
 
       return aggregatedMeasure;
     },
     'custom:CountAggregatedMeasure': (p, element) => {
       let countAggregatedMeasure = drawCountAggregatedMeasure(element)
       svgAppend(p, countAggregatedMeasure);
-      // renderEmbeddedLabel(p, element, 'center-middle');
+      renderEmbeddedLabel(p, element, 'center-middle');
 
       return countAggregatedMeasure;
     },
     'custom:CountMeasure': (p, element) => {
       let countMeasure = drawCountMeasure(element)
       svgAppend(p, countMeasure);
-      // renderEmbeddedLabel(p, element, 'center-middle');
+      renderEmbeddedLabel(p, element, 'center-middle');
 
       return countMeasure;
+    },
+    'custom:TimeMeasure': (p, element) => {
+      let timeMeasure = drawTimeMeasure(element)
+      svgAppend(p, timeMeasure);
+      renderEmbeddedLabel(p, element, 'center-middle');
+
+      return timeMeasure;
     },
     'custom:DataAggregatedMeasure': (p, element) => {
       let dataAggregatedMeasure = drawDataAggregatedMeasure(element)
       svgAppend(p, dataAggregatedMeasure);
-      // renderEmbeddedLabel(p, element, 'center-middle');
+      renderEmbeddedLabel(p, element, 'center-middle');
 
       return dataAggregatedMeasure;
     },
     'custom:DataMeasure': (p, element) => {
       let dataMeasure = drawDataMeasure(element)
       svgAppend(p, dataMeasure);
-      // renderEmbeddedLabel(p, element, 'center-middle');
+      renderEmbeddedLabel(p, element, 'center-middle');
 
       return dataMeasure;
     },
     'custom:DataPropertyConditionAggregatedMeasure': (p, element) => {
       let dataPropertyConditionAggregatedMeasure = drawDataPropertyConditionAggregatedMeasure(element)
       svgAppend(p, dataPropertyConditionAggregatedMeasure);
-      // renderEmbeddedLabel(p, element, 'center-middle');
+      renderEmbeddedLabel(p, element, 'center-middle');
 
       return dataPropertyConditionAggregatedMeasure;
     },
     'custom:DataPropertyConditionMeasure': (p, element) => {
       let dataPropertyConditionMeasure = drawDataPropertyConditionMeasure(element)
       svgAppend(p, dataPropertyConditionMeasure);
-      // renderEmbeddedLabel(p, element, 'center-middle');
+      renderEmbeddedLabel(p, element, 'center-middle');
 
       return dataPropertyConditionMeasure;
     },
     'custom:DerivedMultiInstanceMeasure': (p, element) => {
       let derivedMultiInstanceMeasure = drawDerivedMultiInstanceMeasure(element)
       svgAppend(p, derivedMultiInstanceMeasure);
-      // renderEmbeddedLabel(p, element, 'center-middle');
+      renderEmbeddedLabel(p, element, 'center-middle');
 
       return derivedMultiInstanceMeasure; 
     },
     'custom:DerivedSingleInstanceMeasure': (p, element) => {
       let derivedSingleInstanceMeasure = drawDerivedSingleInstanceMeasure(element)
       svgAppend(p, derivedSingleInstanceMeasure);
-      // renderEmbeddedLabel(p, element, 'center-middle');
+      renderEmbeddedLabel(p, element, 'center-middle');
 
       return derivedSingleInstanceMeasure; 
     },
@@ -837,39 +809,89 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     'custom:GroupAbsence': (p, element) => {
       return renderers['custom:Group'](p, element, true)
     },
-    // 'custom:TaskTimed': (p, element) => {
-    //   var attrs = {
-    //     fill: '#fff',
-    //     stroke: '#000'
-    //   };
-    //   let new_element = Object.assign({type: 'bpmn:Activity'}, element)
-    //   var rect = BpmnRenderer.prototype.drawShape(p, new_element);
-    //   console.log(rect)
-    //   // renderEmbeddedLabel(p, element, 'center-middle');
-    //   // attachTaskMarkers(parentGfx, element);
-    //
-    //   return rect;
-    // },
+
+
+    // CONEXIÓN POR DEFECTO PARA CUSTOM_ELEMENTS-BPMN_ELEMENTS - LÍNEA CONTINUA CON FLECHA
     'custom:ResourceArc': (p, element) => {
       var attrs = computeStyle(attrs, {
         stroke: element.color || BLACK,
         strokeWidth: 1.5,
-        strokeDasharray: [10,7]
+        markerEnd: marker('sequenceflow-end', 'white',BLACK),
       });
 
       return svgAppend(p, createLine(element.waypoints, attrs));
     },
 
-    // DEFINO LA NUEVA CONEXIÓN
+    // CONEXIÓN PRUEBA ENTRE CUSTOM_ELEMENTS - LÍNEA DISCONTINUA ROJA
     'custom:MyConnection': (p, element) => {
       var attrs = computeStyle(attrs, {
-        stroke: COLOR_RED,
-        strokeWidth: 1.5,
-        strokeDasharray: [10,7]
+        stroke: COLOR_RED, //COLOR
+        strokeWidth: 1.5, //ANCHURA
+        // strokeLinecap: 'round', 'butt', 'square' //DEFINE EL PRINCIPIO Y FIN DE LA LÍNEA (REDONDEADO, ETC)
+        strokeDasharray: [10,7] //LÍNA DISCONTINUA
       });
 
       return svgAppend(p, createLine(element.waypoints, attrs));
     },
+
+    // CONEXIÓN PARA MEDIDA_AGREGADA-MEDIDA - LÍNEA CONTINUA CON ROMBO
+    'custom:AggregatedConnection': (p, element) => {
+      var attrs = {
+        //strokeLinejoin: 'round',
+        // markerEnd: marker('sequenceflow-end', 'white', element.color),
+        stroke: BLACK, 
+        strokeWidth: 1.5, 
+        //strokeDasharray: [8,5],
+        markerStart: marker('conditional-flow-marker', 'white',BLACK),
+      };
+      return svgAppend(p, createLine(element.waypoints, attrs));
+    },
+
+    // CONEXIÓN PARA MEDIDA_AGREGADA-DATO - LÍNEA DISCONTINUA CON ROMBO
+    'custom:GroupedBy': (p, element) => {
+      var attrs = {
+        stroke: BLACK, 
+        strokeWidth: 1.5, 
+        strokeDasharray: [8,5],
+        markerStart: marker('conditional-flow-marker', 'white',BLACK),
+        
+      };
+
+      return svgAppend(p, createLine(element.waypoints, attrs));
+    },
+
+    'custom:GroupedBy': (p, element) => {
+      var attrs = {
+        stroke: BLACK, 
+        strokeWidth: 1.5, 
+        strokeDasharray: [8,5],
+        markerStart: marker('conditional-flow-marker', 'white',BLACK),
+      };
+      return svgAppend(p, createLine(element.waypoints, attrs));
+    },
+
+
+    // MODIFICAR RULES PARA ESTAS DOS CONEXIONES
+    'custom:ToConnection': (p, element) => {
+      var attrs = {
+        stroke: COLOR_YELLOW, 
+        strokeWidth: 1.5, 
+        strokeDasharray: [8,5],
+        markerStart: marker('conditional-flow-marker', 'white',BLACK),
+      };
+      return svgAppend(p, createLine(element.waypoints, attrs));
+    },
+
+    'custom:FromConnection': (p, element) => {
+      var attrs = {
+        stroke: COLOR_RED, 
+        strokeWidth: 1.5, 
+        strokeDasharray: [8,5],
+        markerStart: marker('conditional-flow-marker', 'white',BLACK),
+      };
+      return svgAppend(p, createLine(element.waypoints, attrs));
+    },
+
     'custom:ConsequenceFlow': (p, element) => {
       var attrs = {
         strokeLinejoin: 'round',
@@ -998,6 +1020,24 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       return componentsToPath(d);
     },
     'custom:CountMeasure': (element) => {
+      var x = element.x,
+          y = element.y,
+          width = element.width,
+          height = element.height;
+          
+
+      var d = [
+        ['M', x , y],
+        ['h', 50 ],
+        ['v', 50 ],
+        ['h', -50 ],
+        ['v', -50 ],
+        ['z']
+      ]
+
+      return componentsToPath(d);
+    },
+    'custom:TimeMeasure': (element) => {
       var x = element.x,
           y = element.y,
           width = element.width,

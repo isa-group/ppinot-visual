@@ -10,7 +10,7 @@ import {
 
 import RuleProvider from 'diagram-js/lib/features/rules/RuleProvider';
 import {isAny} from "bpmn-js/lib/features/modeling/util/ModelingUtil";
-import {isCustomResourceArcElement, isCustomShape, isCustomMyConnectionElement} from "./Types";
+import {isCustomResourceArcElement, isCustomShape, isCustomMyConnectionElement, isCustomAggregatedElement} from "./Types";
 import {isLabel} from "bpmn-js/lib/util/LabelUtil";
 
 var HIGH_PRIORITY = 1500;
@@ -70,22 +70,31 @@ function canConnect(source, target, connection) {
     else
       return false
   }
-  // else if(is(target, 'custom:Avion')) {
-  //   if(isDefaultValid(source)) {
-  //     if(connection === 'custom:TimeDistandStartArc')
-  //       return { type: connection }
-  //     else
-  //       return { type: 'custom:MyConnection' }
-  //   }
-  //   else
-  //     return false
-  // }
+
+  else if(is(target, 'custom:TimeMeasure')) {
+    if(isDefaultValid(source)) {
+      if(connection === 'custom:ToConnection')
+        return { type: connection }
+      else if(connection == 'custom:FromConnection')
+        return { type: connection }
+    }
+    else
+      return false
+  }
+
   else if((isDefaultValid(source) && isCustomShape(target) && isCustomResourceArcElement(source))  || (isCustomShape(source) && isDefaultValid(target) && isCustomResourceArcElement(target)))
     return { type: 'custom:ResourceArc'
   }
   else if((isDefaultValid(source) && isCustomShape(target) && isCustomMyConnectionElement(source)) || (isCustomShape(source) && isDefaultValid(target) && isCustomMyConnectionElement(source)))
-    return { type: 'custom:MyConnection'}
-  else 
+    return { type: 'custom:MyConnection'
+  }
+  else if((isCustomAggregatedElement(source) && is(target, 'custom:CountMeasure')) )
+    return {type: 'custom:AggregatedConnection'
+  }
+  else if (isCustomAggregatedElement(source) && is(target, 'bpmn:DataObjectReference') )
+    return {type: 'custom:GroupedBy'
+  }
+  else
     return;
 }
 
@@ -113,6 +122,18 @@ function canConnect2(source, target, connection) {
     else
       return false
   }
+
+  else if(is(target, 'custom:TimeMeasure')) {
+    if(isDefaultValid(source)) {
+      if(connection === 'custom:ToConnection')
+        return { type: connection }
+      else if(connection == 'custom:FromConnection')
+        return { type: connection }
+    }
+    else
+      return false
+  }
+  
   else {
     if (!isCustom(source) && !isCustom(target))
       return;
@@ -121,6 +142,12 @@ function canConnect2(source, target, connection) {
     }
     else if((isCustom(source) && isCustomMyConnectionElement(target)) || (isCustom(target) && isCustomMyConnectionElement(source))) {
       return {type: 'custom:MyConnection'}
+    }
+    else if((isCustomAggregatedElement(source) && is(target, 'custom:CountMeasure')) )
+    return {type: 'custom:AggregatedConnection'
+    }
+    else if (isCustomAggregatedElement(source) && is(target, 'bpmn:DataObjectReference') )
+      return {type: 'custom:GroupedBy'
     }
     else
       return
@@ -149,7 +176,7 @@ CustomRules.prototype.init = function() {
 
 
   function canConnectMultiple(source, target, type) {
-    if (is(target, 'bpmn:Task') && is(target, 'bpmn:Task')) {
+    if (is(target, 'bpmn:Task') && is(source, 'bpmn:Task')) {
       if(type === 'custom:ConsequenceTimedFlow')
         return {type1: 'custom:ResourceArc', type2:'custom:ConsequenceFlow'}
       else if(type === 'custom:TimeDistance')
@@ -160,12 +187,19 @@ CustomRules.prototype.init = function() {
     }
   }
 
-  function canConnectMultipleCustomElement(source, target, type) {
-    if (is(target, customElements) && is(source, customElements)) {
-      if(type === 'custom:Avion')
-        return {type1: 'custom:ResourceArc', type2:'custom:MyConnection'}
-    }
-  }
+  // function canConnectMultipleCustomElement(source, target, type) {
+  //   if (is(target, customElements) && is(source, customElements)) {
+  //     if(type === 'custom:Avion')
+  //       return {type1: 'custom:ResourceArc', type2:'custom:MyConnection', type3:'custom:AggregatedConnection'}
+  //   }
+  // }
+
+  // function canConnectTaskCustomElement(source, target, type) {
+  //   if (is(target, 'bpmn:Task') && is(source, customElements)) {
+  //     if(type === 'custom:AggregatedMeasure')
+  //       return {type1: 'custom:AggregatedConnection'}
+  //   }
+  // }
 
   function canReconnect(source, target, connection) {
     if(!isCustom(connection) && !isCustom(source) && !isCustom(target))
@@ -186,6 +220,12 @@ CustomRules.prototype.init = function() {
           return;
       }
       else if(connection.type === 'custom:MyConnection') {
+        if((!isCustom(source) && isCustomShape(target) ) || (isCustomShape(source) && !isCustom(target) ))
+          return { type: connection.type }
+        else
+          return;
+      }
+      else if(connection.type === 'custom:AggregatedConnection') {
         if((!isCustom(source) && isCustomShape(target) ) || (isCustomShape(source) && !isCustom(target) ))
           return { type: connection.type }
         else

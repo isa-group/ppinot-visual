@@ -14,7 +14,7 @@ import {
 } from 'min-dash';
 import {isLabel} from "./utils/LabelUtil";
 
-import {resourceArcElements, myConnectionElements} from "./Types";
+import {resourceArcElements, myConnectionElements, aggreagatedElements} from "./Types";
 
 
 export default function CustomContextPadProvider(config, injector, elementFactory, connect, create, translate) {
@@ -100,12 +100,26 @@ export default function CustomContextPadProvider(config, injector, elementFactor
         connect.customStart2(event, element, 'custom:ConsequenceTimedFlow', elementFactory, autoActivate);
     }
 
-    // if (isAny(businessObject, resourceArcElements) && element.type !== 'label') {
+    if (isAny(businessObject, resourceArcElements) && element.type !== 'label') {
+        assign(actions, {
+          'connect': {
+              group: 'connect',
+              className: 'bpmn-icon-connection-multi',
+              title: translate('Connect using custom connection'),
+              action: {
+                  click: startConnect,
+                  dragstart: startConnect
+              }
+          }
+        });
+    }
+
+    // if (isAny(businessObject, aggreagatedElements) && element.type !== 'label') {
     //     assign(actions, {
     //       'connect': {
     //           group: 'connect',
-    //           className: 'bpmn-icon-connection-multi',
-    //           title: translate('Connect using custom connection'),
+    //           className: 'bpmn-icon-conditional-flow', // MAL
+    //           title: translate('Aggregated connection'),
     //           action: {
     //               click: startConnect,
     //               dragstart: startConnect
@@ -114,19 +128,20 @@ export default function CustomContextPadProvider(config, injector, elementFactor
     //     });
     // }
 
-    // if (isAny(businessObject, myConnectionElements) && element.type !== 'label') {
-    //     assign(actions, {
-    //       'connect': {
-    //           group: 'connect',
-    //           className: 'bpmn-icon-lane-divide-two',
-    //           title: translate('My connection'),
-    //           action: {
-    //               click: startConnect,
-    //               dragstart: startConnect
-    //           }
-    //       }
-    //     });
-    // }
+    if(isAny(businessObject, aggreagatedElements) && element.type !== 'label') {
+        assign(actions, {
+            'connect1': appendConnectAction(
+                'custom:AggregatedConnection',
+                'bpmn-icon-conditional-flow',
+                'Aggregated connection'
+            ),
+            // 'connect2': appendConnectAction(
+            //     'custom:Groupedby',
+            //     'bpmn-icon-conditional-flow',
+            //     'isGroupedBy'
+            // ),
+        });
+    }
 
     // ESTO CREO QUE HAY QUE MODIFICAR PARA VARIAS CONEXIONES
     
@@ -140,7 +155,7 @@ export default function CustomContextPadProvider(config, injector, elementFactor
             'connect2': appendConnectAction(
                 'custom:ConsequenceTimedFlow',
                 'bpmn-icon-connection-multi',
-                'Connect using custom connection'
+                'Connection'
             ),
             'connect3': appendConnectAction(
                 'custom:TimeDistance',

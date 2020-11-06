@@ -14,10 +14,12 @@ export const label = [
     'custom:DataAggregatedMeasure',
     'custom:DataMeasure',
     'custom:DataPropertyConditionAggregatedMeasure',
-
     'custom:DataPropertyConditionMeasure',
     'custom:DerivedMultiInstanceMeasure',
-    'custom:DerivedSingleInstanceMeasure'
+    'custom:DerivedSingleInstanceMeasure',
+    'custom:TimeMeasure',
+
+    'custom:AggregatedConnection'
     
 ]
 
@@ -30,12 +32,12 @@ export const externalLabel = [
     'custom:GroupAbsence',
     'custom:Clock',
     'custom:Avion',
-    'custom:AggregatedMeasure',
-    'custom:CountAggregatedMeasure',
-    'custom:CountMeasure',
-    'custom:DataAggregatedMeasure',
-    'custom:DataMeasure',
-    'custom:DataPropertyConditionAggregatedMeasure'
+    // 'custom:AggregatedMeasure',
+    // 'custom:CountAggregatedMeasure',
+    // 'custom:CountMeasure',
+    // 'custom:DataAggregatedMeasure',
+    // 'custom:DataMeasure',
+    // 'custom:DataPropertyConditionAggregatedMeasure'
 ]
 
 export const connections = [
@@ -44,7 +46,11 @@ export const connections = [
     'custom:TimeDistanceArcStart',
     'custom:TimeDistanceArcEnd',
 
-    'custom:MyConnection'
+    'custom:MyConnection',
+    'custom:AggregatedConnection',
+    'custom:GroupedBy',
+    'custom:ConnectionTo',
+    'custom:ConnectionFrom'
 
     
 ]
@@ -61,11 +67,23 @@ export const directEdit = [
     'custom:CountMeasure',
     'custom:DataAggregatedMeasure',
     'custom:DataMeasure',
-    'custom:DataPropertyConditionAggregatedMeasure'
+    'custom:DataPropertyConditionAggregatedMeasure',
+    'custom:DataPropertyConditionMeasure',
+    'custom:DerivedMultiInstanceMeasure',
+    'custom:DerivedSingleInstanceMeasure',
+    'custom:TimeMeasure',
 ]
 
 export const myConnectionElements = [
     'custom:Avion'
+]
+
+export const aggreagatedElements = [
+    'custom:AggregatedMeasure'
+]
+
+export const timeMeasuresElements = [
+    //'custom:TimeMeasure'  no esta implementada
 ]
 
 export const resourceArcElements = [
@@ -83,7 +101,11 @@ export const resourceArcElements = [
     'custom:CountMeasure',
     'custom:DataAggregatedMeasure',
     'custom:DataMeasure',
-    'custom:DataPropertyConditionAggregatedMeasure'
+    'custom:DataPropertyConditionAggregatedMeasure',
+    'custom:DataPropertyConditionMeasure',
+    'custom:DerivedMultiInstanceMeasure',
+    'custom:DerivedSingleInstanceMeasure',
+    'custom:TimeMeasure',
 ]
 
 export const custom = [
@@ -106,8 +128,16 @@ export const custom = [
     'custom:DataAggregatedMeasure',
     'custom:DataMeasure',
     'custom:DataPropertyConditionAggregatedMeasure',
+    'custom:DataPropertyConditionMeasure',
+    'custom:DerivedMultiInstanceMeasure',
+    'custom:DerivedSingleInstanceMeasure',
+    'custom:TimeMeasure',
 
-    'custom:MyConnection'
+    'custom:MyConnection',
+    'custom:AggregatedConnection',
+    'custom:GroupedBy',
+    'custom:ConnectionTo',
+    'custom:ConnectionFrom'
 
     
 ]
@@ -138,4 +168,18 @@ export function isCustomMyConnectionElement(type) {
         type = type.type
     }
     return myConnectionElements.includes(type)
+}
+
+export function isCustomAggregatedElement(type) {
+    if (typeof type === 'object') {
+        type = type.type
+    }
+    return aggreagatedElements.includes(type)
+}
+
+export function isCustomTimeMeasureElement(type) {
+    if (typeof type === 'object') {
+        type = type.type
+    }
+    return aggreagatedElements.includes(type)
 }
