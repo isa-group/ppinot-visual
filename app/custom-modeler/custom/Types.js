@@ -49,8 +49,8 @@ export const connections = [
     'custom:MyConnection',
     'custom:AggregatedConnection',
     'custom:GroupedBy',
-    'custom:ConnectionTo',
-    'custom:ConnectionFrom'
+    'custom:ToConnection',
+    'custom:FromConnection'
 
     
 ]
@@ -105,7 +105,7 @@ export const resourceArcElements = [
     'custom:DataPropertyConditionMeasure',
     'custom:DerivedMultiInstanceMeasure',
     'custom:DerivedSingleInstanceMeasure',
-    'custom:TimeMeasure',
+    'custom:TimeMeasure'
 ]
 
 export const custom = [
@@ -136,8 +136,8 @@ export const custom = [
     'custom:MyConnection',
     'custom:AggregatedConnection',
     'custom:GroupedBy',
-    'custom:ConnectionTo',
-    'custom:ConnectionFrom'
+    'custom:ToConnection',
+    'custom:FromConnection'
 
     
 ]

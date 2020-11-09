@@ -224,6 +224,7 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       });
     }
 
+
     if (type === 'messageflow-end') {
       var messageflowEnd = svgCreate('path');
       svgAttr(messageflowEnd, { d: 'm 1 5 l 0 -3 l 7 3 l -7 3 z' });
@@ -874,20 +875,20 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     // MODIFICAR RULES PARA ESTAS DOS CONEXIONES
     'custom:ToConnection': (p, element) => {
       var attrs = {
-        stroke: COLOR_YELLOW, 
+        stroke: BLACK, 
         strokeWidth: 1.5, 
         strokeDasharray: [8,5],
-        markerStart: marker('conditional-flow-marker', 'white',BLACK),
+        markerStart: marker('messageflow-start', 'black',BLACK),
       };
       return svgAppend(p, createLine(element.waypoints, attrs));
     },
 
     'custom:FromConnection': (p, element) => {
       var attrs = {
-        stroke: COLOR_RED, 
+        stroke: BLACK, 
         strokeWidth: 1.5, 
         strokeDasharray: [8,5],
-        markerStart: marker('conditional-flow-marker', 'white',BLACK),
+        markerStart: marker('messageflow-start', 'white',BLACK),
       };
       return svgAppend(p, createLine(element.waypoints, attrs));
     },

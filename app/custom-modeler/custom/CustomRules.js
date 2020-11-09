@@ -71,12 +71,12 @@ function canConnect(source, target, connection) {
       return false
   }
 
-  else if(is(target, 'custom:TimeMeasure')) {
-    if(isDefaultValid(source)) {
-      if(connection === 'custom:ToConnection')
+  else if(is(source, 'custom:TimeMeasure')) {
+    if(isDefaultValid(target)) {
+      if(connection === 'custom:ToConnection' || connection === 'custom:FromConnection')
         return { type: connection }
-      else if(connection == 'custom:FromConnection')
-        return { type: connection }
+      else
+        return false
     }
     else
       return false
@@ -123,13 +123,15 @@ function canConnect2(source, target, connection) {
       return false
   }
 
-  else if(is(target, 'custom:TimeMeasure')) {
-    if(isDefaultValid(source)) {
-      if(connection === 'custom:ToConnection')
-        return { type: connection }
-      else if(connection == 'custom:FromConnection')
-        return { type: connection }
-    }
+  else if(connection === 'custom:ToConnection') {
+    if(isDefaultValid(target) && is(source, 'custom:TimeMeasure'))
+      return { type: connection }
+    else
+      return false
+  }
+  else if(connection === 'custom:FromConnection') {
+    if(isDefaultValid(target) && is(source, 'custom:TimeMeasure'))
+      return { type: connection }
     else
       return false
   }
@@ -181,6 +183,7 @@ CustomRules.prototype.init = function() {
         return {type1: 'custom:ResourceArc', type2:'custom:ConsequenceFlow'}
       else if(type === 'custom:TimeDistance')
         return {type1: 'custom:TimeDistanceArcStart', type2:'custom:TimeDistanceArcEnd'}
+    
         // AÑADIDO
       // else if(type === 'custom:Avion')
       //   return {type1: 'custom:ResourceArc', type2:'custom:MyConnection'}

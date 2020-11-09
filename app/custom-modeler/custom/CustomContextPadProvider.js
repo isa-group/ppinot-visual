@@ -165,6 +165,21 @@ export default function CustomContextPadProvider(config, injector, elementFactor
         });
     }
 
+    if(is(businessObject, 'custom:TimeMeasure') && element.type !== 'label') {
+        assign(actions, {
+            'connect1': appendConnectAction(
+                'custom:ToConnection',
+                'bpmn-icon-connection-multi',
+                'Connect using To connection'
+            ),
+            'connect2': appendConnectAction(
+                'custom:FromConnection',
+                'bpmn-icon-connection-multi',
+                'Connect using From connection'
+            ),
+        });
+    }
+
     if(isAny(businessObject, myConnectionElements) && element.type !== 'label') {
         assign(actions, {
             'connect1': appendConnectAction(
