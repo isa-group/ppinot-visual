@@ -19,7 +19,8 @@ export const label = [
     'custom:DerivedSingleInstanceMeasure',
     'custom:TimeMeasure',
 
-    'custom:AggregatedConnection'
+    'custom:AggregatedConnection',
+    'custom:Ppi'
     
 ]
 
@@ -32,6 +33,7 @@ export const externalLabel = [
     'custom:GroupAbsence',
     'custom:Clock',
     'custom:Avion',
+    'custom:Ppi'
     // 'custom:AggregatedMeasure',
     // 'custom:CountAggregatedMeasure',
     // 'custom:CountMeasure',
@@ -72,6 +74,7 @@ export const directEdit = [
     'custom:DerivedMultiInstanceMeasure',
     'custom:DerivedSingleInstanceMeasure',
     'custom:TimeMeasure',
+    'custom:Ppi'
 ]
 
 export const myConnectionElements = [
@@ -137,7 +140,8 @@ export const custom = [
     'custom:AggregatedConnection',
     'custom:GroupedBy',
     'custom:ToConnection',
-    'custom:FromConnection'
+    'custom:FromConnection',
+    'custom:Ppi'
 
     
 ]

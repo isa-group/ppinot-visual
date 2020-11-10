@@ -173,6 +173,7 @@ CustomElementFactory.prototype._getCustomElementSize = function(type) {
     'custom:DerivedMultiInstanceMeasure':{width: 140, height: 110},
     'custom:DerivedSingleInstanceMeasure':{width: 130, height: 100},
     'custom:TimeMeasure':{width: 120, height: 110},
+    'custom:Ppi':{width: 200, height: 200},
   };
 
   return shapes[type] || shapes.__default;

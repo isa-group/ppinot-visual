@@ -280,7 +280,7 @@ CustomRules.prototype.init = function() {
 
     if (isCustom(shape)) {
       // cannot resize custom elements
-      return false;
+      return true;
     }
   });
 

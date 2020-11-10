@@ -1,4 +1,4 @@
-import {
+import { 
   assign
 } from 'min-dash';
 
@@ -252,6 +252,9 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     ),
     'custom-timeMeasure': createAction(
       'custom:TimeMeasure', 'custom', 'icon-custom-timeMeasure'
+    ),
+    'custom-ppi': createAction(
+      'custom:Ppi', 'custom', 'icon-custom-ppi'
     )
     
     
@@ -259,3 +262,5 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
 
   return actions;
 };
+
+

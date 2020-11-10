@@ -439,6 +439,17 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     return derivedSingleInstanceMeasure;
   };
 
+  function drawPpi(element){
+    var ppi = svgCreate('image', {
+      x: 0,
+      y: 0,
+      width: element.width,
+      height: element.height,
+      href: Svg.dataURLppi
+    })
+    return ppi;
+  };
+
   function drawTimeSlot(width, height, color) {
     var attrs = computeStyle(attrs, {
       stroke: color || '#fff',
@@ -558,6 +569,13 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       renderEmbeddedLabel(p, element, 'center-middle');
 
       return derivedSingleInstanceMeasure; 
+    },
+    'custom:Ppi': (p, element) => {
+      let ppi = drawPpi(element)
+      svgAppend(p, ppi);
+      //renderEmbeddedLabel(p, element, 'center-middle');
+
+      return ppi; 
     },
     'custom:Resource': (p, element) => {
       var attrs = computeStyle(attrs, {
@@ -1114,6 +1132,25 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     },
 
     'custom:DerivedSingleInstanceMeasure': (element) => {
+      var x = element.x,
+          y = element.y,
+          width = element.width,
+          height = element.height;
+          
+
+      var d = [
+        ['M', x , y],
+        ['h', 50 ],
+        ['v', 50 ],
+        ['h', -50 ],
+        ['v', -50 ],
+        ['z']
+      ]
+
+      return componentsToPath(d);
+    },
+
+    'custom:Ppi': (element) => {
       var x = element.x,
           y = element.y,
           width = element.width,
