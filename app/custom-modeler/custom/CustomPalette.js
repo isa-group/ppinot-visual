@@ -199,9 +199,9 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     // 'custom-clock': createAction(
     //     'custom:Clock', 'custom', 'icon-custom-clock'
     // ),
-    'custom-time-slot': createAction(
-        'custom:TimeSlot', 'custom', 'icon-custom-time-slot'
-    ),
+    // 'custom-time-slot': createAction(
+    //     'custom:TimeSlot', 'custom', 'icon-custom-time-slot'
+    // ),
     // 'custom-resource': createAction(
     //     'custom:Resource', 'custom', 'icon-custom-resource'
     // ),
@@ -220,15 +220,18 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     // 'custom-group-absence': createAction(
     //     'custom:GroupAbsence', 'custom', 'icon-custom-group-absence'
     // ),
-    'custom-avion': createAction(
-      'custom:Avion', 'custom', 'icon-custom-avion'
-    ),
+    // 'custom-avion': createAction(
+    //   'custom:Avion', 'custom', 'icon-custom-avion'
+    // ),
     'custom-aggregatedMeasure': createAction(
       'custom:AggregatedMeasure', 'custom', 'icon-custom-aggregatedMeasure'
     ),
     'custom-countAggregatedMeasure': createAction(
       'custom:CountAggregatedMeasure', 'custom', 'icon-custom-countAggregatedMeasure'
     ),
+    // 'custom-carlos1': createAction(
+    //   'custom:Carlos1', 'custom', 'icon-custom-carlos1'
+    // ),
     'custom-countMeasure': createAction(
       'custom:CountMeasure', 'custom', 'icon-custom-countMeasure'
     ),
@@ -255,7 +258,8 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     ),
     'custom-ppi': createAction(
       'custom:Ppi', 'custom', 'icon-custom-ppi'
-    )
+    ),
+    
     
     
   });

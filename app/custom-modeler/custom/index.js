@@ -9,6 +9,8 @@ import CustomLabelEditingProvider from "./CustomLabelEdingProvider";
 import CustomModeling from "./CustomModeling";
 import CustomConnect from "./CustomConnect";
 import CustomReplaceConnectionBehavior from "./behaviour/ReplaceConnectionBehaviour";
+import CustomReplaceMenuProvider from "./CustomReplaceMenuProvider";
+
 
 export default {
   __init__: [
@@ -21,7 +23,10 @@ export default {
     'customLabelEditingProvider',
     'modeling',
     'connect',
-    'replaceConnectionBehavior'
+    'replaceConnectionBehavior',
+    'replaceMenuProvider',
+   
+  
   ],
   contextPadProvider: [ 'type', CustomContextPadProvider ],
   customOrderingProvider: [ 'type', CustomOrderingProvider ],
@@ -34,4 +39,7 @@ export default {
   modeling: [ 'type', CustomModeling ],
   connect: [ 'type', CustomConnect],
   replaceConnectionBehavior: [ 'type', CustomReplaceConnectionBehavior],
+  replaceMenuProvider: ['type', CustomReplaceMenuProvider]
+  
+
 };
