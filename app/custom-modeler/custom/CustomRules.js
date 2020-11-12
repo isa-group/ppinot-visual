@@ -85,10 +85,13 @@ function canConnect(source, target, connection) {
   else if((isDefaultValid(source) && isCustomShape(target) && isCustomResourceArcElement(source))  || (isCustomShape(source) && isDefaultValid(target) && isCustomResourceArcElement(target)))
     return { type: 'custom:ResourceArc'
   }
-  else if((isDefaultValid(source) && isCustomShape(target) && isCustomMyConnectionElement(source)) || (isCustomShape(source) && isDefaultValid(target) && isCustomMyConnectionElement(source)))
+  // else if((isDefaultValid(source) && isCustomShape(target) && isCustomMyConnectionElement(source)) || (isCustomShape(source) && isDefaultValid(target) && isCustomMyConnectionElement(source)))
+  //   return { type: 'custom:MyConnection'
+  // }
+  else if((isCustomShape(source) && (isCustomShape(target) )))
     return { type: 'custom:MyConnection'
   }
-  else if((isCustomAggregatedElement(source) && is(target, 'custom:CountMeasure')) )
+  else if((isCustomAggregatedElement(source) && isCustomShape(target)) )
     return {type: 'custom:AggregatedConnection'
   }
   else if (isCustomAggregatedElement(source) && is(target, 'bpmn:DataObjectReference') )
@@ -110,6 +113,19 @@ function canConnect2(source, target, connection) {
     else
       return false
   }
+  // if(connection === 'custom:GroupedBy') {
+  //   if (isCustomAggregatedElement(source) && is(target, 'bpmn:DataObjectReference') )
+  //     return {connection}
+  // }
+  // if(connection === 'custom:AggregatedConnection') {
+  //   if(isCustomAggregatedElement(source) && isCustomShape(target))
+  //     return { type: connection }
+  // }
+  
+  if(connection === 'custom:MyConnection'){
+    return {type: connection}
+  }
+
   else if(connection === 'custom:TimeDistanceArcStart') {
     if(isDefaultValid(source) && is(target, 'custom:TimeSlot'))
       return { type: connection }
@@ -136,16 +152,17 @@ function canConnect2(source, target, connection) {
       return false
   }
   
+  
   else {
     if (!isCustom(source) && !isCustom(target))
       return;
     else if((isDefaultValid(source) && isCustomResourceArcElement(target)) || (isDefaultValid(target) && isCustomResourceArcElement(source))) {
       return {type: 'custom:ResourceArc'}
     }
-    else if((isCustom(source) && isCustomMyConnectionElement(target)) || (isCustom(target) && isCustomMyConnectionElement(source))) {
-      return {type: 'custom:MyConnection'}
-    }
-    else if((isCustomAggregatedElement(source) && is(target, 'custom:CountMeasure')) )
+    // else if((isCustom(source) && (isCustom(target) ))) {
+    //   return {type: 'custom:MyConnection'}
+    // }
+    else if((isCustomAggregatedElement(source) && isCustomShape(target)) )
     return {type: 'custom:AggregatedConnection'
     }
     else if (isCustomAggregatedElement(source) && is(target, 'bpmn:DataObjectReference') )
@@ -222,18 +239,18 @@ CustomRules.prototype.init = function() {
         else
           return;
       }
-      else if(connection.type === 'custom:MyConnection') {
-        if((!isCustom(source) && isCustomShape(target) ) || (isCustomShape(source) && !isCustom(target) ))
-          return { type: connection.type }
-        else
-          return;
-      }
-      else if(connection.type === 'custom:AggregatedConnection') {
-        if((!isCustom(source) && isCustomShape(target) ) || (isCustomShape(source) && !isCustom(target) ))
-          return { type: connection.type }
-        else
-          return;
-      }
+      // else if(connection.type === 'custom:MyConnection') {
+      //   if((!isCustom(source) && isCustomShape(target) ) || (isCustomShape(source) && !isCustom(target) ))
+      //     return { type: connection.type }
+      //   else
+      //     return;
+      // }
+      // else if(connection.type === 'custom:AggregatedConnection') {
+      //   if((!isCustom(source) && isCustomShape(target) ) || (isCustomShape(source) && !isCustom(target) ))
+      //     return { type: connection.type }
+      //   else
+      //     return;
+      // }
       // add time distance
       else {
         return canConnect(source, target, connection.type)

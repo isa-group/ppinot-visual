@@ -19,7 +19,7 @@ export const label = [
     'custom:DerivedSingleInstanceMeasure',
     'custom:TimeMeasure',
 
-    'custom:AggregatedConnection',
+    'custom:MyConnection',
     'custom:Ppi'
     
 ]
@@ -33,7 +33,8 @@ export const externalLabel = [
     'custom:GroupAbsence',
     'custom:Clock',
     'custom:Avion',
-    'custom:Ppi'
+    'custom:Ppi',
+    'custom:MyConnection'
     // 'custom:AggregatedMeasure',
     // 'custom:CountAggregatedMeasure',
     // 'custom:CountMeasure',
@@ -74,7 +75,8 @@ export const directEdit = [
     'custom:DerivedMultiInstanceMeasure',
     'custom:DerivedSingleInstanceMeasure',
     'custom:TimeMeasure',
-    'custom:Ppi'
+    'custom:Ppi',
+    'custom:MyConnection'
 ]
 
 export const myConnectionElements = [
@@ -82,13 +84,23 @@ export const myConnectionElements = [
 ]
 
 export const aggreagatedElements = [
-    'custom:AggregatedMeasure'
+    'custom:AggregatedMeasure',
+    'custom:CountAggregatedMeasure',
+    'custom:DataAggregatedMeasure'
 ]
 
 export const timeMeasuresElements = [
-    //'custom:TimeMeasure'  no esta implementada
+    //'custom:TimeMeasure'  //no esta implementada
 ]
+export const countMeasuresElements = [
+    'custom:CountMeasure'  //no esta implementada
+]
+export const ppiElement = [
+    'custom:Ppi',
+    // 'custom:CountMeasure',
+    // 'custom:DataMeasure'
 
+]
 export const resourceArcElements = [
     'custom:Clock',
     'custom:Resource',
@@ -185,5 +197,18 @@ export function isCustomTimeMeasureElement(type) {
     if (typeof type === 'object') {
         type = type.type
     }
-    return aggreagatedElements.includes(type)
+    return timeMeasuresElements.includes(type)
+}
+export function isCustomCountMeasureElement(type) {
+    if (typeof type === 'object') {
+        type = type.type
+    }
+    return countMeasuresElements.includes(type)
+}
+
+export function isCustomPpi(type) {
+    if (typeof type === 'object') {
+        type = type.type
+    }
+    return ppiElement.includes(type)
 }

@@ -15,11 +15,23 @@ import {
 import {isLabel} from "./utils/LabelUtil";
 
 import {resourceArcElements, myConnectionElements, aggreagatedElements} from "./Types";
+import * as replaceOptions from './CustomReplaceOptions';
+import { replace } from 'tiny-svg';
+import {
+    isDifferentType
+  } from "bpmn-js/lib/features/popup-menu/util/TypeUtil"; 
 
 
-export default function CustomContextPadProvider(config, injector, elementFactory, connect, create, translate) {
+
+export default function CustomContextPadProvider(contextPad, popupMenu, canvas, config, injector, elementFactory, connect, create, translate) {
 
     injector.invoke(ContextPadProvider, this);
+
+    this._contextPad = contextPad;
+    this._popupMenu = popupMenu;
+    this._canvas = canvas;
+
+    contextPad.registerProvider(this);
 
     var cached = bind(this.getContextPadEntries, this);
 
@@ -28,6 +40,63 @@ export default function CustomContextPadProvider(config, injector, elementFactor
         autoPlace = injector.get('autoPlace', false);
     }
 
+    // CustomContextPadProvider.prototype.getContextPadEntries = function(element) {
+    //      var self = this;
+      
+    //      var actions = {
+    //        'set-element': {
+    //          group: 'custom',
+    //          className: 'icon-custom',
+    //          title: 'Set Element',
+    //          action: {
+    //            click: function(event, element) {
+    // //             // close any existing popup
+    //              self._popupMenu.close();
+      
+    // //             // create new color-picker popup
+    //              var elementPicker = self._popupMenu.create('element-picker', element);
+      
+    // //             // get start popup draw start position
+    //              var opts = getStartPosition(self._canvas, self._contextPad, element);
+      
+    // //             // or fallback to current cursor position
+    //              opts.cursor = {
+    //                x: event.x,
+    //                y: event.y
+    //              };
+      
+    // //             // open color picker submenu popup
+    //              elementPicker.open(opts, element);
+    //            }
+    //         }
+    //       }
+    //     };
+      
+    //     return actions;
+    //   };
+
+    //   function getStartPosition(canvas, contextPad, element) {
+
+    //     var Y_OFFSET = 5;
+      
+    //     var diagramContainer = canvas.getContainer(),
+    //         pad = contextPad.getPad(element).html;
+      
+    //     var diagramRect = diagramContainer.getBoundingClientRect(),
+    //         padRect = pad.getBoundingClientRect();
+      
+    //     var top = padRect.top - diagramRect.top;
+    //     var left = padRect.left - diagramRect.left;
+      
+    //     var pos = {
+    //       x: left,
+    //       y: top + padRect.height + Y_OFFSET
+    //     };
+      
+    //     return pos;
+     //  }
+
+    
     function appendAction(type, className, title, options) {
         if (typeof title !== 'string') {
             options = title;
@@ -100,6 +169,8 @@ export default function CustomContextPadProvider(config, injector, elementFactor
         connect.customStart2(event, element, 'custom:ConsequenceTimedFlow', elementFactory, autoActivate);
     }
 
+
+
     if (isAny(businessObject, resourceArcElements) && element.type !== 'label') {
         assign(actions, {
           'connect': {
@@ -114,19 +185,6 @@ export default function CustomContextPadProvider(config, injector, elementFactor
         });
     }
 
-    // if (isAny(businessObject, aggreagatedElements) && element.type !== 'label') {
-    //     assign(actions, {
-    //       'connect': {
-    //           group: 'connect',
-    //           className: 'bpmn-icon-conditional-flow', // MAL
-    //           title: translate('Aggregated connection'),
-    //           action: {
-    //               click: startConnect,
-    //               dragstart: startConnect
-    //           }
-    //       }
-    //     });
-    // }
 
     if(isAny(businessObject, aggreagatedElements) && element.type !== 'label') {
         assign(actions, {
@@ -135,11 +193,16 @@ export default function CustomContextPadProvider(config, injector, elementFactor
                 'bpmn-icon-conditional-flow',
                 'Aggregated connection'
             ),
-            // 'connect2': appendConnectAction(
-            //     'custom:Groupedby',
-            //     'bpmn-icon-conditional-flow',
-            //     'isGroupedBy'
-            // ),
+            'connect2': appendConnectAction(
+                'custom:GroupedBy',
+                'bpmn-icon-conditional-flow',
+                'Aggregated connection'
+            ),
+            'connect3': appendConnectAction(
+                'custom:MyConnection',
+                'bpmn-icon-connection-multi',
+                'Custom connection'
+            ),
         });
     }
 
@@ -177,6 +240,11 @@ export default function CustomContextPadProvider(config, injector, elementFactor
                 'bpmn-icon-connection-multi',
                 'Connect using From connection'
             ),
+            'connect3': appendConnectAction(
+                'custom:MyConnection',
+                'bpmn-icon-connection-multi',
+                'Custom connection'
+            ),
         });
     }
 
@@ -203,6 +271,9 @@ export default function CustomContextPadProvider(config, injector, elementFactor
 inherits(CustomContextPadProvider, ContextPadProvider);
 
 CustomContextPadProvider.$inject = [
+    'contextPad',
+    'popupMenu',
+    'canvas',
     'config',
     'injector',
     'elementFactory',
