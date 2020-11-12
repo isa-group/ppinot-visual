@@ -168,8 +168,14 @@ CustomRules.prototype.init = function() {
       return;
     }
 
+    var allowedContainer = is(target, 'bpmn:Process') || is(target, 'bpmn:Participant') || is(target, 'bpmn:Collaboration');
+
+    if (shape.type === 'custom:AggregatedMeasure') {
+      allowedContainer = allowedContainer || is(target, 'custom:Ppi');
+    }
+
     // allow creation on processes
-    return is(target, 'bpmn:Process') || is(target, 'bpmn:Participant') || is(target, 'bpmn:Collaboration');
+    return allowedContainer;
   }
 
   /**
