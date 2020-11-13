@@ -187,7 +187,11 @@ CustomRules.prototype.init = function() {
 
     var allowedContainer = is(target, 'bpmn:Process') || is(target, 'bpmn:Participant') || is(target, 'bpmn:Collaboration');
 
-    if (shape.type === 'custom:AggregatedMeasure') {
+    // if (shape.type === 'custom:AggregatedMeasure') {
+    //   allowedContainer = allowedContainer || is(target, 'custom:Ppi');
+    // }
+
+    if (isCustom(shape)) {
       allowedContainer = allowedContainer || is(target, 'custom:Ppi');
     }
 
@@ -206,26 +210,10 @@ CustomRules.prototype.init = function() {
         return {type1: 'custom:ResourceArc', type2:'custom:ConsequenceFlow'}
       else if(type === 'custom:TimeDistance')
         return {type1: 'custom:TimeDistanceArcStart', type2:'custom:TimeDistanceArcEnd'}
-    
-        // AÑADIDO
-      // else if(type === 'custom:Avion')
-      //   return {type1: 'custom:ResourceArc', type2:'custom:MyConnection'}
+  
     }
   }
 
-  // function canConnectMultipleCustomElement(source, target, type) {
-  //   if (is(target, customElements) && is(source, customElements)) {
-  //     if(type === 'custom:Avion')
-  //       return {type1: 'custom:ResourceArc', type2:'custom:MyConnection', type3:'custom:AggregatedConnection'}
-  //   }
-  // }
-
-  // function canConnectTaskCustomElement(source, target, type) {
-  //   if (is(target, 'bpmn:Task') && is(source, customElements)) {
-  //     if(type === 'custom:AggregatedMeasure')
-  //       return {type1: 'custom:AggregatedConnection'}
-  //   }
-  // }
 
   function canReconnect(source, target, connection) {
     if(!isCustom(connection) && !isCustom(source) && !isCustom(target))
