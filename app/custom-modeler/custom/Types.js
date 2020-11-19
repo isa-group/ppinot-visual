@@ -43,11 +43,12 @@ export const externalLabel = [
     'custom:GroupedBy',
     'custom:ToConnection',
     'custom:FromConnection',
-    // 'custom:AggregatedMeasure',
+     'custom:AggregatedMeasure',
     // 'custom:CountAggregatedMeasure',
-    // 'custom:CountMeasure',
+     'custom:CountMeasure',
     // 'custom:DataAggregatedMeasure',
-    // 'custom:DataMeasure',
+     'custom:DataMeasure',
+     'custom:TimeMeasure'
     // 'custom:DataPropertyConditionAggregatedMeasure'
 ]
 

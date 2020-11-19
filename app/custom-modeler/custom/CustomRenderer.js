@@ -536,10 +536,8 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     'custom:AggregatedMeasure': (p, element) => {
       let aggregatedMeasure = drawAggregatedMeasure(element)
       svgAppend(p, aggregatedMeasure);
-      renderEmbeddedLabel(p, element, 'center-middle');
-      
-      
-
+      //renderEmbeddedLabel(p, element, 'center-middle');
+      //renderExternalLabel(p, element)
       return aggregatedMeasure;
     },
     'custom:CountAggregatedMeasure': (p, element) => {
@@ -552,14 +550,14 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     'custom:CountMeasure': (p, element) => {
       let countMeasure = drawCountMeasure(element)
       svgAppend(p, countMeasure);
-      renderEmbeddedLabel(p, element, 'center-middle');
+      //renderEmbeddedLabel(p, element, 'center-middle');
 
       return countMeasure;
     },
     'custom:TimeMeasure': (p, element) => {
       let timeMeasure = drawTimeMeasure(element)
       svgAppend(p, timeMeasure);
-      renderEmbeddedLabel(p, element, 'center-middle');
+      //renderEmbeddedLabel(p, element, 'center-middle');
 
       return timeMeasure;
     },
@@ -574,7 +572,6 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       let dataMeasure = drawDataMeasure(element)
       svgAppend(p, dataMeasure);
       //renderEmbeddedLabel(p, element, 'center-middle');
-      renderLaneLabel(p, 'ohdueiwfuwfh', element)
       return dataMeasure;
     },
     'custom:DataPropertyConditionAggregatedMeasure': (p, element) => {

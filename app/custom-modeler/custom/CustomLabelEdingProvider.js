@@ -138,9 +138,6 @@ CustomLabelEditingProvider.prototype.activate = function(element) {
         text = '';
     //END_CUSTOM
 
-    // if(is(element, 'custom:CountMeasure')){
-    //     text='Mi conexión personalizada'
-    // }
 
     if(is(element, 'custom:MyConnection')){
         text= 'Prueba texto conexión'
@@ -149,7 +146,15 @@ CustomLabelEditingProvider.prototype.activate = function(element) {
     if(is(element, 'custom:AggregatedMeasure')){
         text= 'Prueba texto elemento'
     }
-
+    if(is(element, 'custom:CountMeasure')){
+        text= 'Count measure'
+    }
+    if(is(element, 'custom:DataMeasure')){
+        text= 'Data measure'
+    }
+    if(is(element, 'custom:TimeMeasure')){
+        text= 'Time measure'
+    }
     if(is(element, 'custom:ToConnection')){
         text= 'to'
     }
