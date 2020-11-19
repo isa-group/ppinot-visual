@@ -86,6 +86,32 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       )
     });
   }
+
+  // to include default labels into elements
+  function renderEmbeddedDefaultLabel(parentGfx, element, align, label) {
+    return renderLabel(parentGfx, label, {
+      box: element,
+      align: align,
+      padding: 5,
+      style: {
+        fill: element.color
+      }
+    });
+  }
+
+  function renderCustomLabel(parentGfx, element) {
+  
+    return renderLabel(parentGfx, getLabel(element), {
+      box: {
+        height: 30,
+        width: element.width,
+        align: 'center-middle'
+      },
+      style: {
+        fill: element.color
+      }
+    });
+  }
   
 
   function renderExternalLabel(parentGfx, element) {
@@ -536,8 +562,11 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     'custom:AggregatedMeasure': (p, element) => {
       let aggregatedMeasure = drawAggregatedMeasure(element)
       svgAppend(p, aggregatedMeasure);
+      //renderCustomLabel(p, 'hola', element)
+      //renderEmbeddedDefaultLabel(p, element, 'center-middle', 'prueba')
       //renderEmbeddedLabel(p, element, 'center-middle');
       //renderExternalLabel(p, element)
+     
       return aggregatedMeasure;
     },
     'custom:CountAggregatedMeasure': (p, element) => {
@@ -889,6 +918,7 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
         // strokeLinecap: 'round', 'butt', 'square' //DEFINE EL PRINCIPIO Y FIN DE LA LÍNEA (REDONDEADO, ETC)
         //strokeDasharray: [10,7] //LÍNA DISCONTINUA
       });
+
       //renderConnectionLabel(p, element, 'Prueba 2')
       //renderLaneLabel(p, 'ohdueiwfuwfh', element)
       return svgAppend(p, createLine(element.waypoints, attrs));
