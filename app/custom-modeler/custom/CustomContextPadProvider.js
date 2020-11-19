@@ -15,7 +15,6 @@ import {
 import {isLabel} from "./utils/LabelUtil";
 
 import {resourceArcElements, myConnectionElements, aggreagatedElements} from "./Types";
-import * as replaceOptions from './CustomReplaceOptions';
 import { replace } from 'tiny-svg';
 import {
     isDifferentType
