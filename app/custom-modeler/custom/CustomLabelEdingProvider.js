@@ -8,6 +8,7 @@ import { isExpanded } from 'bpmn-js/lib/util/DiUtil';
 
 import {
     getLabel,
+    setLabel,
     getExternalLabelMid,
     isLabelExternal,
     hasExternalLabel,
@@ -31,8 +32,17 @@ export default function CustomLabelEditingProvider(
     // listen to dblclick on non-root elements
     eventBus.on('element.dblclick', function(event) {
         activateDirectEdit(event.element, true);
-    });
+    }); 
+   
 
+    // eventBus.on('element.dblclick', priority, function(context) {
+    //     var element = context.element;
+
+    //     if ()) { //AggregatedMeasure
+    //         return false; // will cancel event
+    //     }
+    // });
+    
     // complete on followup canvas operation
     eventBus.on([
         'element.mousedown',
@@ -118,6 +128,7 @@ CustomLabelEditingProvider.$inject = [
     'textRenderer'
 ];
 
+
 /**
  * Activate direct editing for activities and text annotations.
  *
@@ -134,6 +145,18 @@ CustomLabelEditingProvider.prototype.activate = function(element) {
     if(isAny(element, label) && !text)
         text = '';
     //END_CUSTOM
+
+    // if(is(element, 'custom:CountMeasure')){
+    //     text='Mi conexión personalizada'
+    // }
+
+    if(is(element, 'custom:MyConnection')){
+        text= 'Prueba texto conexión'
+    }
+
+    if(is(element, 'custom:AggregatedMeasure')){
+        text= 'Prueba texto elemento'
+    }
 
     if (text === undefined) {
         return;
@@ -251,6 +274,7 @@ CustomLabelEditingProvider.prototype.getEditingBBox = function(element) {
         });
     }
 
+   
 
     // internal labels for tasks and collapsed call activities,
     // sub processes and participants
@@ -291,6 +315,8 @@ CustomLabelEditingProvider.prototype.getEditingBBox = function(element) {
         });
     }
 
+    
+
     var width = 90 * zoom,
         paddingTop = 7 * zoom,
         paddingBottom = 4 * zoom;
@@ -311,6 +337,8 @@ CustomLabelEditingProvider.prototype.getEditingBBox = function(element) {
             paddingBottom: paddingBottom + 'px'
         });
     }
+
+    
 
     // external label not yet created
     if (isLabelExternal(target)

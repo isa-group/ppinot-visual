@@ -33,25 +33,6 @@ export default function CustomOrderingProvider(eventBus, canvas) {
         index: -1
       };
     }
-    else if (isCustomCountMeasureElement(element.type)) {
-
-      // always move to end of root element
-      // to display always on top
-      return {
-        parent: canvas.getRootElement(),
-        index: -1
-      };
-    }
-
-    else if (isCustomPpi(element.type)) {
-
-      // always move to end of root element
-      // to display always on top
-      return {
-        parent: canvas.getRootElement(),
-        index: -2
-      };
-    }
   };
 }
 

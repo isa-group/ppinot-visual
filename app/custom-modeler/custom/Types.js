@@ -34,7 +34,7 @@ export const externalLabel = [
     'custom:Clock',
     'custom:Avion',
     'custom:Ppi',
-    'custom:MyConnection'
+    'custom:MyConnection',
     // 'custom:AggregatedMeasure',
     // 'custom:CountAggregatedMeasure',
     // 'custom:CountMeasure',
@@ -157,6 +157,13 @@ export const custom = [
 
     
 ]
+
+export function isExternalLabel(type) {
+    if (typeof type === 'object') {
+        type = type.type
+    }
+    return externalLabel.includes(type)
+}
 
 export function isCustomShape(type) {
     if (typeof type === 'object')

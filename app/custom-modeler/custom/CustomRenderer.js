@@ -11,9 +11,9 @@ import {append as svgAppend, attr as svgAttr, classes as svgClasses, create as s
 import {getFillColor, getSemantic, getStrokeColor} from "bpmn-js/lib/draw/BpmnRenderUtil";
 import {assign} from "min-dash";
 import Ids from 'ids';
-import {getLabel} from "./utils/LabelUtil"
+import {getLabel, setLabel} from "./utils/LabelUtil"
 import BaseElementFactory from "diagram-js/lib/core/ElementFactory";
-import {isCustomConnection, isCustomShape} from "./Types";
+import {isCustomConnection, isCustomShape, label} from "./Types";
 
 import Svg from './svg';
 
@@ -39,6 +39,8 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
 
   var markers = {};
 
+  
+
   function renderLabel(parentGfx, label, options) {
     options = assign({
       size: {
@@ -47,6 +49,7 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     }, options);
 
     var text = textRenderer.createText(label || '', options);
+    
 
     svgClasses(text).add('djs-label');
 
@@ -54,6 +57,7 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
 
     return text;
   }
+
 
   function renderEmbeddedLabel(parentGfx, element, align) {
     var semantic = getSemantic(element);
@@ -67,6 +71,22 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       }
     });
   }
+
+  function renderConnectionLabel(parentGfx, element, label) {
+    
+    return renderLabel(parentGfx, label, {
+      
+      fitBox: true,
+      style: assign(
+          {},
+          textRenderer.getExternalStyle(),
+          {
+            fill: element.color
+          }
+      )
+    });
+  }
+  
 
   function renderExternalLabel(parentGfx, element) {
     var box = {
@@ -98,16 +118,17 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     return pathData;
   }
 
-  function addMarker(id, options) {
+  function addMarker( id, options) {
     var attrs = assign({
       fill: 'black',
       strokeWidth: 1,
       strokeLinecap: 'round',
-      strokeDasharray: 'none'
+      strokeDasharray: 'none',
+      labelContent: ''
+
     }, options.attrs);
 
     var ref = options.ref || { x: 0, y: 0 };
-
     var scale = options.scale || 1;
 
     // fix for safari / chrome / firefox bug not correctly
@@ -117,9 +138,7 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     }
 
     var marker = svgCreate('marker');
-
     svgAttr(options.element, attrs);
-
     svgAppend(marker, options.element);
 
     svgAttr(marker, {
@@ -136,12 +155,9 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
 
     if (!defs) {
       defs = svgCreate('defs');
-
       svgAppend(canvas._svg, defs);
     }
-
     svgAppend(defs, marker);
-
     markers[id] = marker;
   }
 
@@ -175,6 +191,8 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
         }
       });
     }
+
+  
 
     if (type === 'timedistance-start') {
       var sequenceflowEnd = svgCreate('path');
@@ -229,6 +247,7 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       var messageflowEnd = svgCreate('path');
       svgAttr(messageflowEnd, { d: 'm 1 5 l 0 -3 l 7 3 l -7 3 z' });
 
+     
       addMarker(id, {
         element: messageflowEnd,
         attrs: {
@@ -484,6 +503,20 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     return drawPath(p, pathData, attrs);
   }
 
+  function drawMyConnection(p, element, options, label) {
+    var pathData = createPathFromConnection(element);   
+    var attrs = {
+      strokeLinejoin: 'round',
+      stroke: element.color || BLACK,
+      strokeWidth: 1.5,
+      label: renderConnectionLabel(p, element, label)
+    };
+    
+    attrs = assign(attrs, options)
+    return drawPath(p, pathData, attrs);
+  }
+
+
   var renderers = this.renderers = {
     'custom:TimeSlot': (p, element) => {
       let polygon = drawTimeSlot(element.width, element.height, element.color)
@@ -504,6 +537,8 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       let aggregatedMeasure = drawAggregatedMeasure(element)
       svgAppend(p, aggregatedMeasure);
       renderEmbeddedLabel(p, element, 'center-middle');
+      
+      
 
       return aggregatedMeasure;
     },
@@ -538,8 +573,8 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     'custom:DataMeasure': (p, element) => {
       let dataMeasure = drawDataMeasure(element)
       svgAppend(p, dataMeasure);
-      renderEmbeddedLabel(p, element, 'center-middle');
-
+      //renderEmbeddedLabel(p, element, 'center-middle');
+      renderLaneLabel(p, 'ohdueiwfuwfh', element)
       return dataMeasure;
     },
     'custom:DataPropertyConditionAggregatedMeasure': (p, element) => {
@@ -841,17 +876,26 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       return svgAppend(p, createLine(element.waypoints, attrs));
     },
 
-    // CONEXIÓN PRUEBA ENTRE CUSTOM_ELEMENTS - LÍNEA DISCONTINUA ROJA
+    // CONEXIÓN PRUEBA ENTRE CUSTOM_ELEMENTS - LÍNEA CONTINUA ROJA CON FLECHA
     'custom:MyConnection': (p, element) => {
-      var attrs = computeStyle(attrs, {
-        stroke: COLOR_RED, //COLOR
-        strokeWidth: 1.5, //ANCHURA
-        // strokeLinecap: 'round', 'butt', 'square' //DEFINE EL PRINCIPIO Y FIN DE LA LÍNEA (REDONDEADO, ETC)
-        strokeDasharray: [10,7] //LÍNA DISCONTINUA
-      });
 
-      return svgAppend(p, createLine(element.waypoints, attrs));
+      var attrs = {
+        markerEnd: marker('sequenceflow-end', 'white', BLACK),
+      };
+      //renderEmbeddedLabel(p, element, 'center-middle')
+      return drawMyConnection(p, element, attrs, 'Prueba conexión')
     },
+      // var attrs = computeStyle(attrs, {
+      //   stroke: COLOR_RED, //COLOR
+      //   strokeWidth: 1.5, //ANCHURA
+      //   markerEnd: marker('sequenceflow-end', 'white',COLOR_RED),
+      //   // strokeLinecap: 'round', 'butt', 'square' //DEFINE EL PRINCIPIO Y FIN DE LA LÍNEA (REDONDEADO, ETC)
+      //   //strokeDasharray: [10,7] //LÍNA DISCONTINUA
+      // });
+      // renderConnectionLabel(p, element, 'Prueba 2')
+      // //renderLaneLabel(p, 'ohdueiwfuwfh', element)
+      // return svgAppend(p, createLine(element.waypoints, attrs));
+    //},
 
     // CONEXIÓN PARA MEDIDA_AGREGADA-MEDIDA - LÍNEA CONTINUA CON ROMBO
     'custom:AggregatedConnection': (p, element) => {
@@ -943,23 +987,7 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     },
   };
 
-  // function getConnectionPath(connection) {
-  //   var waypoints = connection.waypoints.map(function(p) {
-  //     return p.original || p;
-  //   });
-  //
-  //   var connectionPath = [
-  //     ['M', waypoints[0].x, waypoints[0].y]
-  //   ];
-  //
-  //   waypoints.forEach(function(waypoint, index) {
-  //     if (index !== 0) {
-  //       connectionPath.push(['L', waypoint.x, waypoint.y]);
-  //     }
-  //   });
-  //
-  //   return componentsToPath(connectionPath);
-  // }
+  
 
   var paths = this.paths = {
     'custom:TimeSlot': (shape) => {
@@ -1241,7 +1269,7 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     'custom:GroupAbsence': (element) => {
       return paths['custom:Group'](element)
     },
-    // 'custom:ResourceArc': (connection) => {
+    // 'custom:MyConnection': (connection) => {
     //   return getConnectionPath(connection)
     // },
     // 'custom:ConsequenceFlow': (connection) => {
