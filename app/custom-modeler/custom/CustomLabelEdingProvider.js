@@ -34,14 +34,6 @@ export default function CustomLabelEditingProvider(
         activateDirectEdit(event.element, true);
     }); 
    
-
-    // eventBus.on('element.dblclick', priority, function(context) {
-    //     var element = context.element;
-
-    //     if ()) { //AggregatedMeasure
-    //         return false; // will cancel event
-    //     }
-    // });
     
     // complete on followup canvas operation
     eventBus.on([
@@ -156,6 +148,19 @@ CustomLabelEditingProvider.prototype.activate = function(element) {
 
     if(is(element, 'custom:AggregatedMeasure')){
         text= 'Prueba texto elemento'
+    }
+
+    if(is(element, 'custom:ToConnection')){
+        text= 'to'
+    }
+    if(is(element, 'custom:FromConnection')){
+        text= 'from'
+    }
+    if(is(element, 'custom:AggregatedConnection')){
+        text= 'aggregates'
+    }
+    if(is(element, 'custom:GroupedBy')){
+        text= 'isGroupedBy         attribute'
     }
 
     if (text === undefined) {

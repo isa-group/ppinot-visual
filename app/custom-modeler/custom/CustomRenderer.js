@@ -879,23 +879,23 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     // CONEXIÓN PRUEBA ENTRE CUSTOM_ELEMENTS - LÍNEA CONTINUA ROJA CON FLECHA
     'custom:MyConnection': (p, element) => {
 
-      var attrs = {
-        markerEnd: marker('sequenceflow-end', 'white', BLACK),
-      };
-      //renderEmbeddedLabel(p, element, 'center-middle')
-      return drawMyConnection(p, element, attrs, 'Prueba conexión')
+    //   var attrs = {
+    //     markerEnd: marker('sequenceflow-end', 'white', BLACK),
+    //   };
+    //   //renderEmbeddedLabel(p, element, 'center-middle')
+    //   return drawMyConnection(p, element, attrs, 'Prueba conexión')
+    // },
+      var attrs = computeStyle(attrs, {
+        stroke: COLOR_RED, //COLOR
+        strokeWidth: 1.5, //ANCHURA
+        markerEnd: marker('sequenceflow-end', 'white',COLOR_RED),
+        // strokeLinecap: 'round', 'butt', 'square' //DEFINE EL PRINCIPIO Y FIN DE LA LÍNEA (REDONDEADO, ETC)
+        //strokeDasharray: [10,7] //LÍNA DISCONTINUA
+      });
+      //renderConnectionLabel(p, element, 'Prueba 2')
+      //renderLaneLabel(p, 'ohdueiwfuwfh', element)
+      return svgAppend(p, createLine(element.waypoints, attrs));
     },
-      // var attrs = computeStyle(attrs, {
-      //   stroke: COLOR_RED, //COLOR
-      //   strokeWidth: 1.5, //ANCHURA
-      //   markerEnd: marker('sequenceflow-end', 'white',COLOR_RED),
-      //   // strokeLinecap: 'round', 'butt', 'square' //DEFINE EL PRINCIPIO Y FIN DE LA LÍNEA (REDONDEADO, ETC)
-      //   //strokeDasharray: [10,7] //LÍNA DISCONTINUA
-      // });
-      // renderConnectionLabel(p, element, 'Prueba 2')
-      // //renderLaneLabel(p, 'ohdueiwfuwfh', element)
-      // return svgAppend(p, createLine(element.waypoints, attrs));
-    //},
 
     // CONEXIÓN PARA MEDIDA_AGREGADA-MEDIDA - LÍNEA CONTINUA CON ROMBO
     'custom:AggregatedConnection': (p, element) => {
