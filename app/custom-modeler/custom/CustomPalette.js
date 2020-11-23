@@ -256,6 +256,12 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     'custom-timeMeasure': createAction(
       'custom:TimeMeasure', 'custom', 'icon-custom-timeMeasure'
     ),
+    'custom-stateConditionMeasure': createAction(
+      'custom:StateConditionMeasure', 'custom', 'icon-custom-stateConditionMeasure'
+    ),
+    'custom-stateConditionAggregatedMeasure': createAction(
+      'custom:StateConditionAggregatedMeasure', 'custom', 'icon-custom-stateConditionAggregatedMeasure'
+    ),
     'custom-ppi': createAction(
       'custom:Ppi', 'custom', 'icon-custom-ppi'
     ),
