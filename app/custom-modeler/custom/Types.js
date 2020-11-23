@@ -24,7 +24,9 @@ export const label = [
     'custom:GroupedBy',
     'custom:ToConnection',
     'custom:FromConnection',
-    'custom:Ppi'
+    'custom:Ppi',
+    'custom:StateConditionMeasure',
+    'custom:StateConditionAggregatedMeasure'
     
 ]
 
@@ -48,8 +50,10 @@ export const externalLabel = [
      'custom:CountMeasure',
     // 'custom:DataAggregatedMeasure',
      'custom:DataMeasure',
-     'custom:TimeMeasure'
+     'custom:TimeMeasure',
     // 'custom:DataPropertyConditionAggregatedMeasure'
+    'custom:StateConditionMeasure'
+    //'custom:StateConditionAggregatedMeasure'
 ]
 
 export const connections = [
@@ -89,17 +93,31 @@ export const directEdit = [
     'custom:AggregatedConnection',
     'custom:GroupedBy',
     'custom:ToConnection',
-    'custom:FromConnection'
+    'custom:FromConnection',
+    'custom:StateConditionMeasure',
+    'custom:StateConditionAggregatedMeasure'
 ]
 
 export const myConnectionElements = [
-    'custom:Avion'
+    'custom:Avion',
+    'custom:CountAggregatedMeasure',
+    'custom:CountMeasure',
+    'custom:DataAggregatedMeasure',
+    'custom:DataMeasure',
+    'custom:DataPropertyConditionAggregatedMeasure',
+    'custom:DataPropertyConditionMeasure',
+    'custom:DerivedMultiInstanceMeasure',
+    'custom:DerivedSingleInstanceMeasure',
+    'custom:StateConditionMeasure',
+    'custom:StateConditionAggregatedMeasure'
+    
 ]
 
 export const aggreagatedElements = [
     'custom:AggregatedMeasure',
     'custom:CountAggregatedMeasure',
-    'custom:DataAggregatedMeasure'
+    'custom:DataAggregatedMeasure',
+    'custom:StateConditionAggregatedMeasure'
 ]
 
 export const timeMeasuresElements = [
@@ -133,7 +151,9 @@ export const resourceArcElements = [
     'custom:DataPropertyConditionMeasure',
     'custom:DerivedMultiInstanceMeasure',
     'custom:DerivedSingleInstanceMeasure',
-    'custom:TimeMeasure'
+    'custom:TimeMeasure',
+    'custom:StateConditionMeasure',
+    'custom:StateConditionAggregatedMeasure'
 ]
 
 export const custom = [
@@ -166,7 +186,9 @@ export const custom = [
     'custom:GroupedBy',
     'custom:ToConnection',
     'custom:FromConnection',
-    'custom:Ppi'
+    'custom:Ppi',
+    'custom:StateConditionMeasure',
+    'custom:StateConditionAggregatedMeasure'
 
     
 ]

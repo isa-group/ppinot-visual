@@ -495,6 +495,28 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     return ppi;
   };
 
+  function drawStateConditionMeasure(element){
+    var stateConditionMeasure = svgCreate('image', {
+      x: 0,
+      y: 0,
+      width: element.width,
+      height: element.height,
+      href: Svg.dataURLstateConditionMeasure
+    })
+    return stateConditionMeasure;
+  };
+
+  function drawStateConditionAggregatedMeasure(element){
+    var stateConditionAggregatedMeasure = svgCreate('image', {
+      x: 0,
+      y: 0,
+      width: element.width,
+      height: element.height,
+      href: Svg.dataURLstateConditionAggregatedMeasure
+    })
+    return stateConditionAggregatedMeasure;
+  };
+
   function drawTimeSlot(width, height, color) {
     var attrs = computeStyle(attrs, {
       stroke: color || '#fff',
@@ -624,12 +646,19 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
 
       return derivedMultiInstanceMeasure; 
     },
-    'custom:DerivedSingleInstanceMeasure': (p, element) => {
-      let derivedSingleInstanceMeasure = drawDerivedSingleInstanceMeasure(element)
-      svgAppend(p, derivedSingleInstanceMeasure);
+    'custom:StateConditionMeasure': (p, element) => {
+      let stateConditionMeasure = drawStateConditionMeasure(element)
+      svgAppend(p, stateConditionMeasure);
       renderEmbeddedLabel(p, element, 'center-middle');
 
-      return derivedSingleInstanceMeasure; 
+      return stateConditionMeasure; 
+    },
+    'custom:StateConditionAggregatedMeasure': (p, element) => {
+      let stateConditionAggregatedMeasure = drawStateConditionAggregatedMeasure(element)
+      svgAppend(p, stateConditionAggregatedMeasure);
+      renderEmbeddedLabel(p, element, 'center-middle');
+
+      return stateConditionAggregatedMeasure; 
     },
     'custom:Ppi': (p, element) => {
       let ppi = drawPpi(element)
@@ -637,6 +666,13 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       //renderEmbeddedLabel(p, element, 'center-middle');
 
       return ppi; 
+    },
+    'custom:DerivedSingleInstanceMeasure': (p, element) => {
+      let derivedSingleInstanceMeasure = drawDerivedSingleInstanceMeasure(element)
+      svgAppend(p, derivedSingleInstanceMeasure);
+      renderEmbeddedLabel(p, element, 'center-middle');
+
+      return derivedSingleInstanceMeasure; 
     },
     'custom:Resource': (p, element) => {
       var attrs = computeStyle(attrs, {
@@ -1254,6 +1290,52 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     },
 
     'custom:Ppi': (element) => {
+      var x = element.x,
+          y = element.y,
+          width = element.width,
+          height = element.height;
+      
+      var borderRadius = 20;
+         
+      var d = [
+        ['M', x + borderRadius, y],
+        ['l', width - borderRadius * 2, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, borderRadius],
+        ['l', 0, height - borderRadius * 2],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, borderRadius],
+        ['l', borderRadius * 2 - width, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, -borderRadius],
+        ['l', 0, borderRadius * 2 - height],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, -borderRadius],
+        ['z']
+      ];
+
+      return componentsToPath(d);
+    },
+    'custom:StateConditionMeasure': (element) => {
+      var x = element.x,
+          y = element.y,
+          width = element.width,
+          height = element.height;
+      
+      var borderRadius = 20;
+         
+      var d = [
+        ['M', x + borderRadius, y],
+        ['l', width - borderRadius * 2, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, borderRadius],
+        ['l', 0, height - borderRadius * 2],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, borderRadius],
+        ['l', borderRadius * 2 - width, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, -borderRadius],
+        ['l', 0, borderRadius * 2 - height],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, -borderRadius],
+        ['z']
+      ];
+
+      return componentsToPath(d);
+    },
+    'custom:StateConditionAggregatedMeasure': (element) => {
       var x = element.x,
           y = element.y,
           width = element.width,

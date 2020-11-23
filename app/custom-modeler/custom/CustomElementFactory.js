@@ -166,7 +166,7 @@ CustomElementFactory.prototype._getCustomElementSize = function(type) {
     'custom:AggregatedMeasure':{width: 120, height: 100},
     'custom:CountAggregatedMeasure':{width: 140, height: 130},
     'custom:CountMeasure':{width: 130, height: 120},
-    'custom:DataAggregatedMeasure':{width: 140, height: 140},
+    'custom:DataAggregatedMeasure':{width: 140, height: 130},
     'custom:DataMeasure':{width: 130, height: 130}, 
     'custom:DataPropertyConditionAggregatedMeasure':{width: 160, height: 160},
     'custom:DataPropertyConditionMeasure':{width: 130, height: 130},
@@ -174,6 +174,8 @@ CustomElementFactory.prototype._getCustomElementSize = function(type) {
     'custom:DerivedSingleInstanceMeasure':{width: 130, height: 100},
     'custom:TimeMeasure':{width: 120, height: 110},
     'custom:Ppi':{width: 350, height: 300},
+    'custom:StateConditionMeasure':{width: 130, height: 120},
+    'custom:StateConditionAggregatedMeasure':{width: 140, height: 130}
   };
 
   return shapes[type] || shapes.__default;
