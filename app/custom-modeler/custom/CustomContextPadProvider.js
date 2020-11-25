@@ -170,19 +170,19 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
 
 
 
-    if (isAny(businessObject, resourceArcElements) && element.type !== 'label') {
-        assign(actions, {
-          'connect': {
-              group: 'connect',
-              className: 'bpmn-icon-connection-multi',
-              title: translate('Connect using custom connection'),
-              action: {
-                  click: startConnect,
-                  dragstart: startConnect
-              }
-          }
-        });
-    }
+    // if (isAny(businessObject, resourceArcElements) && element.type !== 'label') {
+    //     assign(actions, {
+    //       'connect': {
+    //           group: 'connect',
+    //           className: 'bpmn-icon-connection',
+    //           title: translate('Connection between measures and bpmn elements'),
+    //           action: {
+    //               click: startConnect,
+    //               dragstart: startConnect
+    //           }
+    //       }
+    //     });
+    // }
 
 
     if(isAny(businessObject, aggreagatedElements) && element.type !== 'label') {
@@ -193,13 +193,8 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
                 'Aggregated connection'
             ),
             'connect2': appendConnectAction(
-                'custom:GroupedBy',
-                'bpmn-icon-conditional-flow',
-                'Aggregated connection'
-            ),
-            'connect3': appendConnectAction(
                 'custom:MyConnection',
-                'bpmn-icon-connection-multi',
+                'bpmn-icon-connection',
                 'Custom connection'
             ),
         });
@@ -241,7 +236,7 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
             ),
             'connect3': appendConnectAction(
                 'custom:MyConnection',
-                'bpmn-icon-connection-multi',
+                'bpmn-icon-connection',
                 'Custom connection'
             ),
         });
@@ -249,14 +244,14 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
 
     if(isAny(businessObject, myConnectionElements) && element.type !== 'label') {
         assign(actions, {
-            'connect1': appendConnectAction(
-                'custom:ResourceArc',
-                'bpmn-icon-connection-multi',
-                'Connect using custom connection'
-            ),
+            // 'connect1': appendConnectAction(
+            //     'custom:ResourceArc',
+            //     'bpmn-icon-connection-multi',
+            //     'Connect using custom connection'
+            // ),
             'connect2': appendConnectAction(
                 'custom:MyConnection',
-                'bpmn-icon-connection-multi',
+                'bpmn-icon-connection',
                 // 'bpmn-icon-lane-divide-two', -- mirar ContextPadProvider
                 'My connection'
             ),

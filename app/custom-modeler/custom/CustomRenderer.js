@@ -575,11 +575,11 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       return polygon;
     },
     'custom:Avion': (p, element) => {
-      let avion = drawAvion(element)
-      svgAppend(p, avion);
-      renderEmbeddedLabel(p, element, 'center-middle');
+      // let avion = drawAvion(element)
+      // svgAppend(p, avion);
+      // renderEmbeddedLabel(p, element, 'center-middle');
 
-      return avion;
+      // return avion;
     },
     'custom:AggregatedMeasure': (p, element) => {
       let aggregatedMeasure = drawAggregatedMeasure(element)
@@ -650,14 +650,14 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       let stateConditionMeasure = drawStateConditionMeasure(element)
       svgAppend(p, stateConditionMeasure);
       renderEmbeddedLabel(p, element, 'center-middle');
-
+      
       return stateConditionMeasure; 
     },
     'custom:StateConditionAggregatedMeasure': (p, element) => {
       let stateConditionAggregatedMeasure = drawStateConditionAggregatedMeasure(element)
       svgAppend(p, stateConditionAggregatedMeasure);
       renderEmbeddedLabel(p, element, 'center-middle');
-
+     
       return stateConditionAggregatedMeasure; 
     },
     'custom:Ppi': (p, element) => {
@@ -948,9 +948,9 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     //   return drawMyConnection(p, element, attrs, 'Prueba conexión')
     // },
       var attrs = computeStyle(attrs, {
-        stroke: COLOR_RED, //COLOR
+        stroke: BLACK, //COLOR
         strokeWidth: 1.5, //ANCHURA
-        markerEnd: marker('sequenceflow-end', 'white',COLOR_RED),
+        markerEnd: marker('sequenceflow-end', 'white',BLACK),
         // strokeLinecap: 'round', 'butt', 'square' //DEFINE EL PRINCIPIO Y FIN DE LA LÍNEA (REDONDEADO, ETC)
         //strokeDasharray: [10,7] //LÍNA DISCONTINUA
       });
@@ -1312,6 +1312,29 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
 
       return componentsToPath(d);
     },
+    'custom:DataPropertyConditionAggregatedMeasure': (element) => {
+      var x = element.x,
+          y = element.y,
+          width = element.width,
+          height = element.height;
+      
+      var borderRadius = 20;
+         
+      var d = [
+        ['M', x + borderRadius, y],
+        ['l', width - borderRadius * 2, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, borderRadius],
+        ['l', 0, height - borderRadius * 2],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, borderRadius],
+        ['l', borderRadius * 2 - width, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, -borderRadius],
+        ['l', 0, borderRadius * 2 - height],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, -borderRadius],
+        ['z']
+      ];
+
+      return componentsToPath(d);
+    },
     'custom:StateConditionMeasure': (element) => {
       var x = element.x,
           y = element.y,
@@ -1470,6 +1493,7 @@ CustomRenderer.prototype.canRender = function(element) {
 CustomRenderer.prototype.drawShape = function(p, element) {
   var type = element.type;
   var h = this.renderers[type];
+  
   if(element.color == null)
     element.color= "#000"
 

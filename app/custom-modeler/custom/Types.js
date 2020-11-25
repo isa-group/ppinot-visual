@@ -117,7 +117,9 @@ export const aggreagatedElements = [
     'custom:AggregatedMeasure',
     'custom:CountAggregatedMeasure',
     'custom:DataAggregatedMeasure',
-    'custom:StateConditionAggregatedMeasure'
+    'custom:StateConditionAggregatedMeasure',
+    'custom:DataPropertyConditionAggregatedMeasure',
+    'custom:DerivedMultiInstanceMeasure',
 ]
 
 export const timeMeasuresElements = [
