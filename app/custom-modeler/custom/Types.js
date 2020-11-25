@@ -20,6 +20,7 @@ export const label = [
     'custom:TimeMeasure',
 
     'custom:MyConnection',
+    'custom:DashedLine',
     'custom:AggregatedConnection',
     'custom:GroupedBy',
     'custom:ToConnection',
@@ -41,6 +42,7 @@ export const externalLabel = [
     'custom:Avion',
     'custom:Ppi',
     'custom:MyConnection',
+    'custom:DashedLine',
     'custom:AggregatedConnection',
     'custom:GroupedBy',
     'custom:ToConnection',
@@ -63,6 +65,7 @@ export const connections = [
     'custom:TimeDistanceArcEnd',
 
     'custom:MyConnection',
+    'custom:DashedLine',
     'custom:AggregatedConnection',
     'custom:GroupedBy',
     'custom:ToConnection',
@@ -90,6 +93,7 @@ export const directEdit = [
     'custom:TimeMeasure',
     'custom:Ppi',
     'custom:MyConnection',
+    'custom:DashedLine',
     'custom:AggregatedConnection',
     'custom:GroupedBy',
     'custom:ToConnection',
@@ -100,6 +104,7 @@ export const directEdit = [
 
 export const myConnectionElements = [
     'custom:Avion',
+    'custom:AggregatedMeasure',
     'custom:CountAggregatedMeasure',
     'custom:CountMeasure',
     'custom:DataAggregatedMeasure',
@@ -108,10 +113,13 @@ export const myConnectionElements = [
     'custom:DataPropertyConditionMeasure',
     'custom:DerivedMultiInstanceMeasure',
     'custom:DerivedSingleInstanceMeasure',
+    'custom:Ppi',
     'custom:StateConditionMeasure',
     'custom:StateConditionAggregatedMeasure'
     
 ]
+
+
 
 export const aggreagatedElements = [
     'custom:AggregatedMeasure',
@@ -184,6 +192,7 @@ export const custom = [
     'custom:TimeMeasure',
 
     'custom:MyConnection',
+    'custom:DashedLine',
     'custom:AggregatedConnection',
     'custom:GroupedBy',
     'custom:ToConnection',

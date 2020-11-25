@@ -192,11 +192,18 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
                 'bpmn-icon-conditional-flow',
                 'Aggregated connection'
             ),
+        });
+    }
+
+    if(is(businessObject, 'custom:StateConditionAggregatedMeasure')
+        ||  is(businessObject, 'custom:StateConditionMeasure') && element.type !== 'label') {
+        assign(actions, {
             'connect2': appendConnectAction(
-                'custom:MyConnection',
-                'bpmn-icon-connection',
-                'Custom connection'
+                'custom:DashedLine',
+                'icon-dashed-line',
+                'State connection'
             ),
+            
         });
     }
 
@@ -204,17 +211,17 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
     
     if(is(businessObject, 'bpmn:BaseElement') && element.type !== 'label') {
         assign(actions, {
-            'connect1': appendConnectAction(
+            'connect3': appendConnectAction(
                 'custom:ConsequenceFlow',
                 'bpmn-icon-connection-multi',
                 'Connect using custom connection'
             ),
-            'connect2': appendConnectAction(
+            'connect4': appendConnectAction(
                 'custom:ConsequenceTimedFlow',
                 'bpmn-icon-connection-multi',
                 'Connection'
             ),
-            'connect3': appendConnectAction(
+            'connect5': appendConnectAction(
                 'custom:TimeDistance',
                 'bpmn-icon-connection-multi',
                 'Connect using custom connection'
@@ -224,17 +231,17 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
 
     if(is(businessObject, 'custom:TimeMeasure') && element.type !== 'label') {
         assign(actions, {
-            'connect1': appendConnectAction(
+            'connect6': appendConnectAction(
                 'custom:ToConnection',
-                'bpmn-icon-connection-multi',
+                'icon-from-to-connection',
                 'Connect using To connection'
             ),
-            'connect2': appendConnectAction(
+            'connect7': appendConnectAction(
                 'custom:FromConnection',
-                'bpmn-icon-connection-multi',
+                'icon-from-to-connection',
                 'Connect using From connection'
             ),
-            'connect3': appendConnectAction(
+            'connect8': appendConnectAction(
                 'custom:MyConnection',
                 'bpmn-icon-connection',
                 'Custom connection'
@@ -244,16 +251,10 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
 
     if(isAny(businessObject, myConnectionElements) && element.type !== 'label') {
         assign(actions, {
-            // 'connect1': appendConnectAction(
-            //     'custom:ResourceArc',
-            //     'bpmn-icon-connection-multi',
-            //     'Connect using custom connection'
-            // ),
-            'connect2': appendConnectAction(
+            'connect9': appendConnectAction(
                 'custom:MyConnection',
                 'bpmn-icon-connection',
-                // 'bpmn-icon-lane-divide-two', -- mirar ContextPadProvider
-                'My connection'
+                'Custom connection'
             ),
         });
     }

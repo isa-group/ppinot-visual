@@ -85,11 +85,11 @@ function canConnect(source, target, connection) {
   else if((isDefaultValid(source) && isCustomShape(target) && isCustomResourceArcElement(source))  || (isCustomShape(source) && isDefaultValid(target) && isCustomResourceArcElement(target)))
     return { type: 'custom:ResourceArc'
   }
-  // else if((isDefaultValid(source) && isCustomShape(target) && isCustomMyConnectionElement(source)) || (isCustomShape(source) && isDefaultValid(target) && isCustomMyConnectionElement(source)))
-  //   return { type: 'custom:MyConnection'
-  // }
   else if((isCustomShape(source) && (isCustomShape(target) )))
     return { type: 'custom:MyConnection'
+  }
+  else if((is(source, 'custom:StateConditionMeasure') || is(source, 'custom:StateConditionAggregatedMeasure')))
+    return { type: 'custom:DashedLine'
   }
   else if((isCustomAggregatedElement(source) && isCustomShape(target)) )
     return {type: 'custom:AggregatedConnection'
@@ -126,6 +126,12 @@ function canConnect2(source, target, connection) {
     return {type: connection}
   }
 
+  else if(connection === 'custom:DashedLine') {
+    if(isCustom(target) && is(source, 'custom:StateConditionMeasure') || (source, 'custom:StateCondStateConditionAggregatedMeasureitionMeasure'))
+      return { type: connection }
+    else
+      return false
+  }
   else if(connection === 'custom:TimeDistanceArcStart') {
     if(isDefaultValid(source) && is(target, 'custom:TimeSlot'))
       return { type: connection }
@@ -159,9 +165,6 @@ function canConnect2(source, target, connection) {
     else if((isDefaultValid(source) && isCustomResourceArcElement(target)) || (isDefaultValid(target) && isCustomResourceArcElement(source))) {
       return {type: 'custom:ResourceArc'}
     }
-    // else if((isCustom(source) && (isCustom(target) ))) {
-    //   return {type: 'custom:MyConnection'}
-    // }
     else if((isCustomAggregatedElement(source) && isCustomShape(target)) )
     return {type: 'custom:AggregatedConnection'
     }
@@ -233,19 +236,6 @@ CustomRules.prototype.init = function() {
         else
           return;
       }
-      // else if(connection.type === 'custom:MyConnection') {
-      //   if((!isCustom(source) && isCustomShape(target) ) || (isCustomShape(source) && !isCustom(target) ))
-      //     return { type: connection.type }
-      //   else
-      //     return;
-      // }
-      // else if(connection.type === 'custom:AggregatedConnection') {
-      //   if((!isCustom(source) && isCustomShape(target) ) || (isCustomShape(source) && !isCustom(target) ))
-      //     return { type: connection.type }
-      //   else
-      //     return;
-      // }
-      // add time distance
       else {
         return canConnect(source, target, connection.type)
       }

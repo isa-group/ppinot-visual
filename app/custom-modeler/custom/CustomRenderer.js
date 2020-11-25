@@ -959,6 +959,14 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       //renderLaneLabel(p, 'ohdueiwfuwfh', element)
       return svgAppend(p, createLine(element.waypoints, attrs));
     },
+    'custom:DashedLine': (p, element) => {
+        var attrs = computeStyle(attrs, {
+          stroke: BLACK, //COLOR
+          strokeWidth: 1.5, //ANCHURA
+          strokeDasharray: [10,7] //LÍNA DISCONTINUA
+        });
+        return svgAppend(p, createLine(element.waypoints, attrs));
+    },
 
     // CONEXIÓN PARA MEDIDA_AGREGADA-MEDIDA - LÍNEA CONTINUA CON ROMBO
     'custom:AggregatedConnection': (p, element) => {
@@ -1454,15 +1462,6 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     'custom:GroupAbsence': (element) => {
       return paths['custom:Group'](element)
     },
-    // 'custom:MyConnection': (connection) => {
-    //   return getConnectionPath(connection)
-    // },
-    // 'custom:ConsequenceFlow': (connection) => {
-    //   return paths['custom:ResourceArc'](connection)
-    // },
-    // 'custom:TimeDistance': (connection) => {
-    //   return paths['custom:ResourceArc'](connection)
-    // },
     'label': (element) => {
       var x = element.x,
           y = element.y,
