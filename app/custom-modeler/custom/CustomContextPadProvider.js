@@ -196,7 +196,9 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
     }
 
     if(is(businessObject, 'custom:StateConditionAggregatedMeasure')
-        ||  is(businessObject, 'custom:StateConditionMeasure') && element.type !== 'label') {
+        ||  is(businessObject, 'custom:StateConditionMeasure')
+        ||  is(businessObject, 'custom:CountMeasure') 
+        ||  is(businessObject, 'custom:DataMeasure')&& element.type !== 'label') {
         assign(actions, {
             'connect2': appendConnectAction(
                 'custom:DashedLine',

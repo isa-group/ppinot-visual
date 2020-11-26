@@ -88,7 +88,9 @@ function canConnect(source, target, connection) {
   else if((isCustomShape(source) && (isCustomShape(target) )))
     return { type: 'custom:MyConnection'
   }
-  else if((is(source, 'custom:StateConditionMeasure') || is(source, 'custom:StateConditionAggregatedMeasure')))
+  else if(is(source, 'custom:StateConditionMeasure') 
+  || is(source, 'custom:StateConditionAggregatedMeasure')
+  || is(source, 'custom:CountMeasure') || is(source, 'custom:DataMeasure'))
     return { type: 'custom:DashedLine'
   }
   else if((isCustomAggregatedElement(source) && isCustomShape(target)) )
@@ -127,7 +129,9 @@ function canConnect2(source, target, connection) {
   }
 
   else if(connection === 'custom:DashedLine') {
-    if(isCustom(target) && is(source, 'custom:StateConditionMeasure') || (source, 'custom:StateCondStateConditionAggregatedMeasureitionMeasure'))
+    if(isCustom(target) && is(source, 'custom:StateConditionMeasure') 
+    || is(source, 'custom:StateCondStateConditionAggregatedMeasureitionMeasure')
+    || is(source, 'custom:CountMeasure') || is(source, 'custom:DataMeasure'))
       return { type: connection }
     else
       return false
