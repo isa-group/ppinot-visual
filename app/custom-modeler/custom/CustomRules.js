@@ -72,7 +72,7 @@ function canConnect(source, target, connection) {
   }
 
   else if(is(source, 'custom:TimeMeasure')) {
-    if(isDefaultValid(target)) {
+    if(isDefaultValid(target) || is(target, 'bpmn:Participant')) {
       if(connection === 'custom:ToConnection' || connection === 'custom:FromConnection')
         return { type: connection }
       else
@@ -150,13 +150,13 @@ function canConnect2(source, target, connection) {
   }
 
   else if(connection === 'custom:ToConnection') {
-    if(isDefaultValid(target) && is(source, 'custom:TimeMeasure'))
+    if(isDefaultValid(target) || is(target, 'bpmn:Participant') && is(source, 'custom:TimeMeasure'))
       return { type: connection }
     else
       return false
   }
   else if(connection === 'custom:FromConnection') {
-    if(isDefaultValid(target) && is(source, 'custom:TimeMeasure'))
+    if(isDefaultValid(target) || is(target, 'bpmn:Participant') && is(source, 'custom:TimeMeasure'))
       return { type: connection }
     else
       return false
