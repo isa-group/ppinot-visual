@@ -1,30 +1,35 @@
 export var MEASURE = [
-  
   {
-    label: 'Time measure',
+    label: 'Start Event',
     actionName: 'replace-with-none-start',
     className: 'bpmn-icon-start-event-none',
+    target: {
+      type: 'bpmn:StartEvent'
+    }
+  },
+  {
+    label: 'Time measure',
+    actionName: 'replace-with-time-measure',
     target: {
       type: 'custom:TimeMeasure'
     }
   },
   {
     label: 'Count measure',
-    actionName: 'replace-with-none-start',
-    className: 'bpmn-icon-start-event-none',
+    actionName: 'replace-with-count-measure',
     target: {
       type: 'custom:CountMeasure'
     }
   }, 
   {
     label: 'Data measure',
-    actionName: 'replace-with-none-start',
-    className: 'bpmn-icon-start-event-none',
+    actionName: 'replace-with-data-measure',
     target: {
       type: 'custom:DataMeasure'
     }
-  },
+  }
 ];
+
 
 export var START_EVENT = [
   
@@ -37,9 +42,17 @@ export var START_EVENT = [
     }
   },
   {
-    label: 'Time measure',
+    label: 'Service Task',
     actionName: 'replace-with-none-start',
     className: 'bpmn-icon-start-event-none',
+    target: {
+      type: 'bpmn:ServiceTask'
+    }
+  },
+  {
+    label: 'Time measure',
+    actionName: 'replace-with-time-measure',
+    //className: 'icon-custom-timeMeasure',
     target: {
       type: 'custom:TimeMeasure'
     }
@@ -316,8 +329,6 @@ export var GATEWAY = [
       type: 'bpmn:ExclusiveGateway'
     }
   },
-
- 
   {
     label: 'Parallel Gateway',
     actionName: 'replace-with-parallel-gateway',

@@ -14,11 +14,16 @@ import {
 
 import {
   forEach,
-  filter
+  filter,
+  assign,
+  pick
 } from 'min-dash';
 
 import * as replaceOptions from './CustomReplaceOptions';
-//import ReplaceMenuProvider from './node_modules/bpmn-js/lib/features/popupMenu/ReplaceMenuProvider';
+import { isLabel, isLabelExternal } from "bpmn-js/lib/util/LabelUtil";
+import { isCustomShape, label } from "./Types";
+import BpmnReplace from 'bpmn-js/lib/features/replace/BpmnReplace';
+//import elementFactory from './CustomElementFactory';
 
 /**
  * This module is an element agnostic replace menu provider for the popup menu.
@@ -77,13 +82,14 @@ if (!rules.allowed('shape.replace', { element: element })) {
 
 var differentType = isDifferentType(element);
 
-// PRUEBA CON MEASURE
-if (is(businessObject, 'custom:CountMeasure') ) {
-
+// ------------------------------------------------------------------------
+if (is(businessObject, 'custom:CountMeasure') 
+|| is(businessObject, 'custom:TimeMeasure') 
+|| is(businessObject, 'custom:DataMeasure')) {
   entries = filter(replaceOptions.MEASURE, differentType);
-
   return this._createEntries(element, entries);
 }
+//-------------------------------------------------------------------------
 
 // start events outside event sub processes
 if (is(businessObject, 'bpmn:StartEvent') && !isEventSubProcess(businessObject.$parent)) {
@@ -254,12 +260,11 @@ ReplaceMenuProvider.prototype.getHeaderEntries = function(element) {
 
 var headerEntries = [];
 
-//ESTO ES PARA LAS 3 OPCIONES QUE SALEN ARRIBA EN EL MENÚ
-
-// if (is(element, 'custom:Avion')) {
+//ESTO ES PARA LAS 3 OPCIONES QUE SALEN ARRIBA EN EL MENÚ---------
+// if (is(element, 'custom:CountMeasure')) {
 //   headerEntries = headerEntries.concat(this._getLoopEntries(element));
 // }
-
+//----------------------------------------------------------------
 
 if (is(element, 'bpmn:Activity') && !isEventSubProcess(element)) {
   headerEntries = headerEntries.concat(this._getLoopEntries(element));
@@ -347,12 +352,6 @@ forEach(replaceOptions, function(entry) {
     break;
     
   default:
-
-    // if(is(businessObject, 'custom:CountMeasure')){
-    //   return menuEntries.push(self._createMenuEntry(entry, element, function() {
-    //   modeling.updateProperties(element.source, { default: undefined });
-    //   }));
-    // }
     
     // default flows
     if (is(businessObject.sourceRef, 'bpmn:Activity') && businessObject.conditionExpression) {
@@ -390,6 +389,9 @@ return menuEntries;
 *
 * @return {Object} menu entry item
 */
+
+//-------------------------------------------------------------------------------
+
 ReplaceMenuProvider.prototype._createMenuEntry = function(definition, element, action) {
 var translate = this._translate;
 var replaceElement = this._bpmnReplace.replaceElement;
@@ -398,7 +400,13 @@ var replaceAction = function() {
   return replaceElement(element, definition.target);
 };
 
+if(isCustomShape(definition.target)){
+  replaceAction = function() {
+    return replaceCustomElement(element, definition.target);
+  };
+}
 action = action || replaceAction;
+
 
 var menuEntry = {
   label: translate(definition.label),
@@ -409,6 +417,32 @@ var menuEntry = {
 
 return menuEntry;
 };
+
+
+function replaceCustomElement(element, target, hints) {
+  console.log('replaceCustomElement');
+  hints = hints || {};
+  var type = target.type;
+  console.log('type', type)
+  var oldBusinessObject = element.businessObject;
+  console.log('oldBusinessObject' , oldBusinessObject);
+
+ // var newBusinessObject = create(type);
+  var newElement = {
+    type: type,
+    //businessObject: newBusinessObject
+  };
+  console.log('newElement' , newElement);
+
+  newElement = BpmnReplace.replaceElement(element, newElement, hints);
+
+  return newElement;
+  
+}
+
+
+
+//---------------------------------------------------------------------------------------
 
 /**
 * Get a list of menu items containing buttons for multi instance markers
@@ -483,10 +517,15 @@ var loopEntries = [
     options: {
       loopCharacteristics: 'bpmn:StandardLoopCharacteristics'
     }
-  }
+  },
 ];
 return loopEntries;
 };
+
+
+
+
+
 
 
 /**

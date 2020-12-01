@@ -39,62 +39,6 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
         autoPlace = injector.get('autoPlace', false);
     }
 
-    // CustomContextPadProvider.prototype.getContextPadEntries = function(element) {
-    //      var self = this;
-      
-    //      var actions = {
-    //        'set-element': {
-    //          group: 'custom',
-    //          className: 'icon-custom',
-    //          title: 'Set Element',
-    //          action: {
-    //            click: function(event, element) {
-    // //             // close any existing popup
-    //              self._popupMenu.close();
-      
-    // //             // create new color-picker popup
-    //              var elementPicker = self._popupMenu.create('element-picker', element);
-      
-    // //             // get start popup draw start position
-    //              var opts = getStartPosition(self._canvas, self._contextPad, element);
-      
-    // //             // or fallback to current cursor position
-    //              opts.cursor = {
-    //                x: event.x,
-    //                y: event.y
-    //              };
-      
-    // //             // open color picker submenu popup
-    //              elementPicker.open(opts, element);
-    //            }
-    //         }
-    //       }
-    //     };
-      
-    //     return actions;
-    //   };
-
-    //   function getStartPosition(canvas, contextPad, element) {
-
-    //     var Y_OFFSET = 5;
-      
-    //     var diagramContainer = canvas.getContainer(),
-    //         pad = contextPad.getPad(element).html;
-      
-    //     var diagramRect = diagramContainer.getBoundingClientRect(),
-    //         padRect = pad.getBoundingClientRect();
-      
-    //     var top = padRect.top - diagramRect.top;
-    //     var left = padRect.left - diagramRect.left;
-      
-    //     var pos = {
-    //       x: left,
-    //       y: top + padRect.height + Y_OFFSET
-    //     };
-      
-    //     return pos;
-     //  }
-
     
     function appendAction(type, className, title, options) {
         if (typeof title !== 'string') {
@@ -167,22 +111,6 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
     function startConnectTimeDistance(event, element, autoActivate) {
         connect.customStart2(event, element, 'custom:ConsequenceTimedFlow', elementFactory, autoActivate);
     }
-
-
-
-    // if (isAny(businessObject, resourceArcElements) && element.type !== 'label') {
-    //     assign(actions, {
-    //       'connect': {
-    //           group: 'connect',
-    //           className: 'bpmn-icon-connection',
-    //           title: translate('Connection between measures and bpmn elements'),
-    //           action: {
-    //               click: startConnect,
-    //               dragstart: startConnect
-    //           }
-    //       }
-    //     });
-    // }
 
 
     if(isAny(businessObject, aggreagatedElements) && element.type !== 'label') {
