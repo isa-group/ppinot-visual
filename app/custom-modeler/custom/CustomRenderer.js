@@ -564,6 +564,10 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     return drawPath(p, pathData, attrs);
   }
 
+  function renderer(type) {
+    return renderers[type];
+  }
+
 
   var renderers = this.renderers = {
     'custom:TimeSlot': (p, element) => {
@@ -584,26 +588,26 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     'custom:AggregatedMeasure': (p, element) => {
       let aggregatedMeasure = drawAggregatedMeasure(element)
       svgAppend(p, aggregatedMeasure);
-      //renderCustomLabel(p, 'hola', element)
-      //renderEmbeddedDefaultLabel(p, element, 'center-middle', 'prueba')
-      //renderEmbeddedLabel(p, element, 'center-middle');
-      //renderExternalLabel(p, element)
+      
      
       return aggregatedMeasure;
     },
     'custom:CountAggregatedMeasure': (p, element) => {
       let countAggregatedMeasure = drawCountAggregatedMeasure(element)
       svgAppend(p, countAggregatedMeasure);
-      renderEmbeddedLabel(p, element, 'center-middle');
-
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', 'Texto por defecto');
+      //renderEmbeddedLabel(p, element, 'center-middle');
+      
       return countAggregatedMeasure;
     },
     'custom:CountMeasure': (p, element) => {
       let countMeasure = drawCountMeasure(element)
       svgAppend(p, countMeasure);
       //renderEmbeddedLabel(p, element, 'center-middle');
+      
 
       return countMeasure;
+      
     },
     'custom:TimeMeasure': (p, element) => {
       let timeMeasure = drawTimeMeasure(element)
@@ -616,7 +620,7 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       let dataAggregatedMeasure = drawDataAggregatedMeasure(element)
       svgAppend(p, dataAggregatedMeasure);
       renderEmbeddedLabel(p, element, 'center-middle');
-
+      renderExternalLabel(p, element);
       return dataAggregatedMeasure;
     },
     'custom:DataMeasure': (p, element) => {
