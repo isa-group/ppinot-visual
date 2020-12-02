@@ -15,20 +15,21 @@ import {
 import {isLabel} from "./utils/LabelUtil";
 
 import {resourceArcElements, myConnectionElements, aggreagatedElements} from "./Types";
-import { replace } from 'tiny-svg';
+import { remove, replace } from 'tiny-svg';
 import {
     isDifferentType
   } from "bpmn-js/lib/features/popup-menu/util/TypeUtil"; 
 
 
 
-export default function CustomContextPadProvider(contextPad, popupMenu, canvas, config, injector, elementFactory, connect, create, translate) {
+export default function CustomContextPadProvider(contextPad, popupMenu, canvas, config, injector, elementFactory, connect, modeling, create, translate) {
 
     injector.invoke(ContextPadProvider, this);
 
     this._contextPad = contextPad;
     this._popupMenu = popupMenu;
     this._canvas = canvas;
+    
 
     contextPad.registerProvider(this);
 
@@ -70,6 +71,27 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
             }
         };
     }
+    
+
+    // function replaceAction(type, className, title) {
+
+    //     function replaceElement(element) {  
+    //         console.log('prueba');
+    //         var shape = elementFactory.createShape(assign({ type: type }));
+    //         console.log(shape);
+            
+    //     }
+
+
+    //     return {
+    //         group: 'replace',
+    //         className: className,
+    //         title: title,
+    //         action: {
+    //             click: replaceElement
+    //         }
+    //     };
+    // }
 
     function appendConnectAction(type, className, title) {
         if (typeof title !== 'string') {
@@ -92,6 +114,8 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
         };
     }
 
+    
+
     this.getContextPadEntries = function(element) {
     var actions = cached(element);
     var businessObject = element.businessObject;
@@ -112,13 +136,17 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
         connect.customStart2(event, element, 'custom:ConsequenceTimedFlow', elementFactory, autoActivate);
     }
 
-
     if(isAny(businessObject, aggreagatedElements) && element.type !== 'label') {
         assign(actions, {
             'connect1': appendConnectAction(
                 'custom:AggregatedConnection',
-                'bpmn-icon-conditional-flow',
+                'icon-aggregates',
                 'Aggregated connection'
+            ),
+            'connect10': appendConnectAction(
+                'custom:IsGroupedBy',
+                'icon-isGroupedBy',
+                'GroupedBy connection'
             ),
         });
     }
@@ -163,12 +191,12 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
         assign(actions, {
             'connect6': appendConnectAction(
                 'custom:ToConnection',
-                'icon-from-to-connection',
+                'icon-toConnector',
                 'Connect using To connection'
             ),
             'connect7': appendConnectAction(
                 'custom:FromConnection',
-                'icon-from-to-connection',
+                'icon-fromConnector',
                 'Connect using From connection'
             ),
             'connect8': appendConnectAction(
@@ -188,6 +216,16 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
             ),
         });
     }
+
+    // if(is(businessObject, 'custom:CountMeasure')) {
+    //     assign(actions, {
+    //         'replace1': replaceAction(
+    //             'custom:TimeMeasure',
+    //             'bpmn-icon-start-event-none',
+    //             'Replace with time measure'
+    //         ),
+    //     });
+    // }
 
     return actions;
   };
