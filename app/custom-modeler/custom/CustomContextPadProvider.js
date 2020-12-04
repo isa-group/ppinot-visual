@@ -22,14 +22,14 @@ import {
 
 
 
-export default function CustomContextPadProvider(contextPad, popupMenu, canvas, config, injector, elementFactory, connect, modeling, create, translate) {
+export default function CustomContextPadProvider(contextPad, popupMenu, canvas, config, injector, elementFactory, connect, create, translate, modeling, replace) {
 
     injector.invoke(ContextPadProvider, this);
 
     this._contextPad = contextPad;
     this._popupMenu = popupMenu;
     this._canvas = canvas;
-    
+ 
 
     contextPad.registerProvider(this);
 
@@ -52,6 +52,7 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
             create.start(event, shape, {
                 source: element
             });
+            
         }
 
         function append(event, element) {
@@ -73,29 +74,32 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
     }
     
 
-    // function replaceAction(type, className, title) {
+    function replaceAction(type, type2, className, title) {
 
-    //     function replaceElement(element) {  
-    //         console.log('prueba');
-    //         var shape = elementFactory.createShape(assign({ type: type }));
-    //         console.log(shape);
-            
-    //     }
+        function replaceEl() {  
+            console.log('prueba');
+            console.log('element',type2);
+            var shape = elementFactory.createShape(assign({ type: type }));
+            console.log('shape',shape);
+            var newShape = modeling.replaceShape(type2, type);
+            console.log('new',newShape);
+            //return newShape;
+        }
 
-
-    //     return {
-    //         group: 'replace',
-    //         className: className,
-    //         title: title,
-    //         action: {
-    //             click: replaceElement
-    //         }
-    //     };
-    // }
+        return {
+            group: 'replace',
+            className: className,
+            title: title,
+            action: {
+                dragstart: replaceEl,
+                click: replaceEl
+            }
+        };
+    }
 
     function appendConnectAction(type, className, title) {
         if (typeof title !== 'string') {
-            title = translate('Append {type}', { type: type.replace(/^custom:/, '') });
+            title = translate('Append {type}', { type: type.replace(/^RALph:/, '') });
         }
 
         function connectStart(event, element, autoActivate) {
@@ -113,8 +117,6 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
             }
         };
     }
-
-    
 
     this.getContextPadEntries = function(element) {
     var actions = cached(element);
@@ -160,8 +162,7 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
                 'custom:DashedLine',
                 'icon-dashed-line',
                 'State connection'
-            ),
-            
+            ),        
         });
     }
 
@@ -217,15 +218,16 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
         });
     }
 
-    // if(is(businessObject, 'custom:CountMeasure')) {
-    //     assign(actions, {
-    //         'replace1': replaceAction(
-    //             'custom:TimeMeasure',
-    //             'bpmn-icon-start-event-none',
-    //             'Replace with time measure'
-    //         ),
-    //     });
-    // }
+    if(is(businessObject, 'custom:CountMeasure')) {
+        assign(actions, {
+            'replace': replaceAction(
+                'custom:DataMeasure',
+                businessObject,
+                'icon-menu-data-measure',
+                'Replace with data measure'
+            ),
+        });
+    }
 
     return actions;
   };
