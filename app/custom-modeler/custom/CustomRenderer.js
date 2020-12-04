@@ -374,6 +374,17 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     return avion;
   };
 
+  function drawLabel(element){
+    var label = svgCreate('image', {
+      x: 0,
+      y: 0,
+      width: element.width,
+      height: element.height,
+      href: Svg.dataURLlabel
+    })
+    return label;
+  };
+
   function drawAggregatedMeasure(element){
     var aggregatedMeasure = svgCreate('image', {
       x: 0,
@@ -585,6 +596,13 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
 
       // return avion;
     },
+    'custom:Label': (p, element) => {
+      let label = drawLabel(element)
+      svgAppend(p, label);
+      renderEmbeddedLabel(p, element, 'center-middle');
+
+      return label;
+    },
     'custom:AggregatedMeasure': (p, element) => {
       let aggregatedMeasure = drawAggregatedMeasure(element)
       svgAppend(p, aggregatedMeasure);
@@ -595,7 +613,7 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     'custom:CountAggregatedMeasure': (p, element) => {
       let countAggregatedMeasure = drawCountAggregatedMeasure(element)
       svgAppend(p, countAggregatedMeasure);
-      renderEmbeddedDefaultLabel(p, element, 'center-middle', 'Texto por defecto');
+      //renderEmbeddedDefaultLabel(p, element, 'center-middle', 'Texto por defecto');
       //renderEmbeddedLabel(p, element, 'center-middle');
       
       return countAggregatedMeasure;
@@ -1088,6 +1106,24 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       return componentsToPath(roundRectPath);
     },
     'custom:Avion': (element) => {
+      var x = element.x,
+          y = element.y,
+          width = element.width,
+          height = element.height;
+          
+
+      var d = [
+        ['M', x , y],
+        ['h', 50 ],
+        ['v', 50 ],
+        ['h', -50 ],
+        ['v', -50 ],
+        ['z']
+      ]
+
+      return componentsToPath(d);
+    },
+    'custom:Label': (element) => {
       var x = element.x,
           y = element.y,
           width = element.width,

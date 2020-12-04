@@ -265,6 +265,10 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     'custom-ppi': createAction(
       'custom:Ppi', 'custom', 'icon-custom-ppi'
     ),
+    'custom-label': createAction(
+      'custom:Label', 'custom', 'icon-label'
+    ),
+    
     
     
     

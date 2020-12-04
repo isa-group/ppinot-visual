@@ -27,7 +27,8 @@ export const label = [
     'custom:FromConnection',
     'custom:Ppi',
     'custom:StateConditionMeasure',
-    'custom:StateConditionAggregatedMeasure'
+    'custom:StateConditionAggregatedMeasure',
+    'custom:Label'
     
 ]
 
@@ -55,7 +56,8 @@ export const externalLabel = [
     'custom:TimeMeasure',
     // 'custom:DataPropertyConditionAggregatedMeasure'
     'custom:StateConditionMeasure'
-    //'custom:StateConditionAggregatedMeasure'
+    //'custom:StateConditionAggregatedMeasure',
+
 ]
 
 export const connections = [
@@ -81,6 +83,7 @@ export const directEdit = [
     'custom:Clock',
     'custom:TimeSlot',
     'custom:Avion',
+    'custom:Label',
     'custom:AggregatedMeasure',
     'custom:CountAggregatedMeasure',
     'custom:CountMeasure',

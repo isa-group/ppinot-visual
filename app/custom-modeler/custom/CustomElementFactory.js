@@ -175,7 +175,8 @@ CustomElementFactory.prototype._getCustomElementSize = function(type) {
     'custom:TimeMeasure':{width: 120, height: 110},
     'custom:Ppi':{width: 350, height: 300},
     'custom:StateConditionMeasure':{width: 130, height: 120},
-    'custom:StateConditionAggregatedMeasure':{width: 140, height: 130}
+    'custom:StateConditionAggregatedMeasure':{width: 140, height: 130},
+    'custom:Label':{width: 80, height: 30}
   };
 
   return shapes[type] || shapes.__default;
