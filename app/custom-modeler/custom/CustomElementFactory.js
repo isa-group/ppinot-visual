@@ -173,10 +173,11 @@ CustomElementFactory.prototype._getCustomElementSize = function(type) {
     'custom:DerivedMultiInstanceMeasure':{width: 140, height: 110},
     'custom:DerivedSingleInstanceMeasure':{width: 130, height: 100},
     'custom:TimeMeasure':{width: 120, height: 110},
-    'custom:Ppi':{width: 350, height: 300},
+    'custom:Ppi':{width: 370, height: 350},
     'custom:StateConditionMeasure':{width: 130, height: 120},
     'custom:StateConditionAggregatedMeasure':{width: 140, height: 130},
-    'custom:Target':{width: 130, height: 60}
+    'custom:Target':{width: 130, height: 60},
+    'custom:Scope':{width: 130, height: 60}
   };
 
   return shapes[type] || shapes.__default;

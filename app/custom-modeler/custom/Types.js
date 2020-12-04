@@ -28,7 +28,8 @@ export const label = [
     'custom:Ppi',
     'custom:StateConditionMeasure',
     'custom:StateConditionAggregatedMeasure',
-    'custom:Target'
+    'custom:Target',
+    'custom:Scope'
     
 ]
 
@@ -84,6 +85,7 @@ export const directEdit = [
     'custom:TimeSlot',
     'custom:Avion',
     'custom:Target',
+    'custom:Scope',
     'custom:AggregatedMeasure',
     'custom:CountAggregatedMeasure',
     'custom:CountMeasure',

@@ -385,6 +385,17 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     return target;
   };
 
+  function drawScope(element){
+    var scope = svgCreate('image', {
+      x: 0,
+      y: 0,
+      width: element.width,
+      height: element.height,
+      href: Svg.dataURLscope
+    })
+    return scope;
+  };
+
   function drawAggregatedMeasure(element){
     var aggregatedMeasure = svgCreate('image', {
       x: 0,
@@ -602,6 +613,13 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       renderEmbeddedLabel(p, element, 'center-middle');
 
       return target;
+    },
+    'custom:Scope': (p, element) => {
+      let scope = drawScope(element)
+      svgAppend(p, scope);
+      renderEmbeddedLabel(p, element, 'center-middle');
+
+      return scope;
     },
     'custom:AggregatedMeasure': (p, element) => {
       let aggregatedMeasure = drawAggregatedMeasure(element)
@@ -1124,6 +1142,25 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       return componentsToPath(d);
     },
     'custom:Target': (element) => {
+      var x = element.x,
+          y = element.y,
+          width = element.width,
+          height = element.height;
+          
+
+      var d = [
+        ['M', x , y],
+        ['h', 50 ],
+        ['v', 50 ],
+        ['h', -50 ],
+        ['v', -50 ],
+        ['z']
+      ]
+
+      return componentsToPath(d);
+    },
+
+    'custom:Scope': (element) => {
       var x = element.x,
           y = element.y,
           width = element.width,
