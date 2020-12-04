@@ -374,15 +374,15 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     return avion;
   };
 
-  function drawLabel(element){
-    var label = svgCreate('image', {
+  function drawTarget(element){
+    var target = svgCreate('image', {
       x: 0,
       y: 0,
       width: element.width,
       height: element.height,
-      href: Svg.dataURLlabel
+      href: Svg.dataURLtarget
     })
-    return label;
+    return target;
   };
 
   function drawAggregatedMeasure(element){
@@ -596,12 +596,12 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
 
       // return avion;
     },
-    'custom:Label': (p, element) => {
-      let label = drawLabel(element)
-      svgAppend(p, label);
+    'custom:Target': (p, element) => {
+      let target = drawTarget(element)
+      svgAppend(p, target);
       renderEmbeddedLabel(p, element, 'center-middle');
 
-      return label;
+      return target;
     },
     'custom:AggregatedMeasure': (p, element) => {
       let aggregatedMeasure = drawAggregatedMeasure(element)
@@ -1123,7 +1123,7 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
 
       return componentsToPath(d);
     },
-    'custom:Label': (element) => {
+    'custom:Target': (element) => {
       var x = element.x,
           y = element.y,
           width = element.width,

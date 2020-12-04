@@ -176,7 +176,7 @@ CustomElementFactory.prototype._getCustomElementSize = function(type) {
     'custom:Ppi':{width: 350, height: 300},
     'custom:StateConditionMeasure':{width: 130, height: 120},
     'custom:StateConditionAggregatedMeasure':{width: 140, height: 130},
-    'custom:Label':{width: 80, height: 30}
+    'custom:Target':{width: 130, height: 60}
   };
 
   return shapes[type] || shapes.__default;
