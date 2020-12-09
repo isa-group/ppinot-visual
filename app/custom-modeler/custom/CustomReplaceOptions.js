@@ -1,15 +1,8 @@
 export var MEASURE = [
   {
-    label: 'Start Event',
-    actionName: 'replace-with-none-start',
-    className: 'bpmn-icon-start-event-none',
-    target: {
-      type: 'bpmn:StartEvent'
-    }
-  },
-  {
     label: 'Time measure',
     actionName: 'replace-with-time-measure',
+    //className: 'icon-custom-timeMeasure',
     target: {
       type: 'custom:TimeMeasure'
     }
@@ -17,6 +10,7 @@ export var MEASURE = [
   {
     label: 'Count measure',
     actionName: 'replace-with-count-measure',
+    //className: 'icon-custom-countMeasure',
     target: {
       type: 'custom:CountMeasure'
     }
@@ -24,6 +18,7 @@ export var MEASURE = [
   {
     label: 'Data measure',
     actionName: 'replace-with-data-measure',
+    //className: 'icon-menu-data-measure',
     target: {
       type: 'custom:DataMeasure'
     }
@@ -39,22 +34,6 @@ export var START_EVENT = [
     className: 'bpmn-icon-start-event-none',
     target: {
       type: 'bpmn:StartEvent'
-    }
-  },
-  {
-    label: 'Service Task',
-    actionName: 'replace-with-none-start',
-    className: 'bpmn-icon-start-event-none',
-    target: {
-      type: 'bpmn:ServiceTask'
-    }
-  },
-  {
-    label: 'Time measure',
-    actionName: 'replace-with-time-measure',
-    //className: 'icon-custom-timeMeasure',
-    target: {
-      type: 'custom:TimeMeasure'
     }
   },
   {

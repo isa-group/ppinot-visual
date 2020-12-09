@@ -19,17 +19,18 @@ import { remove, replace } from 'tiny-svg';
 import {
     isDifferentType
   } from "bpmn-js/lib/features/popup-menu/util/TypeUtil"; 
+import CustomModeling from './CustomModeling' ;
 
 
 
-export default function CustomContextPadProvider(contextPad, popupMenu, canvas, config, injector, elementFactory, connect, create, translate, modeling, replace) {
+export default function CustomContextPadProvider(contextPad, popupMenu, canvas, config, injector, elementFactory, connect, create, translate, modeling) {
 
     injector.invoke(ContextPadProvider, this);
 
     this._contextPad = contextPad;
     this._popupMenu = popupMenu;
     this._canvas = canvas;
- 
+    this._modeling = modeling;
 
     contextPad.registerProvider(this);
 
@@ -38,6 +39,7 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
     let autoPlace = config.autoPlace
     if (autoPlace !== false) {
         autoPlace = injector.get('autoPlace', false);
+
     }
 
     
@@ -69,30 +71,6 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
             action: {
                 dragstart: appendStart,
                 click: autoPlace ? append : appendStart
-            }
-        };
-    }
-    
-
-    function replaceAction(type, type2, className, title) {
-
-        function replaceEl() {  
-            console.log('prueba');
-            console.log('element',type2);
-            var shape = elementFactory.createShape(assign({ type: type }));
-            console.log('shape',shape);
-            var newShape = modeling.replaceShape(type2, type);
-            console.log('new',newShape);
-            //return newShape;
-        }
-
-        return {
-            group: 'replace',
-            className: className,
-            title: title,
-            action: {
-                dragstart: replaceEl,
-                click: replaceEl
             }
         };
     }
@@ -218,17 +196,6 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
         });
     }
 
-    if(is(businessObject, 'custom:CountMeasure')) {
-        assign(actions, {
-            'replace': replaceAction(
-                'custom:DataMeasure',
-                businessObject,
-                'icon-menu-data-measure',
-                'Replace with data measure'
-            ),
-        });
-    }
-
     return actions;
   };
 }
@@ -244,5 +211,6 @@ CustomContextPadProvider.$inject = [
     'elementFactory',
     'connect',
     'create',
-    'translate'
+    'translate',
+    'modeling'
 ];

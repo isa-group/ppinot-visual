@@ -22,15 +22,15 @@ import {
 import * as replaceOptions from './CustomReplaceOptions';
 import { isLabel, isLabelExternal } from "bpmn-js/lib/util/LabelUtil";
 import { isCustomShape, label } from "./Types";
-import BpmnReplace from 'bpmn-js/lib/features/replace/BpmnReplace';
-//import elementFactory from './CustomElementFactory';
+import Replace from 'diagram-js/lib/features/replace/Replace';
+
 
 /**
  * This module is an element agnostic replace menu provider for the popup menu.
  */
 export default function ReplaceMenuProvider(
   popupMenu, modeling, moddle,
-  bpmnReplace, rules, translate) {
+  bpmnReplace, rules, translate, replace) {
 
 this._popupMenu = popupMenu;
 this._modeling = modeling;
@@ -38,6 +38,7 @@ this._moddle = moddle;
 this._bpmnReplace = bpmnReplace;
 this._rules = rules;
 this._translate = translate;
+this._replace = replace;
 
 this.register();
 }
@@ -48,7 +49,8 @@ ReplaceMenuProvider.$inject = [
 'moddle',
 'bpmnReplace',
 'rules',
-'translate'
+'translate',
+'replace'
 ];
 
 
@@ -372,6 +374,13 @@ forEach(replaceOptions, function(entry) {
         modeling.updateProperties(element.source, { default: undefined });
       }));
     }
+
+    if (is(businessObject, 'custom:CountMeasure')){
+
+      return menuEntries.push(self._createMenuEntry(entry, element, function() {
+        modeling.updateProperties(element.source, { default: undefined });
+      }));
+    }
   }
 });
 
@@ -395,18 +404,20 @@ return menuEntries;
 ReplaceMenuProvider.prototype._createMenuEntry = function(definition, element, action) {
 var translate = this._translate;
 var replaceElement = this._bpmnReplace.replaceElement;
+var modeling = this._modeling;
+var replace = this._replace;
 
 var replaceAction = function() {
   return replaceElement(element, definition.target);
 };
 
-if(isCustomShape(definition.target)){
+if(isCustomShape(element)){
   replaceAction = function() {
-    return replaceCustomElement(element, definition.target);
+    return replace.replaceElement(element, definition.target);
   };
 }
-action = action || replaceAction;
 
+action = action || replaceAction;
 
 var menuEntry = {
   label: translate(definition.label),
@@ -414,31 +425,32 @@ var menuEntry = {
   id: definition.actionName,
   action: action
 };
-
+//console.log(menuEntry);
 return menuEntry;
 };
+
 
 
 function replaceCustomElement(element, target, hints) {
   console.log('replaceCustomElement');
   hints = hints || {};
-  var type = target.type;
-  console.log('type', type)
-  var oldBusinessObject = element.businessObject;
+
+  var type = target.type,
+      oldBusinessObject = element.businessObject;
+  console.log('type', type);
   console.log('oldBusinessObject' , oldBusinessObject);
 
- // var newBusinessObject = create(type);
   var newElement = {
-    type: type,
-    //businessObject: newBusinessObject
-  };
+    type: type
+  }
+  
   console.log('newElement' , newElement);
+  //return newElement;
 
-  newElement = BpmnReplace.replaceElement(element, newElement, hints);
-
-  return newElement;
+  return replace.replaceElement(oldBusinessObject, newElement);
   
 }
+
 
 
 
