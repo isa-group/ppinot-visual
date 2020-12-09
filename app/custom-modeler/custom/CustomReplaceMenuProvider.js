@@ -85,10 +85,19 @@ if (!rules.allowed('shape.replace', { element: element })) {
 var differentType = isDifferentType(element);
 
 // ------------------------------------------------------------------------
-if (is(businessObject, 'custom:CountMeasure') 
+if (is(businessObject, 'custom:BaseMeasure') 
+|| is(businessObject, 'custom:CountMeasure') 
 || is(businessObject, 'custom:TimeMeasure') 
+|| is(businessObject, 'custom:StateConditionMeasure')
 || is(businessObject, 'custom:DataMeasure')) {
   entries = filter(replaceOptions.MEASURE, differentType);
+  return this._createEntries(element, entries);
+}
+
+if (is(businessObject, 'custom:CountAggregatedMeasure') 
+|| is(businessObject, 'custom:AggregatedMeasure') 
+|| is(businessObject, 'custom:DataAggregatedMeasure')) {
+  entries = filter(replaceOptions.AGGREGATED_MEASURE, differentType);
   return this._createEntries(element, entries);
 }
 //-------------------------------------------------------------------------
@@ -376,6 +385,13 @@ forEach(replaceOptions, function(entry) {
     }
 
     if (is(businessObject, 'custom:CountMeasure')){
+
+      return menuEntries.push(self._createMenuEntry(entry, element, function() {
+        modeling.updateProperties(element.source, { default: undefined });
+      }));
+    }
+
+    if (is(businessObject, 'custom:AggregatedMeasure')){
 
       return menuEntries.push(self._createMenuEntry(entry, element, function() {
         modeling.updateProperties(element.source, { default: undefined });

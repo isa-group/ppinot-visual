@@ -1,5 +1,13 @@
 export var MEASURE = [
   {
+    label: 'Base measure',
+    actionName: 'replace-with-base-measure',
+    //className: 'icon-custom-timeMeasure',
+    target: {
+      type: 'custom:BaseMeasure'
+    }
+  },
+  {
     label: 'Time measure',
     actionName: 'replace-with-time-measure',
     //className: 'icon-custom-timeMeasure',
@@ -22,9 +30,43 @@ export var MEASURE = [
     target: {
       type: 'custom:DataMeasure'
     }
-  }
+  },
+  {
+    label: 'State condition measure',
+    actionName: 'replace-with-state-condition-measure',
+    //className: 'icon-custom-timeMeasure',
+    target: {
+      type: 'custom:StateConditionMeasure'
+    }
+  },
 ];
 
+export var AGGREGATED_MEASURE = [
+  {
+    label: 'Aggregated measure',
+    actionName: 'replace-with-aggregated-measure',
+    //className: 'icon-custom-timeMeasure',
+    target: {
+      type: 'custom:AggregatedMeasure'
+    }
+  },
+  {
+    label: 'Count measure',
+    actionName: 'replace-with-count-aggregated-measure',
+    //className: 'icon-custom-countMeasure',
+    target: {
+      type: 'custom:CountAggregatedMeasure',
+    }
+  }, 
+  {
+    label: 'Data aggregated measure',
+    actionName: 'replace-with-data-aggregated-measure',
+    //className: 'icon-menu-data-measure',
+    target: {
+      type: 'custom:DataAggregatedMeasure',
+    }
+  }
+];
 
 export var START_EVENT = [
   
