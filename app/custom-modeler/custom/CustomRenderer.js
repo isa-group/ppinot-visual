@@ -512,7 +512,7 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       y: 0,
       width: element.width,
       height: element.height,
-      href: Svg.dataURLppi
+      href: Svg.dataURLppi3
     })
     return ppi;
   };
