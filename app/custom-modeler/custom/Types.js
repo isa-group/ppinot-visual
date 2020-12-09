@@ -18,7 +18,7 @@ export const label = [
     'custom:DerivedMultiInstanceMeasure',
     'custom:DerivedSingleInstanceMeasure',
     'custom:TimeMeasure',
-
+    'custom:BaseMeasure',
     'custom:MyConnection',
     'custom:DashedLine',
     'custom:AggregatedConnection',
@@ -55,6 +55,7 @@ export const externalLabel = [
     //'custom:DataAggregatedMeasure',
     'custom:DataMeasure',
     'custom:TimeMeasure',
+    'custom:BaseMeasure',
     // 'custom:DataPropertyConditionAggregatedMeasure'
     'custom:StateConditionMeasure'
     //'custom:StateConditionAggregatedMeasure',
@@ -104,7 +105,8 @@ export const directEdit = [
     'custom:ToConnection',
     'custom:FromConnection',
     'custom:StateConditionMeasure',
-    'custom:StateConditionAggregatedMeasure'
+    'custom:StateConditionAggregatedMeasure',
+    'custom:BaseMeasure'
 ]
 
 export const myConnectionElements = [
@@ -120,7 +122,8 @@ export const myConnectionElements = [
     'custom:DerivedSingleInstanceMeasure',
     'custom:Ppi',
     'custom:StateConditionMeasure',
-    'custom:StateConditionAggregatedMeasure'
+    'custom:StateConditionAggregatedMeasure',
+    'custom:BaseMeasure'
     
 ]
 
@@ -168,7 +171,8 @@ export const resourceArcElements = [
     'custom:DerivedSingleInstanceMeasure',
     'custom:TimeMeasure',
     'custom:StateConditionMeasure',
-    'custom:StateConditionAggregatedMeasure'
+    'custom:StateConditionAggregatedMeasure',
+    'custom:BaseMeasure'
 ]
 
 export const custom = [
@@ -195,7 +199,7 @@ export const custom = [
     'custom:DerivedMultiInstanceMeasure',
     'custom:DerivedSingleInstanceMeasure',
     'custom:TimeMeasure',
-
+    'custom:BaseMeasure',
     'custom:MyConnection',
     'custom:DashedLine',
     'custom:AggregatedConnection',

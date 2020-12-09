@@ -177,7 +177,8 @@ CustomElementFactory.prototype._getCustomElementSize = function(type) {
     'custom:StateConditionMeasure':{width: 130, height: 120},
     'custom:StateConditionAggregatedMeasure':{width: 140, height: 130},
     'custom:Target':{width: 180, height: 90},
-    'custom:Scope':{width: 180, height: 80}
+    'custom:Scope':{width: 180, height: 80},
+    'custom:BaseMeasure':{width: 110, height: 85}
   };
 
   return shapes[type] || shapes.__default;

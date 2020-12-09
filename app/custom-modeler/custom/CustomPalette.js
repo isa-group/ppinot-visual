@@ -271,6 +271,9 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     'custom-scope': createAction(
       'custom:Scope', 'custom', 'icon-scope'
     ), 
+    'custom-baseMeasure': createAction(
+      'custom:BaseMeasure', 'custom', 'icon-baseMeasure'
+    ), 
     
     
   });

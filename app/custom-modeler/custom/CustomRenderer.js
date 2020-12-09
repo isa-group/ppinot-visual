@@ -374,6 +374,17 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     return avion;
   };
 
+  function drawBaseMeasure(element){
+    var baseMeasure = svgCreate('image', {
+      x: 0,
+      y: 0,
+      width: element.width,
+      height: element.height,
+      href: Svg.dataURLbaseMeasure
+    })
+    return baseMeasure;
+  };
+
   function drawTarget(element){
     var target = svgCreate('image', {
       x: 0,
@@ -651,6 +662,13 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       //renderEmbeddedLabel(p, element, 'center-middle');
 
       return timeMeasure;
+    },
+    'custom:BaseMeasure': (p, element) => {
+      let baseMeasure = drawBaseMeasure(element)
+      svgAppend(p, baseMeasure);
+      //renderEmbeddedLabel(p, element, 'center-middle');
+
+      return baseMeasure;
     },
     'custom:DataAggregatedMeasure': (p, element) => {
       let dataAggregatedMeasure = drawDataAggregatedMeasure(element)
@@ -1124,6 +1142,24 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       return componentsToPath(roundRectPath);
     },
     'custom:Avion': (element) => {
+      var x = element.x,
+          y = element.y,
+          width = element.width,
+          height = element.height;
+          
+
+      var d = [
+        ['M', x , y],
+        ['h', 50 ],
+        ['v', 50 ],
+        ['h', -50 ],
+        ['v', -50 ],
+        ['z']
+      ]
+
+      return componentsToPath(d);
+    },
+    'custom:BaseMeasure': (element) => {
       var x = element.x,
           y = element.y,
           width = element.width,
