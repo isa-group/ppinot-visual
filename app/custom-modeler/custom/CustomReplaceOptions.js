@@ -39,6 +39,14 @@ export var MEASURE = [
       type: 'custom:StateConditionMeasure'
     }
   },
+  {
+    label: 'Data property condition measure',
+    actionName: 'replace-with-data-property-condition-measure',
+    //className: 'icon-custom-timeMeasure',
+    target: {
+      type: 'custom:DataPropertyConditionMeasure'
+    }
+  },
 ];
 
 export var AGGREGATED_MEASURE = [

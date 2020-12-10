@@ -217,9 +217,9 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     'custom-dataPropertyConditionAggregatedMeasure': createAction(
       'custom:DataPropertyConditionAggregatedMeasure', 'custom', 'icon-custom-dataPropertyConditionAggregatedMeasure'
     ),
-    'custom-dataPropertyConditionMeasure': createAction(
-      'custom:DataPropertyConditionMeasure', 'custom', 'icon-custom-dataPropertyConditionMeasure'
-    ),
+    // 'custom-dataPropertyConditionMeasure': createAction(
+    //   'custom:DataPropertyConditionMeasure', 'custom', 'icon-custom-dataPropertyConditionMeasure'
+    // ),
     'custom-derivedMultiInstanceMeasure': createAction(
       'custom:DerivedMultiInstanceMeasure', 'custom', 'icon-custom-derivedMultiInstanceMeasure'
     ),

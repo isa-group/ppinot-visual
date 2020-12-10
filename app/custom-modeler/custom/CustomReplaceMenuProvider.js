@@ -91,6 +91,7 @@ if (is(businessObject, 'custom:BaseMeasure')
 || is(businessObject, 'custom:TimeMeasure') 
 || is(businessObject, 'custom:CyclicTimeMeasure') 
 || is(businessObject, 'custom:StateConditionMeasure')
+|| is(businessObject, 'custom:DataPropertyConditionMeasure')
 || is(businessObject, 'custom:DataMeasure')) {
   entries = filter(replaceOptions.MEASURE, differentType);
   return this._createEntries(element, entries);
@@ -539,7 +540,7 @@ var replaceAction = function() {
 var timeEntry = {
   id: 'replace-with-cyclic-time-measure',
   className: 'icon-menu-cyclic-time',
-  //label: translate('Cyclic'),
+  label: translate('Cyclic'),
   action: replaceAction
 };
 
