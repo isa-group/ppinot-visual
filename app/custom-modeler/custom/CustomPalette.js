@@ -202,21 +202,21 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     'custom-aggregatedMeasure': createAction(
       'custom:AggregatedMeasure', 'custom', 'icon-custom-aggregatedMeasure'
     ),
-    'custom-countAggregatedMeasure': createAction(
-      'custom:CountAggregatedMeasure', 'custom', 'icon-custom-countAggregatedMeasure'
-    ),
+    // 'custom-countAggregatedMeasure': createAction(
+    //   'custom:CountAggregatedMeasure', 'custom', 'icon-custom-countAggregatedMeasure'
+    // ),
     // 'custom-countMeasure': createAction(
     //   'custom:CountMeasure', 'custom', 'icon-custom-countMeasure'
     // ),
-    'custom-dataAggregatedMeasure': createAction(
-      'custom:DataAggregatedMeasure', 'custom', 'icon-custom-dataAggregatedMeasure'
-    ),
+    // 'custom-dataAggregatedMeasure': createAction(
+    //   'custom:DataAggregatedMeasure', 'custom', 'icon-custom-dataAggregatedMeasure'
+    // ),
     // 'custom-dataMeasure': createAction(
     //   'custom:DataMeasure', 'custom', 'icon-custom-dataMeasure'
     // ),
-    'custom-dataPropertyConditionAggregatedMeasure': createAction(
-      'custom:DataPropertyConditionAggregatedMeasure', 'custom', 'icon-custom-dataPropertyConditionAggregatedMeasure'
-    ),
+    // 'custom-dataPropertyConditionAggregatedMeasure': createAction(
+    //   'custom:DataPropertyConditionAggregatedMeasure', 'custom', 'icon-custom-dataPropertyConditionAggregatedMeasure'
+    // ),
     // 'custom-dataPropertyConditionMeasure': createAction(
     //   'custom:DataPropertyConditionMeasure', 'custom', 'icon-custom-dataPropertyConditionMeasure'
     // ),
@@ -232,9 +232,9 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     // 'custom-stateConditionMeasure': createAction(
     //   'custom:StateConditionMeasure', 'custom', 'icon-custom-stateConditionMeasure'
     // ),
-    'custom-stateConditionAggregatedMeasure': createAction(
-      'custom:StateConditionAggregatedMeasure', 'custom', 'icon-custom-stateConditionAggregatedMeasure'
-    ),
+    // 'custom-stateConditionAggregatedMeasure': createAction(
+    //   'custom:StateConditionAggregatedMeasure', 'custom', 'icon-custom-stateConditionAggregatedMeasure'
+    // ),
     'custom-ppi': createAction(
       'custom:Ppi', 'custom', 'icon-custom-ppi'
     ),

@@ -168,7 +168,7 @@ CustomElementFactory.prototype._getCustomElementSize = function(type) {
     'custom:CountMeasure':{width: 130, height: 120},
     'custom:DataAggregatedMeasure':{width: 140, height: 130},
     'custom:DataMeasure':{width: 130, height: 130}, 
-    'custom:DataPropertyConditionAggregatedMeasure':{width: 160, height: 160},
+    'custom:DataPropertyConditionAggregatedMeasure':{width: 130, height: 140},
     'custom:DataPropertyConditionMeasure':{width: 130, height: 130},
     'custom:DerivedMultiInstanceMeasure':{width: 140, height: 110},
     'custom:DerivedSingleInstanceMeasure':{width: 130, height: 100},
