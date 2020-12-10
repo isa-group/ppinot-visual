@@ -73,6 +73,14 @@ export var AGGREGATED_MEASURE = [
     target: {
       type: 'custom:DataAggregatedMeasure',
     }
+  },
+  {
+    label: 'Data property Condition aggregated measure',
+    actionName: 'replace-with-data-property-condition-aggregated-measure',
+    //className: 'icon-menu-data-measure',
+    target: {
+      type: 'custom:DataPropertyConditionAggregatedMeasure',
+    }
   }
 ];
 

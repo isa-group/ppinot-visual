@@ -99,6 +99,7 @@ if (is(businessObject, 'custom:BaseMeasure')
 
 if (is(businessObject, 'custom:CountAggregatedMeasure') 
 || is(businessObject, 'custom:AggregatedMeasure') 
+|| is(businessObject, 'custom:DataPropertyConditionAggregatedMeasure') 
 || is(businessObject, 'custom:DataAggregatedMeasure')) {
   entries = filter(replaceOptions.AGGREGATED_MEASURE, differentType);
   return this._createEntries(element, entries);
