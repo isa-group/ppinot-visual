@@ -274,6 +274,9 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     'custom-baseMeasure': createAction(
       'custom:BaseMeasure', 'custom', 'icon-baseMeasure'
     ), 
+    'custom-cyclicTimeMeasure': createAction(
+      'custom:CyclicTimeMeasure', 'custom', 'icon-custom-cyclicTimeMeasure'
+    ),
     
     
   });

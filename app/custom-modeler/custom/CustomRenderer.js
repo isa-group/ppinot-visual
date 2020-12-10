@@ -451,6 +451,17 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     return countMeasure;
   };
 
+  function drawCyclicTimeMeasure(element){
+    var cyclicTime = svgCreate('image', {
+      x: 0,
+      y: 0,
+      width: element.width,
+      height: element.height,
+      href: Svg.dataURLcyclicTimeMeasure
+    })
+    return cyclicTime;
+  };
+
   function drawDataAggregatedMeasure(element){
     var dataAggregatedMeasure = svgCreate('image', {
       x: 0,
@@ -662,6 +673,13 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       //renderEmbeddedLabel(p, element, 'center-middle');
 
       return timeMeasure;
+    },
+    'custom:CyclicTimeMeasure': (p, element) => {
+      let cyclicTime = drawCyclicTimeMeasure(element)
+      svgAppend(p, cyclicTime);
+      //renderEmbeddedLabel(p, element, 'center-middle');
+
+      return cyclicTime;
     },
     'custom:BaseMeasure': (p, element) => {
       let baseMeasure = drawBaseMeasure(element)
@@ -1287,6 +1305,30 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       return componentsToPath(d);
     },
     'custom:TimeMeasure': (element) => {
+      var x = element.x,
+          y = element.y,
+          width = element.width,
+          height = element.height;
+          
+
+      var borderRadius = 20;
+         
+      var d = [
+        ['M', x + borderRadius, y],
+        ['l', width - borderRadius * 2, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, borderRadius],
+        ['l', 0, height - borderRadius * 2],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, borderRadius],
+        ['l', borderRadius * 2 - width, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, -borderRadius],
+        ['l', 0, borderRadius * 2 - height],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, -borderRadius],
+        ['z']
+      ];
+
+      return componentsToPath(d);
+    },
+    'custom:CyclicTimeMeasure': (element) => {
       var x = element.x,
           y = element.y,
           width = element.width,
