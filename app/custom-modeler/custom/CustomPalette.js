@@ -196,51 +196,24 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
       group: 'custom',
       separator: true
     },
-    // 'custom-clock': createAction(
-    //     'custom:Clock', 'custom', 'icon-custom-clock'
-    // ),
-    // 'custom-time-slot': createAction(
-    //     'custom:TimeSlot', 'custom', 'icon-custom-time-slot'
-    // ),
-    // 'custom-resource': createAction(
-    //     'custom:Resource', 'custom', 'icon-custom-resource'
-    // ),
-    // 'custom-resource-absence': createAction(
-    //     'custom:ResourceAbsence', 'custom', 'icon-custom-resource-absence'
-    // ),
-    // 'custom-role': createAction(
-    //     'custom:Role', 'custom', 'icon-custom-role'
-    // ),
-    // 'custom-role-absence': createAction(
-    //     'custom:RoleAbsence', 'custom', 'icon-custom-role-absence'
-    // ),
-    // 'custom-group': createAction(
-    //     'custom:Group', 'custom', 'icon-custom-group'
-    // ),
-    // 'custom-group-absence': createAction(
-    //     'custom:GroupAbsence', 'custom', 'icon-custom-group-absence'
-    // ),
-    // 'custom-avion': createAction(
-    //   'custom:Avion', 'custom', 'icon-custom-avion'
-    // ),
+    'custom-baseMeasure': createAction(
+      'custom:BaseMeasure', 'custom', 'icon-baseMeasure'
+    ), 
     'custom-aggregatedMeasure': createAction(
       'custom:AggregatedMeasure', 'custom', 'icon-custom-aggregatedMeasure'
     ),
     'custom-countAggregatedMeasure': createAction(
       'custom:CountAggregatedMeasure', 'custom', 'icon-custom-countAggregatedMeasure'
     ),
-    // 'custom-carlos1': createAction(
-    //   'custom:Carlos1', 'custom', 'icon-custom-carlos1'
+    // 'custom-countMeasure': createAction(
+    //   'custom:CountMeasure', 'custom', 'icon-custom-countMeasure'
     // ),
-    'custom-countMeasure': createAction(
-      'custom:CountMeasure', 'custom', 'icon-custom-countMeasure'
-    ),
     'custom-dataAggregatedMeasure': createAction(
       'custom:DataAggregatedMeasure', 'custom', 'icon-custom-dataAggregatedMeasure'
     ),
-    'custom-dataMeasure': createAction(
-      'custom:DataMeasure', 'custom', 'icon-custom-dataMeasure'
-    ),
+    // 'custom-dataMeasure': createAction(
+    //   'custom:DataMeasure', 'custom', 'icon-custom-dataMeasure'
+    // ),
     'custom-dataPropertyConditionAggregatedMeasure': createAction(
       'custom:DataPropertyConditionAggregatedMeasure', 'custom', 'icon-custom-dataPropertyConditionAggregatedMeasure'
     ),
@@ -253,12 +226,12 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     'custom-derivedSingleInstanceMeasure': createAction(
       'custom:DerivedSingleInstanceMeasure', 'custom', 'icon-custom-derivedSingleInstanceMeasure'
     ),
-    'custom-timeMeasure': createAction(
-      'custom:TimeMeasure', 'custom', 'icon-custom-timeMeasure'
-    ),
-    'custom-stateConditionMeasure': createAction(
-      'custom:StateConditionMeasure', 'custom', 'icon-custom-stateConditionMeasure'
-    ),
+    // 'custom-timeMeasure': createAction(
+    //   'custom:TimeMeasure', 'custom', 'icon-custom-timeMeasure'
+    // ),
+    // 'custom-stateConditionMeasure': createAction(
+    //   'custom:StateConditionMeasure', 'custom', 'icon-custom-stateConditionMeasure'
+    // ),
     'custom-stateConditionAggregatedMeasure': createAction(
       'custom:StateConditionAggregatedMeasure', 'custom', 'icon-custom-stateConditionAggregatedMeasure'
     ),
@@ -271,12 +244,9 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     'custom-scope': createAction(
       'custom:Scope', 'custom', 'icon-scope'
     ), 
-    'custom-baseMeasure': createAction(
-      'custom:BaseMeasure', 'custom', 'icon-baseMeasure'
-    ), 
-    'custom-cyclicTimeMeasure': createAction(
-      'custom:CyclicTimeMeasure', 'custom', 'icon-custom-cyclicTimeMeasure'
-    ),
+    // 'custom-cyclicTimeMeasure': createAction(
+    //   'custom:CyclicTimeMeasure', 'custom', 'icon-custom-cyclicTimeMeasure'
+    // ),
     
     
   });
