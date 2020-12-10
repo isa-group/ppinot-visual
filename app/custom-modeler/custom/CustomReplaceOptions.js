@@ -16,14 +16,6 @@ export var MEASURE = [
     }
   },
   {
-    label: 'Cyclic time measure',
-    actionName: 'replace-with-cyclic-time-measure',
-    //className: 'icon-custom-timeMeasure',
-    target: {
-      type: 'custom:CyclicTimeMeasure'
-    }
-  },
-  {
     label: 'Count measure',
     actionName: 'replace-with-count-measure',
     //className: 'icon-custom-countMeasure',

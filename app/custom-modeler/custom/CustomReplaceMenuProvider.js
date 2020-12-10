@@ -23,6 +23,7 @@ import * as replaceOptions from './CustomReplaceOptions';
 import { isLabel, isLabelExternal } from "bpmn-js/lib/util/LabelUtil";
 import { isCustomShape, label } from "./Types";
 import Replace from 'diagram-js/lib/features/replace/Replace';
+import { replace } from "tiny-svg";
 
 
 /**
@@ -273,10 +274,10 @@ ReplaceMenuProvider.prototype.getHeaderEntries = function(element) {
 var headerEntries = [];
 
 //ESTO ES PARA LAS 3 OPCIONES QUE SALEN ARRIBA EN EL MENÚ---------
-// if (is(element, 'custom:CountMeasure')) {
-//   headerEntries = headerEntries.concat(this._getLoopEntries(element));
-// }
-//----------------------------------------------------------------
+if (is(element, 'custom:TimeMeasure')) {
+  headerEntries = headerEntries.concat(this._getTime(element));
+}
+// ----------------------------------------------------------------
 
 if (is(element, 'bpmn:Activity') && !isEventSubProcess(element)) {
   headerEntries = headerEntries.concat(this._getLoopEntries(element));
@@ -421,7 +422,6 @@ return menuEntries;
 ReplaceMenuProvider.prototype._createMenuEntry = function(definition, element, action) {
 var translate = this._translate;
 var replaceElement = this._bpmnReplace.replaceElement;
-var modeling = this._modeling;
 var replace = this._replace;
 
 var replaceAction = function() {
@@ -527,7 +527,24 @@ return loopEntries;
 };
 
 
+ReplaceMenuProvider.prototype._getTime = function(element) {
 
+var translate = this._translate;
+var businessObject = getBusinessObject(element);
+var replace = this._replace;
+var replaceAction = function() {
+  return replace.replaceElement(element, { type: 'custom:CyclicTimeMeasure' });
+};
+
+var timeEntry = {
+  id: 'replace-with-cyclic-time-measure',
+  className: 'icon-menu-cyclic-time',
+  //label: translate('Cyclic'),
+  action: replaceAction
+};
+
+return timeEntry;
+};
 
 
 
