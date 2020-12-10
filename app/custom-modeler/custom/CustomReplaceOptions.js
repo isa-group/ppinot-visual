@@ -75,11 +75,19 @@ export var AGGREGATED_MEASURE = [
     }
   },
   {
-    label: 'Data property Condition aggregated measure',
+    label: 'Data property condition aggregated measure',
     actionName: 'replace-with-data-property-condition-aggregated-measure',
     //className: 'icon-menu-data-measure',
     target: {
       type: 'custom:DataPropertyConditionAggregatedMeasure',
+    }
+  },
+  {
+    label: 'State condition aggregated measure',
+    actionName: 'replace-with-state-condition-aggregated-measure',
+    //className: 'icon-menu-data-measure',
+    target: {
+      type: 'custom:StateConditionAggregatedMeasure',
     }
   }
 ];
