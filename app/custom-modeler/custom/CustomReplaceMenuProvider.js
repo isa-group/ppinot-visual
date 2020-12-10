@@ -88,6 +88,7 @@ var differentType = isDifferentType(element);
 if (is(businessObject, 'custom:BaseMeasure') 
 || is(businessObject, 'custom:CountMeasure') 
 || is(businessObject, 'custom:TimeMeasure') 
+|| is(businessObject, 'custom:CyclicTimeMeasure') 
 || is(businessObject, 'custom:StateConditionMeasure')
 || is(businessObject, 'custom:DataMeasure')) {
   entries = filter(replaceOptions.MEASURE, differentType);
@@ -444,31 +445,6 @@ var menuEntry = {
 //console.log(menuEntry);
 return menuEntry;
 };
-
-
-
-function replaceCustomElement(element, target, hints) {
-  console.log('replaceCustomElement');
-  hints = hints || {};
-
-  var type = target.type,
-      oldBusinessObject = element.businessObject;
-  console.log('type', type);
-  console.log('oldBusinessObject' , oldBusinessObject);
-
-  var newElement = {
-    type: type
-  }
-  
-  console.log('newElement' , newElement);
-  //return newElement;
-
-  return replace.replaceElement(oldBusinessObject, newElement);
-  
-}
-
-
-
 
 //---------------------------------------------------------------------------------------
 
