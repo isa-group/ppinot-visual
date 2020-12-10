@@ -166,7 +166,9 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
         });
     }
 
-    if(is(businessObject, 'custom:TimeMeasure') && element.type !== 'label') {
+    if(is(businessObject, 'custom:TimeMeasure') 
+    || is(businessObject, 'custom:CyclicTimeMeasure')
+    && element.type !== 'label') {
         assign(actions, {
             'connect6': appendConnectAction(
                 'custom:ToConnection',
