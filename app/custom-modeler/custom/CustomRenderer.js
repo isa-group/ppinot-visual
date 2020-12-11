@@ -1140,6 +1140,26 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       return svgAppend(p, createLine(element.waypoints, attrs));
     },
 
+    'custom:EndConnection': (p, element) => {
+      var attrs = {
+        stroke: BLACK, 
+        strokeWidth: 1.5, 
+        strokeDasharray: [8,5],
+        markerEnd: marker('messageflow-start', 'black',BLACK),
+      };
+      return svgAppend(p, createLine(element.waypoints, attrs));
+    },
+
+    'custom:StartConnection': (p, element) => {
+      var attrs = {
+        stroke: BLACK, 
+        strokeWidth: 1.5, 
+        strokeDasharray: [8,5],
+        markerEnd: marker('messageflow-start', 'white',BLACK),
+      };
+      return svgAppend(p, createLine(element.waypoints, attrs));
+    },
+
     'custom:ConsequenceFlow': (p, element) => {
       var attrs = {
         strokeLinejoin: 'round',
