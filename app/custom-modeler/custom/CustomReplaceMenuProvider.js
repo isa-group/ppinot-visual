@@ -99,6 +99,7 @@ if (is(businessObject, 'custom:BaseMeasure')
 
 if (is(businessObject, 'custom:CountAggregatedMeasure') 
 || is(businessObject, 'custom:AggregatedMeasure') 
+|| is(businessObject, 'custom:TimeAggregatedMeasure') 
 || is(businessObject, 'custom:DataPropertyConditionAggregatedMeasure') 
 || is(businessObject, 'custom:StateConditionAggregatedMeasure') 
 || is(businessObject, 'custom:DataAggregatedMeasure')) {
@@ -280,7 +281,11 @@ var headerEntries = [];
 if (is(element, 'custom:TimeMeasure')) {
   headerEntries = headerEntries.concat(this._getTime(element));
 }
-// ----------------------------------------------------------------
+
+if (is(element, 'custom:TimeAggregatedMeasure')) {
+  headerEntries = headerEntries.concat(this._getTimeAggregated(element));
+}
+//----------------------------------------------------------------
 
 if (is(element, 'bpmn:Activity') && !isEventSubProcess(element)) {
   headerEntries = headerEntries.concat(this._getLoopEntries(element));
@@ -533,7 +538,6 @@ return loopEntries;
 ReplaceMenuProvider.prototype._getTime = function(element) {
 
 var translate = this._translate;
-var businessObject = getBusinessObject(element);
 var replace = this._replace;
 var replaceAction = function() {
   return replace.replaceElement(element, { type: 'custom:CyclicTimeMeasure' });
@@ -548,6 +552,24 @@ var timeEntry = {
 
 return timeEntry;
 };
+
+ReplaceMenuProvider.prototype._getTimeAggregated = function(element) {
+
+  var translate = this._translate;
+  var replace = this._replace;
+  var replaceAction = function() {
+    return replace.replaceElement(element, { type: 'custom:CyclicTimeAggregatedMeasure' });
+  };
+  
+  var timeEntry = {
+    id: 'replace-with-cyclic-time-aggregated-measure',
+    className: 'icon-menu-cyclic-time',
+    label: translate('Cyclic'),
+    action: replaceAction
+  };
+  
+  return timeEntry;
+  };
 
 
 

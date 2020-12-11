@@ -75,6 +75,14 @@ export var AGGREGATED_MEASURE = [
     }
   },
   {
+    label: 'Time aggregated measure',
+    actionName: 'replace-with-time-aggregated-measure',
+    //className: 'icon-menu-data-measure',
+    target: {
+      type: 'custom:TimeAggregatedMeasure',
+    }
+  },
+  {
     label: 'Data property condition aggregated measure',
     actionName: 'replace-with-data-property-condition-aggregated-measure',
     //className: 'icon-menu-data-measure',
