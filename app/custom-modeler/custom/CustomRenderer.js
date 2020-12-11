@@ -1124,6 +1124,7 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
         strokeWidth: 1.5, 
         strokeDasharray: [8,5],
         markerStart: marker('messageflow-start', 'black',BLACK),
+        markerEnd: marker('messageflow-start', 'black',BLACK),
       };
       return svgAppend(p, createLine(element.waypoints, attrs));
     },
@@ -1134,6 +1135,7 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
         strokeWidth: 1.5, 
         strokeDasharray: [8,5],
         markerStart: marker('messageflow-start', 'white',BLACK),
+        markerEnd: marker('messageflow-start', 'white',BLACK),
       };
       return svgAppend(p, createLine(element.waypoints, attrs));
     },
