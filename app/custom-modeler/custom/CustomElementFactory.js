@@ -165,6 +165,8 @@ CustomElementFactory.prototype._getCustomElementSize = function(type) {
     'custom:Avion':{width: 50, height: 50},
     'custom:AggregatedMeasure':{width: 120, height: 100},
     'custom:CountAggregatedMeasure':{width: 140, height: 130},
+    'custom:TimeAggregatedMeasure':{width: 130, height: 125},
+    'custom:CyclicTimeAggregatedMeasure':{width: 130, height: 125},
     'custom:CountMeasure':{width: 130, height: 120},
     'custom:DataAggregatedMeasure':{width: 140, height: 130},
     'custom:DataMeasure':{width: 130, height: 130}, 

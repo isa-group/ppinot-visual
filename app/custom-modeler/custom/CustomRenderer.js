@@ -418,6 +418,28 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
     return aggregatedMeasure;
   };
 
+  function drawTimeAggregatedMeasure(element){
+    var timeAggregatedMeasure = svgCreate('image', {
+      x: 0,
+      y: 0,
+      width: element.width,
+      height: element.height,
+      href: Svg.dataURLtimeAggregatedMeasure
+    })
+    return timeAggregatedMeasure;
+  };
+
+  function drawCyclicTimeAggregatedMeasure(element){
+    var cyclicTimeAggregatedMeasure = svgCreate('image', {
+      x: 0,
+      y: 0,
+      width: element.width,
+      height: element.height,
+      href: Svg.dataURLcyclicTimeAggregatedMeasure
+    })
+    return cyclicTimeAggregatedMeasure;
+  };
+
   function drawCountAggregatedMeasure(element){
     var countAggregatedMeasure = svgCreate('image', {
       x: 0,
@@ -649,6 +671,20 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       
      
       return aggregatedMeasure;
+    },
+    'custom:TimeAggregatedMeasure': (p, element) => {
+      let timeAggregatedMeasure = drawTimeAggregatedMeasure(element)
+      svgAppend(p, timeAggregatedMeasure);
+      
+     
+      return timeAggregatedMeasure;
+    },
+    'custom:CyclicTimeAggregatedMeasure': (p, element) => {
+      let cyclicTimeAggregatedMeasure = drawCyclicTimeAggregatedMeasure(element)
+      svgAppend(p, cyclicTimeAggregatedMeasure);
+      
+     
+      return cyclicTimeAggregatedMeasure;
     },
     'custom:CountAggregatedMeasure': (p, element) => {
       let countAggregatedMeasure = drawCountAggregatedMeasure(element)
@@ -1233,6 +1269,54 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       return componentsToPath(d);
     },
     'custom:AggregatedMeasure': (element) => {
+      var x = element.x,
+          y = element.y,
+          width = element.width,
+          height = element.height;
+          
+
+      var borderRadius = 20;
+         
+      var d = [
+        ['M', x + borderRadius, y],
+        ['l', width - borderRadius * 2, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, borderRadius],
+        ['l', 0, height - borderRadius * 2],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, borderRadius],
+        ['l', borderRadius * 2 - width, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, -borderRadius],
+        ['l', 0, borderRadius * 2 - height],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, -borderRadius],
+        ['z']
+      ];
+
+      return componentsToPath(d);
+    },
+    'custom:TimeAggregatedMeasure': (element) => {
+      var x = element.x,
+          y = element.y,
+          width = element.width,
+          height = element.height;
+          
+
+      var borderRadius = 20;
+         
+      var d = [
+        ['M', x + borderRadius, y],
+        ['l', width - borderRadius * 2, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, borderRadius],
+        ['l', 0, height - borderRadius * 2],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, borderRadius],
+        ['l', borderRadius * 2 - width, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, -borderRadius],
+        ['l', 0, borderRadius * 2 - height],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, -borderRadius],
+        ['z']
+      ];
+
+      return componentsToPath(d);
+    },
+    'custom:CyclicTimeAggregatedMeasure': (element) => {
       var x = element.x,
           y = element.y,
           width = element.width,

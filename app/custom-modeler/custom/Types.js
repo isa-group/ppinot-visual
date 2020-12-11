@@ -9,6 +9,8 @@ export const label = [
     'custom:TimeSlot',
     'custom:Avion',
     'custom:AggregatedMeasure',
+    'custom:TimeAggregatedMeasure',
+    'custom:CyclicTimeAggregatedMeasure',
     'custom:CountAggregatedMeasure',
     'custom:CountMeasure',
     'custom:DataAggregatedMeasure',
@@ -51,6 +53,8 @@ export const externalLabel = [
     'custom:ToConnection',
     'custom:FromConnection',
     'custom:AggregatedMeasure',
+    'custom:TimeAggregatedMeasure',
+    'custom:CyclicTimeAggregatedMeasure',
     'custom:CountAggregatedMeasure',
     'custom:CountMeasure',
     //'custom:DataAggregatedMeasure',
@@ -90,6 +94,8 @@ export const directEdit = [
     'custom:Target',
     'custom:Scope',
     'custom:AggregatedMeasure',
+    'custom:TimeAggregatedMeasure',
+    'custom:CyclicTimeAggregatedMeasure',
     'custom:CountAggregatedMeasure',
     'custom:CountMeasure',
     'custom:DataAggregatedMeasure',
@@ -115,6 +121,8 @@ export const directEdit = [
 export const myConnectionElements = [
     'custom:Avion',
     'custom:AggregatedMeasure',
+    'custom:TimeAggregatedMeasure',
+    'custom:CyclicTimeAggregatedMeasure',
     'custom:CountAggregatedMeasure',
     'custom:CountMeasure',
     'custom:DataAggregatedMeasure',
@@ -134,11 +142,12 @@ export const myConnectionElements = [
 
 export const aggreagatedElements = [
     'custom:AggregatedMeasure',
+    'custom:TimeAggregatedMeasure',
+    'custom:CyclicTimeAggregatedMeasure',
     'custom:CountAggregatedMeasure',
     'custom:DataAggregatedMeasure',
     'custom:StateConditionAggregatedMeasure',
-    'custom:DataPropertyConditionAggregatedMeasure',
-    'custom:DerivedMultiInstanceMeasure',
+    'custom:DataPropertyConditionAggregatedMeasure'
 ]
 
 export const timeMeasuresElements = [
@@ -164,6 +173,8 @@ export const resourceArcElements = [
     'custom:TimeSlot',
     'custom:Avion',
     'custom:AggregatedMeasure',
+    'custom:TimeAggregatedMeasure',
+    'custom:CyclicTimeAggregatedMeasure',
     'custom:CountAggregatedMeasure',
     'custom:CountMeasure',
     'custom:DataAggregatedMeasure',
@@ -194,6 +205,8 @@ export const custom = [
     'custom:TimeDistanceArcEnd',
     'custom:Avion',
     'custom:AggregatedMeasure',
+    'custom:TimeAggregatedMeasure',
+    'custom:CyclicTimeAggregatedMeasure',
     'custom:CountAggregatedMeasure',
     'custom:CountMeasure',
     'custom:DataAggregatedMeasure',
