@@ -23,6 +23,8 @@ export const label = [
     'custom:CyclicTimeMeasure',
     'custom:BaseMeasure',
     'custom:MyConnection',
+    'custom:StartConnection',
+    'custom:EndConnection',
     'custom:DashedLine',
     'custom:AggregatedConnection',
     'custom:GroupedBy',
@@ -47,6 +49,8 @@ export const externalLabel = [
     'custom:Avion',
     'custom:Ppi',
     'custom:MyConnection',
+    'custom:StartConnection',
+    'custom:EndConnection',
     'custom:DashedLine',
     'custom:AggregatedConnection',
     'custom:GroupedBy',
@@ -79,9 +83,9 @@ export const connections = [
     'custom:AggregatedConnection',
     'custom:GroupedBy',
     'custom:ToConnection',
-    'custom:FromConnection'
-
-    
+    'custom:FromConnection',
+    'custom:StartConnection',
+    'custom:EndConnection',    
 ]
 
 export const directEdit = [
@@ -108,6 +112,8 @@ export const directEdit = [
     'custom:CyclicTimeMeasure',
     'custom:Ppi',
     'custom:MyConnection',
+    'custom:StartConnection',
+    'custom:EndConnection',
     'custom:DashedLine',
     'custom:AggregatedConnection',
     'custom:GroupedBy',
@@ -219,6 +225,8 @@ export const custom = [
     'custom:CyclicTimeMeasure',
     'custom:BaseMeasure',
     'custom:MyConnection',
+    'custom:StartConnection',
+    'custom:EndConnection',
     'custom:DashedLine',
     'custom:AggregatedConnection',
     'custom:GroupedBy',
