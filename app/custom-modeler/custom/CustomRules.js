@@ -82,6 +82,17 @@ function canConnect(source, target, connection) {
       return false
   }
 
+  else if(is(source, 'custom:CounteMeasure') || is(source, 'custom:CountAggregatedMeasure')) {
+    if(isDefaultValid(target) || is(target, 'bpmn:Participant')) {
+      if(connection === 'custom:StartConnection' || connection === 'custom:EndConnection')
+        return { type: connection }
+      else
+        return false
+    }
+    else
+      return false
+  }
+
   else if((isDefaultValid(source) && isCustomShape(target) && isCustomResourceArcElement(source))  || (isCustomShape(source) && isDefaultValid(target) && isCustomResourceArcElement(target)))
     return { type: 'custom:ResourceArc'
   }
@@ -157,6 +168,19 @@ function canConnect2(source, target, connection) {
   }
   else if(connection === 'custom:FromConnection') {
     if(isDefaultValid(target) || is(target, 'bpmn:Participant') && is(source, 'custom:TimeMeasure') || is(source, 'custom:CyclicTimeMeasure'))
+      return { type: connection }
+    else
+      return false
+  }
+
+  else if(connection === 'custom:StartConnection') {
+    if(isDefaultValid(target) || is(target, 'bpmn:Participant') && is(source, 'custom:CountMeasure') || is(source, 'custom:CountAggregatedMeasure'))
+      return { type: connection }
+    else
+      return false
+  }
+  else if(connection === 'custom:EndConnection') {
+    if(isDefaultValid(target) || is(target, 'bpmn:Participant') && is(source, 'custom:CountMeasure') || is(source, 'custom:CountAggregatedMeasure'))
       return { type: connection }
     else
       return false
