@@ -173,7 +173,7 @@ CustomElementFactory.prototype._getCustomElementSize = function(type) {
     'custom:DataPropertyConditionAggregatedMeasure':{width: 130, height: 140},
     'custom:DataPropertyConditionMeasure':{width: 130, height: 130},
     'custom:DerivedMultiInstanceMeasure':{width: 140, height: 110},
-    'custom:DerivedSingleInstanceMeasure':{width: 130, height: 100},
+    'custom:DerivedSingleInstanceMeasure':{width: 130, height: 120},
     'custom:TimeMeasure':{width: 120, height: 110},
     'custom:CyclicTimeMeasure':{width: 120, height: 110},
     'custom:Ppi':{width: 470, height: 380},
