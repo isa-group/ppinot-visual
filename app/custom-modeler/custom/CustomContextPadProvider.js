@@ -188,6 +188,23 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
         });
     }
 
+    if(is(businessObject, 'custom:CountMeasure') 
+    || is(businessObject, 'custom:CountAggregatedMeasure')
+    && element.type !== 'label') {
+        assign(actions, {
+            'connect6': appendConnectAction(
+                'custom:StartConnection',
+                'icon-startConnector',
+                'Connect using Start connection'
+            ),
+            'connect7': appendConnectAction(
+                'custom:EndConnection',
+                'icon-endConnector',
+                'Connect using End connection'
+            ),
+        });
+    }
+
     if(isAny(businessObject, myConnectionElements) && element.type !== 'label') {
         assign(actions, {
             'connect9': appendConnectAction(
