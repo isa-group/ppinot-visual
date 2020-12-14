@@ -10,7 +10,7 @@ import {
 
 import RuleProvider from 'diagram-js/lib/features/rules/RuleProvider';
 import {isAny} from "bpmn-js/lib/features/modeling/util/ModelingUtil";
-import {isCustomResourceArcElement, isCustomShape, isCustomMyConnectionElement, isCustomAggregatedElement} from "./Types";
+import {isCustomResourceArcElement, isCustomShape, isCustomMyConnectionElement, isCustomAggregatedElement, isCustomConnection} from "./Types";
 import {isLabel} from "bpmn-js/lib/util/LabelUtil";
 
 var HIGH_PRIORITY = 1500;
@@ -99,6 +99,9 @@ function canConnect(source, target, connection) {
   else if((isCustomShape(source) && (isCustomShape(target) )))
     return { type: 'custom:MyConnection'
   }
+  else if((is(source, 'bpmn:DataObjectReference') && (isCustomConnection(target) )))
+    return { type: 'custom:RFCStateConnection'
+  }
   else if(is(source, 'custom:StateConditionMeasure') 
   || is(source, 'custom:StateConditionAggregatedMeasure')
   || is(source, 'custom:CountMeasure') || is(source, 'custom:DataMeasure'))
@@ -126,14 +129,6 @@ function canConnect2(source, target, connection) {
     else
       return false
   }
-  // if(connection === 'custom:GroupedBy') {
-  //   if (isCustomAggregatedElement(source) && is(target, 'bpmn:DataObjectReference') )
-  //     return {connection}
-  // }
-  // if(connection === 'custom:AggregatedConnection') {
-  //   if(isCustomAggregatedElement(source) && isCustomShape(target))
-  //     return { type: connection }
-  // }
   
   if(connection === 'custom:MyConnection'){
     return {type: connection}
@@ -185,8 +180,12 @@ function canConnect2(source, target, connection) {
     else
       return false
   }
-  
-  
+  else if(connection === 'custom:RFCStateConnection') {
+    if(is(source, 'bpmn:DataObjectReference')  && isCustomConnection(target) )
+      return { type: connection }
+    else
+      return false
+  }
   else {
     if (!isCustom(source) && !isCustom(target))
       return;
@@ -241,8 +240,10 @@ CustomRules.prototype.init = function() {
         return {type1: 'custom:ResourceArc', type2:'custom:ConsequenceFlow'}
       else if(type === 'custom:TimeDistance')
         return {type1: 'custom:TimeDistanceArcStart', type2:'custom:TimeDistanceArcEnd'}
-  
     }
+    // }else if(is(source, 'bpmn:Task') && isDefaultValid(target)){
+    //   return {type1: 'custom:ConsequenceTimedFlow', type2:'custom:RFCStateReference'}
+    // }
   }
 
 

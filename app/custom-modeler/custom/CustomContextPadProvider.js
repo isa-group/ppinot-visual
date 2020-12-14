@@ -14,7 +14,7 @@ import {
 } from 'min-dash';
 import {isLabel} from "./utils/LabelUtil";
 
-import {resourceArcElements, myConnectionElements, aggreagatedElements} from "./Types";
+import {resourceArcElements, myConnectionElements, aggreagatedElements, isCustomConnection} from "./Types";
 import { remove, replace } from 'tiny-svg';
 import {
     isDifferentType
@@ -77,7 +77,7 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
 
     function appendConnectAction(type, className, title) {
         if (typeof title !== 'string') {
-            title = translate('Append {type}', { type: type.replace(/^RALph:/, '') });
+            title = translate('Append {type}', { type: type.replace(/^custom:/, '') });
         }
 
         function connectStart(event, element, autoActivate) {
@@ -114,6 +114,19 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
 
     function startConnectTimeDistance(event, element, autoActivate) {
         connect.customStart2(event, element, 'custom:ConsequenceTimedFlow', elementFactory, autoActivate);
+    }
+
+    if (is(businessObject, 'custom:TimeMeasure')) {
+
+        assign(actions, {
+          'append.text-annotation':
+              appendAction(
+                'custom:BaseMeasure',
+                'bpmn-icon-task',
+                translate('Append compensation activity'),
+                
+              )
+        });
     }
 
     if(isAny(businessObject, aggreagatedElements) && element.type !== 'label') {
@@ -201,6 +214,17 @@ export default function CustomContextPadProvider(contextPad, popupMenu, canvas, 
                 'custom:EndConnection',
                 'icon-endConnector',
                 'Connect using End connection'
+            ),
+        });
+    }
+
+    if(is(businessObject, 'bpmn:DataObjectReference') 
+    && element.type !== 'label') {
+        assign(actions, {
+            'connect14': appendConnectAction(
+                'custom:RFCStateConnection',
+                'icon-dashed-line',
+                'Connect using RFC state connection'
             ),
         });
     }
