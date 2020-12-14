@@ -1079,6 +1079,14 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
         });
         return svgAppend(p, createLine(element.waypoints, attrs));
     },
+    'custom:RFCStateConnection': (p, element) => {
+      var attrs = computeStyle(attrs, {
+        stroke: BLACK, //COLOR
+        strokeWidth: 1.5, //ANCHURA
+        strokeDasharray: [10,7] //LÍNA DISCONTINUA
+      });
+      return svgAppend(p, createLine(element.waypoints, attrs));
+  },
 
     // CONEXIÓN PARA MEDIDA_AGREGADA-MEDIDA - LÍNEA CONTINUA CON ROMBO
     'custom:AggregatedConnection': (p, element) => {
@@ -1369,6 +1377,30 @@ export default function CustomRenderer(eventBus, styles, canvas, textRenderer) {
       return componentsToPath(d);
     },
     'custom:CountAggregatedMeasure': (element) => {
+      var x = element.x,
+          y = element.y,
+          width = element.width,
+          height = element.height;
+          
+
+      var borderRadius = 20;
+         
+      var d = [
+        ['M', x + borderRadius, y],
+        ['l', width - borderRadius * 2, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, borderRadius],
+        ['l', 0, height - borderRadius * 2],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, borderRadius],
+        ['l', borderRadius * 2 - width, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, -borderRadius],
+        ['l', 0, borderRadius * 2 - height],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, -borderRadius],
+        ['z']
+      ];
+
+      return componentsToPath(d);
+    },
+    'custom:RFCStateConnection': (element) => {
       var x = element.x,
           y = element.y,
           width = element.width,

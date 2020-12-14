@@ -34,7 +34,8 @@ export const label = [
     'custom:StateConditionMeasure',
     'custom:StateConditionAggregatedMeasure',
     'custom:Target',
-    'custom:Scope'
+    'custom:Scope',
+    'custom:RFCStateConnection',
     
 ]
 
@@ -67,8 +68,9 @@ export const externalLabel = [
     'custom:CyclicTimeMeasure',
     'custom:BaseMeasure',
     // 'custom:DataPropertyConditionAggregatedMeasure'
-    'custom:StateConditionMeasure'
+    'custom:StateConditionMeasure',
     //'custom:StateConditionAggregatedMeasure',
+    'custom:RFCStateConnection',
 
 ]
 
@@ -77,7 +79,7 @@ export const connections = [
     'custom:ConsequenceFlow',
     'custom:TimeDistanceArcStart',
     'custom:TimeDistanceArcEnd',
-
+    'custom:RFCStateConnection',
     'custom:MyConnection',
     'custom:DashedLine',
     'custom:AggregatedConnection',
@@ -121,7 +123,8 @@ export const directEdit = [
     'custom:FromConnection',
     'custom:StateConditionMeasure',
     'custom:StateConditionAggregatedMeasure',
-    'custom:BaseMeasure'
+    'custom:BaseMeasure',
+    'custom:RFCStateConnection',
 ]
 
 export const myConnectionElements = [
@@ -234,7 +237,8 @@ export const custom = [
     'custom:FromConnection',
     'custom:Ppi',
     'custom:StateConditionMeasure',
-    'custom:StateConditionAggregatedMeasure'
+    'custom:StateConditionAggregatedMeasure',
+    'custom:RFCStateConnection'
 
     
 ]
