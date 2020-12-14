@@ -4,7 +4,7 @@ import BpmnModeler from 'bpmn-js/lib/Modeler';
 
 import pizzaDiagram from '../resources/diag.bpmn';
 
-import CustomModeler from './custom-modeler';
+import PPINOTModeler from './PPINOT-modeler';
 
 import BpmnModdle from 'bpmn-moddle';
 
@@ -13,7 +13,7 @@ var moddle = new BpmnModdle();
 var container = $('#js-drop-zone');
 let body =$('body')
 
-var modeler = new CustomModeler({
+var modeler = new PPINOTModeler({
   container: '#js-canvas',
   keyboard: {
     bindTo: document
@@ -63,7 +63,7 @@ function openDiagram(xml, cbpmn) {
         .addClass('with-diagram');
 
       if(cbpmn != null)
-        modeler.addCustomElements(cbpmn);
+        modeler.addPPINOTElements(cbpmn);
 
       modeler.setModelOpen(true);
       body.addClass('shown')
@@ -127,7 +127,7 @@ function saveDiagram(done) {
         }
       })
       moddle.toXML(def,{ format: true }, (err, res) => {
-        done(err, res, modeler.getCustomElements());
+        done(err, res, modeler.getPPINOTElements());
       })
     })
 
@@ -181,7 +181,7 @@ function handleFiles(files, callback) {
     reader.onload = function(e) {
       var cbpmn = JSON.parse(e.target.result);
 
-      modeler.addCustomElements(cbpmn)
+      modeler.addPPINOTElements(cbpmn)
     };
 
     reader.readAsText(cbpmnFile);
@@ -294,7 +294,7 @@ $(function() {
     if (data) {
       let urls = []
       window.localStorage.setItem("diagram", encodeURIComponent(data[0]))
-      window.localStorage.setItem("custom", encodeURIComponent(JSON.stringify(data[1])))
+      window.localStorage.setItem("PPINOT", encodeURIComponent(JSON.stringify(data[1])))
     } else {
       link.removeClass('active');
     }
@@ -307,7 +307,7 @@ $(function() {
     });
 
     saveDiagram(function(err, xml) {
-      // setEncoded(downloadLink, 'custom.elements', err ? null : json)
+      // setEncoded(downloadLink, 'PPINOT.elements', err ? null : json)
       // setEncoded(downloadLink, 'diagram.bpmn', err ? null : xml)
       // console.log("what?")
       let cbpmn = modeler.getJson()
