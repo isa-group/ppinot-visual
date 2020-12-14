@@ -220,12 +220,13 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     // 'custom-dataPropertyConditionMeasure': createAction(
     //   'custom:DataPropertyConditionMeasure', 'custom', 'icon-custom-dataPropertyConditionMeasure'
     // ),
-    'custom-derivedMultiInstanceMeasure': createAction(
-      'custom:DerivedMultiInstanceMeasure', 'custom', 'icon-custom-derivedMultiInstanceMeasure'
-    ),
     'custom-derivedSingleInstanceMeasure': createAction(
       'custom:DerivedSingleInstanceMeasure', 'custom', 'icon-custom-derivedSingleInstanceMeasure'
     ),
+    'custom-derivedMultiInstanceMeasure': createAction(
+      'custom:DerivedMultiInstanceMeasure', 'custom', 'icon-custom-derivedMultiInstanceMeasure'
+    ),
+    
     // 'custom-timeMeasure': createAction(
     //   'custom:TimeMeasure', 'custom', 'icon-custom-timeMeasure'
     // ),
