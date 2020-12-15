@@ -91,7 +91,7 @@ if (is(businessObject, 'PPINOT:BaseMeasure')
 || is(businessObject, 'PPINOT:TimeMeasure') 
 || is(businessObject, 'PPINOT:CyclicTimeMeasure') 
 || is(businessObject, 'PPINOT:StateConditionMeasure')
-|| is(businessObject, 'PPINOT:DataPropertyConditionMeasure')
+//|| is(businessObject, 'PPINOT:DataPropertyConditionMeasure')
 || is(businessObject, 'PPINOT:DataMeasure')) {
   entries = filter(replaceOptions.MEASURE, differentType);
   return this._createEntries(element, entries);
@@ -100,7 +100,7 @@ if (is(businessObject, 'PPINOT:BaseMeasure')
 if (is(businessObject, 'PPINOT:CountAggregatedMeasure') 
 || is(businessObject, 'PPINOT:AggregatedMeasure') 
 || is(businessObject, 'PPINOT:TimeAggregatedMeasure') 
-|| is(businessObject, 'PPINOT:DataPropertyConditionAggregatedMeasure') 
+//|| is(businessObject, 'PPINOT:DataPropertyConditionAggregatedMeasure') 
 || is(businessObject, 'PPINOT:StateConditionAggregatedMeasure') 
 || is(businessObject, 'PPINOT:DataAggregatedMeasure')) {
   entries = filter(replaceOptions.AGGREGATED_MEASURE, differentType);

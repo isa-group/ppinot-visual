@@ -39,14 +39,14 @@ export var MEASURE = [
       type: 'PPINOT:StateConditionMeasure'
     }
   },
-  {
-    label: 'Data property condition measure',
-    actionName: 'replace-with-data-property-condition-measure',
-    //className: 'icon-PPINOT-timeMeasure',
-    target: {
-      type: 'PPINOT:DataPropertyConditionMeasure'
-    }
-  },
+  // {
+  //   label: 'Data property condition measure',
+  //   actionName: 'replace-with-data-property-condition-measure',
+  //   //className: 'icon-PPINOT-timeMeasure',
+  //   target: {
+  //     type: 'PPINOT:DataPropertyConditionMeasure'
+  //   }
+  // },
 ];
 
 export var AGGREGATED_MEASURE = [
@@ -82,14 +82,14 @@ export var AGGREGATED_MEASURE = [
       type: 'PPINOT:TimeAggregatedMeasure',
     }
   },
-  {
-    label: 'Data property condition aggregated measure',
-    actionName: 'replace-with-data-property-condition-aggregated-measure',
-    //className: 'icon-menu-data-measure',
-    target: {
-      type: 'PPINOT:DataPropertyConditionAggregatedMeasure',
-    }
-  },
+  // {
+  //   label: 'Data property condition aggregated measure',
+  //   actionName: 'replace-with-data-property-condition-aggregated-measure',
+  //   //className: 'icon-menu-data-measure',
+  //   target: {
+  //     type: 'PPINOT:DataPropertyConditionAggregatedMeasure',
+  //   }
+  // },
   {
     label: 'State condition aggregated measure',
     actionName: 'replace-with-state-condition-aggregated-measure',
