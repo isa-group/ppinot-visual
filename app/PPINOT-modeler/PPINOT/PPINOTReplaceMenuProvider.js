@@ -555,8 +555,8 @@ var replaceAction = function() {
 
 var timeEntry = {
   id: 'replace-with-cyclic-time-measure',
-  className: 'icon-menu-cyclic-time',
-  label: translate('Cyclic'),
+  className: 'icon-cyclic-time-menu',
+  label: translate('\xa0\xa0\xa0\xa0\xa0\xa0\xa0' + 'Cyclic'),
   action: replaceAction
 };
 
@@ -570,11 +570,11 @@ ReplaceMenuProvider.prototype._getTimeAggregated = function(element) {
   var replaceAction = function() {
     return replace.replaceElement(element, { type: 'PPINOT:CyclicTimeAggregatedMeasure' });
   };
-  
+
   var timeEntry = {
     id: 'replace-with-cyclic-time-aggregated-measure',
-    className: 'icon-menu-cyclic-time',
-    label: translate('Cyclic'),
+    className: 'icon-cyclic-time-menu',
+    label: translate('\xa0\xa0\xa0\xa0\xa0\xa0\xa0' + 'Cyclic'),
     action: replaceAction
   };
   

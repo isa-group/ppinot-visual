@@ -2,39 +2,38 @@ export var MEASURE = [
   {
     label: 'Base measure',
     actionName: 'replace-with-base-measure',
-    //className: 'icon-PPINOT-timeMeasure',
     target: {
       type: 'PPINOT:BaseMeasure'
     }
   },
   {
-    label: 'Time measure',
+    label: '\xa0\xa0\xa0\xa0\xa0' + 'Time measure',
     actionName: 'replace-with-time-measure',
-    //className: 'icon-PPINOT-timeMeasure',
+    className: 'icon-time-menu',
     target: {
       type: 'PPINOT:TimeMeasure'
     }
   },
   {
-    label: 'Count measure',
+    label: '\xa0\xa0\xa0\xa0\xa0' + 'Count measure',
     actionName: 'replace-with-count-measure',
-    //className: 'icon-PPINOT-countMeasure',
+    className: 'icon-count-menu',
     target: {
       type: 'PPINOT:CountMeasure'
     }
   }, 
   {
-    label: 'Data measure',
+    label: '\xa0\xa0\xa0\xa0\xa0' + 'Data measure',
     actionName: 'replace-with-data-measure',
-    //className: 'icon-menu-data-measure',
+    className: 'icon-data-menu',
     target: {
       type: 'PPINOT:DataMeasure'
     }
   },
   {
-    label: 'State condition measure',
+    label: '\xa0\xa0\xa0\xa0\xa0' + 'State condition measure',
     actionName: 'replace-with-state-condition-measure',
-    //className: 'icon-PPINOT-timeMeasure',
+    className: 'icon-state-menu',
     target: {
       type: 'PPINOT:StateConditionMeasure'
     }
@@ -59,25 +58,25 @@ export var AGGREGATED_MEASURE = [
     }
   },
   {
-    label: 'Count measure',
+    label: '\xa0\xa0\xa0\xa0\xa0' + 'Count aggregated measure',
     actionName: 'replace-with-count-aggregated-measure',
-    //className: 'icon-PPINOT-countMeasure',
+    className: 'icon-count-menu',
     target: {
       type: 'PPINOT:CountAggregatedMeasure',
     }
   }, 
   {
-    label: 'Data aggregated measure',
+    label: '\xa0\xa0\xa0\xa0\xa0' + 'Data aggregated measure',
     actionName: 'replace-with-data-aggregated-measure',
-    //className: 'icon-menu-data-measure',
+    className: 'icon-data-menu',
     target: {
       type: 'PPINOT:DataAggregatedMeasure',
     }
   },
   {
-    label: 'Time aggregated measure',
+    label: '\xa0\xa0\xa0\xa0\xa0' + 'Time aggregated measure',
     actionName: 'replace-with-time-aggregated-measure',
-    //className: 'icon-menu-data-measure',
+    className: 'icon-time-menu',
     target: {
       type: 'PPINOT:TimeAggregatedMeasure',
     }
@@ -91,13 +90,21 @@ export var AGGREGATED_MEASURE = [
   //   }
   // },
   {
-    label: 'State condition aggregated measure',
+    label: '\xa0\xa0\xa0\xa0\xa0' + 'State condition aggregated measure',
     actionName: 'replace-with-state-condition-aggregated-measure',
-    //className: 'icon-menu-data-measure',
+    className: 'icon-state-menu',
     target: {
       type: 'PPINOT:StateConditionAggregatedMeasure',
     }
-  }
+  },
+  {
+    label: 'SUM',
+    actionName: 'replace-with-sum',
+    //className: 'icon-PPINOT-timeMeasure',
+    target: {
+      type: 'PPINOT:Sum'
+    }
+  },
 ];
 
 export var STATE = [
