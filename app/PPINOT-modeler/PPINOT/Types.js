@@ -36,6 +36,11 @@ export const label = [
     'PPINOT:Target',
     'PPINOT:Scope',
     'PPINOT:RFCStateConnection',
+    'PPINOT:StateCondAggMeasureNumber',
+    'PPINOT:StateCondAggMeasurePercentage',
+    'PPINOT:StateCondAggMeasureAll',
+    'PPINOT:StateCondAggMeasureAtLeastOne',
+    'PPINOT:StateCondAggMeasureNo'
     
 ]
 
@@ -71,6 +76,12 @@ export const externalLabel = [
     'PPINOT:StateConditionMeasure',
     //'PPINOT:StateConditionAggregatedMeasure',
     'PPINOT:RFCStateConnection',
+    'PPINOT:StateCondAggMeasureNumber',
+    'PPINOT:StateCondAggMeasurePercentage',
+    'PPINOT:StateCondAggMeasureAll',
+    'PPINOT:StateCondAggMeasureAtLeastOne',
+    'PPINOT:StateCondAggMeasureNo'
+    
 
 ]
 
@@ -125,6 +136,12 @@ export const directEdit = [
     'PPINOT:StateConditionAggregatedMeasure',
     'PPINOT:BaseMeasure',
     'PPINOT:RFCStateConnection',
+    'PPINOT:StateCondAggMeasureNumber',
+    'PPINOT:StateCondAggMeasurePercentage',
+    'PPINOT:StateCondAggMeasureAll',
+    'PPINOT:StateCondAggMeasureAtLeastOne',
+    'PPINOT:StateCondAggMeasureNo'
+    
 ]
 
 export const myConnectionElements = [
@@ -143,7 +160,13 @@ export const myConnectionElements = [
     'PPINOT:Ppi',
     'PPINOT:StateConditionMeasure',
     'PPINOT:StateConditionAggregatedMeasure',
-    'PPINOT:BaseMeasure'
+    'PPINOT:BaseMeasure',
+    'PPINOT:StateCondAggMeasureNumber',
+    'PPINOT:StateCondAggMeasurePercentage',
+    'PPINOT:StateCondAggMeasureAll',
+    'PPINOT:StateCondAggMeasureAtLeastOne',
+    'PPINOT:StateCondAggMeasureNo'
+    
     
 ]
 
@@ -156,7 +179,13 @@ export const aggreagatedElements = [
     'PPINOT:CountAggregatedMeasure',
     'PPINOT:DataAggregatedMeasure',
     'PPINOT:StateConditionAggregatedMeasure',
-    'PPINOT:DataPropertyConditionAggregatedMeasure'
+    'PPINOT:DataPropertyConditionAggregatedMeasure',
+    'PPINOT:StateCondAggMeasureNumber',
+    'PPINOT:StateCondAggMeasurePercentage',
+    'PPINOT:StateCondAggMeasureAll',
+    'PPINOT:StateCondAggMeasureAtLeastOne',
+    'PPINOT:StateCondAggMeasureNo'
+    
 ]
 
 export const timeMeasuresElements = [
@@ -196,7 +225,13 @@ export const resourceArcElements = [
     'PPINOT:CyclicTimeMeasure',
     'PPINOT:StateConditionMeasure',
     'PPINOT:StateConditionAggregatedMeasure',
-    'PPINOT:BaseMeasure'
+    'PPINOT:BaseMeasure',
+    'PPINOT:StateCondAggMeasureNumber',
+    'PPINOT:StateCondAggMeasurePercentage',
+    'PPINOT:StateCondAggMeasureAll',
+    'PPINOT:StateCondAggMeasureAtLeastOne',
+    'PPINOT:StateCondAggMeasureNo'
+    
 ]
 
 export const PPINOT = [
@@ -238,9 +273,13 @@ export const PPINOT = [
     'PPINOT:Ppi',
     'PPINOT:StateConditionMeasure',
     'PPINOT:StateConditionAggregatedMeasure',
-    'PPINOT:RFCStateConnection'
-
-    
+    'PPINOT:RFCStateConnection',
+    'PPINOT:StateCondAggMeasureNumber',
+    'PPINOT:StateCondAggMeasurePercentage',
+    'PPINOT:StateCondAggMeasureAll',
+    'PPINOT:StateCondAggMeasureAtLeastOne',
+    'PPINOT:StateCondAggMeasureNo'
+        
 ]
 
 export function isExternalLabel(type) {

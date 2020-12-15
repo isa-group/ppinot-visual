@@ -181,7 +181,12 @@ PPINOTElementFactory.prototype._getPPINOTElementSize = function(type) {
     'PPINOT:StateConditionAggregatedMeasure':{width: 140, height: 130},
     'PPINOT:Target':{width: 180, height: 90},
     'PPINOT:Scope':{width: 180, height: 80},
-    'PPINOT:BaseMeasure':{width: 110, height: 85}
+    'PPINOT:BaseMeasure':{width: 110, height: 85},
+    'PPINOT:StateCondAggMeasureNumber':{width: 140, height: 130},
+    'PPINOT:StateCondAggMeasurePercentage':{width: 140, height: 130},
+    'PPINOT:StateCondAggMeasureAll':{width: 140, height: 130},
+    'PPINOT:StateCondAggMeasureAtLeastOne':{width: 140, height: 130},
+    'PPINOT:StateCondAggMeasureNo':{width: 140, height: 130},
   };
 
   return shapes[type] || shapes.__default;

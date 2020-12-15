@@ -94,7 +94,8 @@ export default function PPINOTRenderer(eventBus, styles, canvas, textRenderer) {
       align: align,
       padding: 5,
       style: {
-        fill: element.color
+        fill: element.color,
+        fontSize:  30 + 'px',
       }
     });
   }
@@ -767,10 +768,38 @@ export default function PPINOTRenderer(eventBus, styles, canvas, textRenderer) {
     },
     'PPINOT:StateConditionAggregatedMeasure': (p, element) => {
       let stateConditionAggregatedMeasure = drawStateConditionAggregatedMeasure(element)
-      svgAppend(p, stateConditionAggregatedMeasure);
-      renderEmbeddedLabel(p, element, 'center-middle');
-     
+      svgAppend(p, stateConditionAggregatedMeasure);    
       return stateConditionAggregatedMeasure; 
+    },
+    'PPINOT:StateCondAggMeasureNumber': (p, element) => {
+      var number = renderer('PPINOT:StateConditionAggregatedMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', '#');
+          
+      return number; 
+    },
+    'PPINOT:StateCondAggMeasurePercentage': (p, element) => {
+      var percentage = renderer('PPINOT:StateConditionAggregatedMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', '%');
+          
+      return percentage; 
+    },
+    'PPINOT:StateCondAggMeasureAll': (p, element) => {
+      var all = renderer('PPINOT:StateConditionAggregatedMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', '∀');
+          
+      return all; 
+    },
+    'PPINOT:StateCondAggMeasureAtLeastOne': (p, element) => {
+      var one = renderer('PPINOT:StateConditionAggregatedMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', '∃');
+          
+      return one; 
+    },
+    'PPINOT:StateCondAggMeasureNo': (p, element) => {
+      var no = renderer('PPINOT:StateConditionAggregatedMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', '∄');
+          
+      return no; 
     },
     'PPINOT:Ppi': (p, element) => {
       let ppi = drawPpi(element)
@@ -1666,6 +1695,121 @@ export default function PPINOTRenderer(eventBus, styles, canvas, textRenderer) {
       return componentsToPath(d);
     },
     'PPINOT:StateConditionAggregatedMeasure': (element) => {
+      var x = element.x,
+          y = element.y,
+          width = element.width,
+          height = element.height;
+      
+      var borderRadius = 20;
+         
+      var d = [
+        ['M', x + borderRadius, y],
+        ['l', width - borderRadius * 2, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, borderRadius],
+        ['l', 0, height - borderRadius * 2],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, borderRadius],
+        ['l', borderRadius * 2 - width, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, -borderRadius],
+        ['l', 0, borderRadius * 2 - height],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, -borderRadius],
+        ['z']
+      ];
+
+      return componentsToPath(d);
+    },
+    'PPINOT:StateCondAggMeasureNumber': (element) => {
+      var x = element.x,
+          y = element.y,
+          width = element.width,
+          height = element.height;
+      
+      var borderRadius = 20;
+         
+      var d = [
+        ['M', x + borderRadius, y],
+        ['l', width - borderRadius * 2, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, borderRadius],
+        ['l', 0, height - borderRadius * 2],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, borderRadius],
+        ['l', borderRadius * 2 - width, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, -borderRadius],
+        ['l', 0, borderRadius * 2 - height],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, -borderRadius],
+        ['z']
+      ];
+
+      return componentsToPath(d);
+    },
+    'PPINOT:StateCondAggMeasurePercentage': (element) => {
+      var x = element.x,
+          y = element.y,
+          width = element.width,
+          height = element.height;
+      
+      var borderRadius = 20;
+         
+      var d = [
+        ['M', x + borderRadius, y],
+        ['l', width - borderRadius * 2, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, borderRadius],
+        ['l', 0, height - borderRadius * 2],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, borderRadius],
+        ['l', borderRadius * 2 - width, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, -borderRadius],
+        ['l', 0, borderRadius * 2 - height],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, -borderRadius],
+        ['z']
+      ];
+
+      return componentsToPath(d);
+    },
+    'PPINOT:StateCondAggMeasureAll': (element) => {
+      var x = element.x,
+          y = element.y,
+          width = element.width,
+          height = element.height;
+      
+      var borderRadius = 20;
+         
+      var d = [
+        ['M', x + borderRadius, y],
+        ['l', width - borderRadius * 2, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, borderRadius],
+        ['l', 0, height - borderRadius * 2],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, borderRadius],
+        ['l', borderRadius * 2 - width, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, -borderRadius],
+        ['l', 0, borderRadius * 2 - height],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, -borderRadius],
+        ['z']
+      ];
+
+      return componentsToPath(d);
+    },
+    'PPINOT:StateCondAggMeasureNo': (element) => {
+      var x = element.x,
+          y = element.y,
+          width = element.width,
+          height = element.height;
+      
+      var borderRadius = 20;
+         
+      var d = [
+        ['M', x + borderRadius, y],
+        ['l', width - borderRadius * 2, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, borderRadius],
+        ['l', 0, height - borderRadius * 2],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, borderRadius],
+        ['l', borderRadius * 2 - width, 0],
+        ['a', borderRadius, borderRadius, 0, 0, 1, -borderRadius, -borderRadius],
+        ['l', 0, borderRadius * 2 - height],
+        ['a', borderRadius, borderRadius, 0, 0, 1, borderRadius, -borderRadius],
+        ['z']
+      ];
+
+      return componentsToPath(d);
+    },
+    'PPINOT:StateCondAggMeasureAtLeastOne': (element) => {
       var x = element.x,
           y = element.y,
           width = element.width,
