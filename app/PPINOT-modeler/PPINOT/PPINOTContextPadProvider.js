@@ -116,18 +116,6 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
         connect.PPINOTStart2(event, element, 'PPINOT:ConsequenceTimedFlow', elementFactory, autoActivate);
     }
 
-    if (is(businessObject, 'PPINOT:TimeMeasure')) {
-
-        assign(actions, {
-          'append.text-annotation':
-              appendAction(
-                'PPINOT:BaseMeasure',
-                'bpmn-icon-task',
-                translate('Append compensation activity'),
-                
-              )
-        });
-    }
 
     if(isAny(businessObject, aggreagatedElements) && element.type !== 'label') {
         assign(actions, {
