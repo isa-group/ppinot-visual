@@ -101,9 +101,19 @@ if (is(businessObject, 'PPINOT:CountAggregatedMeasure')
 || is(businessObject, 'PPINOT:AggregatedMeasure') 
 || is(businessObject, 'PPINOT:TimeAggregatedMeasure') 
 //|| is(businessObject, 'PPINOT:DataPropertyConditionAggregatedMeasure') 
-|| is(businessObject, 'PPINOT:StateConditionAggregatedMeasure') 
+//|| is(businessObject, 'PPINOT:StateConditionAggregatedMeasure') 
 || is(businessObject, 'PPINOT:DataAggregatedMeasure')) {
   entries = filter(replaceOptions.AGGREGATED_MEASURE, differentType);
+  return this._createEntries(element, entries);
+}
+
+if (is(businessObject, 'PPINOT:StateConditionAggregatedMeasure') 
+|| is(businessObject, 'PPINOT:StateCondAggMeasureNumber') 
+|| is(businessObject, 'PPINOT:StateCondAggMeasurePercentage') 
+|| is(businessObject, 'PPINOT:StateCondAggMeasureAtLeastOne') 
+|| is(businessObject, 'PPINOT:StateCondAggMeasureAll') 
+|| is(businessObject, 'PPINOT:StateCondAggMeasureNo')) {
+  entries = filter(replaceOptions.STATE, differentType);
   return this._createEntries(element, entries);
 }
 //-------------------------------------------------------------------------

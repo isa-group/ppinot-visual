@@ -100,6 +100,44 @@ export var AGGREGATED_MEASURE = [
   }
 ];
 
+export var STATE = [
+  {
+    label: '# - Number of process instances',
+    actionName: 'replace-with-number-state',
+    target: {
+      type: 'PPINOT:StateCondAggMeasureNumber'
+    }
+  },
+  {
+    label: '% - Percentage of process instances',
+    actionName: 'replace-with-percentage-state',
+    target: {
+      type: 'PPINOT:StateCondAggMeasurePercentage',
+    }
+  }, 
+  {
+    label: '∀ - All process instances',
+    actionName: 'replace-with-all-state',
+    target: {
+      type: 'PPINOT:StateCondAggMeasureAll',
+    }
+  },
+  {
+    label: '∃ - At least one process instance',
+    actionName: 'replace-with-at-least-one-state',
+    target: {
+      type: 'PPINOT:StateCondAggMeasureAtLeastOne',
+    }
+  },
+  {
+    label: '∄ - No process instance',
+    actionName: 'replace-with-no-state',
+    target: {
+      type: 'PPINOT:StateCondAggMeasureNo',
+    }
+  }
+];
+
 export var START_EVENT = [
   
   {
