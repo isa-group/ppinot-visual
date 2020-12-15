@@ -130,7 +130,7 @@ function saveDiagram(done) {
         done(err, res, modeler.getPPINOTElements());
       })
     })
-
+    done(err, xml);
     // console.log(modeler.getJson())
   });
 }
