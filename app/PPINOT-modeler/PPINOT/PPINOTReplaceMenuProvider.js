@@ -289,11 +289,11 @@ var headerEntries = [];
 
 //ESTO ES PARA LAS 3 OPCIONES QUE SALEN ARRIBA EN EL MENÚ---------
 if (is(element, 'PPINOT:TimeMeasure')) {
-  headerEntries = headerEntries.concat(this._getTime(element));
+  headerEntries = headerEntries.concat(this._getCyclicTime(element));
 }
 
 if (is(element, 'PPINOT:TimeAggregatedMeasure')) {
-  headerEntries = headerEntries.concat(this._getTimeAggregated(element));
+  headerEntries = headerEntries.concat(this._getCyclicTimeAggregated(element));
 }
 //----------------------------------------------------------------
 
@@ -545,7 +545,7 @@ return loopEntries;
 };
 
 
-ReplaceMenuProvider.prototype._getTime = function(element) {
+ReplaceMenuProvider.prototype._getCyclicTime = function(element) {
 
 var translate = this._translate;
 var replace = this._replace;
@@ -563,7 +563,7 @@ var timeEntry = {
 return timeEntry;
 };
 
-ReplaceMenuProvider.prototype._getTimeAggregated = function(element) {
+ReplaceMenuProvider.prototype._getCyclicTimeAggregated = function(element) {
 
   var translate = this._translate;
   var replace = this._replace;
