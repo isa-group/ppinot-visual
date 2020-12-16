@@ -38,21 +38,13 @@ export var MEASURE = [
       type: 'PPINOT:StateConditionMeasure'
     }
   },
-  // {
-  //   label: 'Data property condition measure',
-  //   actionName: 'replace-with-data-property-condition-measure',
-  //   //className: 'icon-PPINOT-timeMeasure',
-  //   target: {
-  //     type: 'PPINOT:DataPropertyConditionMeasure'
-  //   }
-  // },
+  
 ];
 
 export var AGGREGATED_MEASURE = [
   {
     label: 'Aggregated measure',
     actionName: 'replace-with-aggregated-measure',
-    //className: 'icon-PPINOT-timeMeasure',
     target: {
       type: 'PPINOT:AggregatedMeasure'
     }
@@ -81,14 +73,6 @@ export var AGGREGATED_MEASURE = [
       type: 'PPINOT:TimeAggregatedMeasure',
     }
   },
-  // {
-  //   label: 'Data property condition aggregated measure',
-  //   actionName: 'replace-with-data-property-condition-aggregated-measure',
-  //   //className: 'icon-menu-data-measure',
-  //   target: {
-  //     type: 'PPINOT:DataPropertyConditionAggregatedMeasure',
-  //   }
-  // },
   {
     label: '\xa0\xa0\xa0\xa0\xa0' + 'State condition aggregated measure',
     actionName: 'replace-with-state-condition-aggregated-measure',
@@ -109,36 +93,41 @@ export var AGGREGATED_MEASURE = [
 
 export var STATE = [
   {
-    label: '# - Number of process instances',
+    label: '\xa0\xa0\xa0\xa0' +'Number of process instances',
     actionName: 'replace-with-number-state',
+    className: 'icon-state-number-menu',
     target: {
       type: 'PPINOT:StateCondAggMeasureNumber'
     }
   },
   {
-    label: '% - Percentage of process instances',
+    label: '\xa0\xa0\xa0\xa0' + 'Percentage of process instances',
     actionName: 'replace-with-percentage-state',
+    className: 'icon-state-percentage-menu',
     target: {
       type: 'PPINOT:StateCondAggMeasurePercentage',
     }
   }, 
   {
-    label: '∀ - All process instances',
+    label: '\xa0\xa0\xa0\xa0' + 'All process instances',
     actionName: 'replace-with-all-state',
+    className: 'icon-state-all-menu',
     target: {
       type: 'PPINOT:StateCondAggMeasureAll',
     }
   },
   {
-    label: '∃ - At least one process instance',
+    label: '\xa0\xa0\xa0\xa0' + 'At least one process instance',
     actionName: 'replace-with-at-least-one-state',
+    className: 'icon-state-atLeast-menu',
     target: {
       type: 'PPINOT:StateCondAggMeasureAtLeastOne',
     }
   },
   {
-    label: '∄ - No process instance',
+    label: '\xa0\xa0\xa0\xa0' + 'No process instance',
     actionName: 'replace-with-no-state',
+    className: 'icon-state-no-menu',
     target: {
       type: 'PPINOT:StateCondAggMeasureNo',
     }
