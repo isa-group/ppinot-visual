@@ -81,14 +81,7 @@ export var AGGREGATED_MEASURE = [
       type: 'PPINOT:StateConditionAggregatedMeasure',
     }
   },
-  {
-    label: 'SUM',
-    actionName: 'replace-with-sum',
-    //className: 'icon-PPINOT-timeMeasure',
-    target: {
-      type: 'PPINOT:Sum'
-    }
-  },
+  
 ];
 
 export var STATE = [
