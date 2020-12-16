@@ -22,7 +22,7 @@ import {
 import PPINOTModeling from './PPINOTModeling' ;
 
 
-
+// This module is used to show buttons in the menu of element in the diagram
 export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, config, injector, elementFactory, connect, create, translate, modeling) {
 
     injector.invoke(ContextPadProvider, this);
@@ -42,7 +42,7 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
 
     }
 
-    
+    // With this function you can append some elements to other element in the diagram automatically
     function appendAction(type, className, title, options) {
         if (typeof title !== 'string') {
             options = title;
@@ -75,6 +75,7 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
         };
     }
 
+    // With this function you can append some connections to an element in the diagram automatically
     function appendConnectAction(type, className, title) {
         if (typeof title !== 'string') {
             title = translate('Append {type}', { type: type.replace(/^PPINOT:/, '') });
@@ -100,31 +101,19 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
     var actions = cached(element);
     var businessObject = element.businessObject;
 
-    function startConnect(event, element, autoActivate) {
-      connect.start(event, element, autoActivate);
-    }
-
-    function startConnectConsequence(event, element, autoActivate) {
-      connect.PPINOTStart(event, element, 'PPINOT:ConsequenceFlow', autoActivate);
-    }
-
-    function startConnectConsequenceTimed(event, element, autoActivate) {
-      connect.PPINOTStart2(event, element, 'PPINOT:ConsequenceTimedFlow', elementFactory, autoActivate);
-    }
-
-    function startConnectTimeDistance(event, element, autoActivate) {
-        connect.PPINOTStart2(event, element, 'PPINOT:ConsequenceTimedFlow', elementFactory, autoActivate);
-    }
 
 
+    // In this case, if the element (businessObject) is any of aggregatedElements and it is not a label
+    // the corresponding buttons appear in the element when you click on it
+    // ---- Note: The elements included in aggregatedElements are defined in Types.js 
     if(isAny(businessObject, aggreagatedElements) && element.type !== 'label') {
         assign(actions, {
             'connect1': appendConnectAction(
-                'PPINOT:AggregatedConnection',
-                'icon-aggregates',
-                'Aggregated connection'
+                'PPINOT:AggregatedConnection', // Connection type that you want to append to element
+                'icon-aggregates', // Icon displayed on element as button
+                'Aggregated connection' // Description that appears if you put the mouse over the button
             ),
-            'connect10': appendConnectAction(
+            'connect2': appendConnectAction( // Append second connection to element
                 'PPINOT:IsGroupedBy',
                 'icon-isGroupedBy',
                 'GroupedBy connection'
@@ -132,34 +121,34 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
         });
     }
 
+    // In this case, if the element (businessObject) is some of these and it is not a label,
+    // the follow button appear in the element when you click on it
     if(is(businessObject, 'PPINOT:StateConditionAggregatedMeasure')
         ||  is(businessObject, 'PPINOT:StateConditionMeasure')
         ||  is(businessObject, 'PPINOT:CountMeasure') 
         ||  is(businessObject, 'PPINOT:DataMeasure')&& element.type !== 'label') {
         assign(actions, {
-            'connect2': appendConnectAction(
+            'connect3': appendConnectAction(
                 'PPINOT:DashedLine',
                 'icon-dashed-line',
                 'State connection'
             ),        
         });
     }
-
-    // ESTO CREO QUE HAY QUE MODIFICAR PARA VARIAS CONEXIONES
     
     if(is(businessObject, 'bpmn:BaseElement') && element.type !== 'label') {
         assign(actions, {
-            'connect3': appendConnectAction(
+            'connect4': appendConnectAction(
                 'PPINOT:ConsequenceFlow',
                 'bpmn-icon-connection-multi',
                 'Connect using PPINOT connection'
             ),
-            'connect4': appendConnectAction(
+            'connect5': appendConnectAction(
                 'PPINOT:ConsequenceTimedFlow',
                 'bpmn-icon-connection-multi',
                 'Connection'
             ),
-            'connect5': appendConnectAction(
+            'connect6': appendConnectAction(
                 'PPINOT:TimeDistance',
                 'bpmn-icon-connection-multi',
                 'Connect using PPINOT connection'
@@ -171,17 +160,17 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
     || is(businessObject, 'PPINOT:CyclicTimeMeasure')
     && element.type !== 'label') {
         assign(actions, {
-            'connect6': appendConnectAction(
+            'connect7': appendConnectAction(
                 'PPINOT:ToConnection',
                 'icon-toConnector',
                 'Connect using To connection'
             ),
-            'connect7': appendConnectAction(
+            'connect8': appendConnectAction(
                 'PPINOT:FromConnection',
                 'icon-fromConnector',
                 'Connect using From connection'
             ),
-            'connect8': appendConnectAction(
+            'connect9': appendConnectAction(
                 'PPINOT:MyConnection',
                 'bpmn-icon-connection',
                 'PPINOT connection'
@@ -193,12 +182,12 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
     || is(businessObject, 'PPINOT:CountAggregatedMeasure')
     && element.type !== 'label') {
         assign(actions, {
-            'connect6': appendConnectAction(
+            'connect10': appendConnectAction(
                 'PPINOT:StartConnection',
                 'icon-startConnector',
                 'Connect using Start connection'
             ),
-            'connect7': appendConnectAction(
+            'connect11': appendConnectAction(
                 'PPINOT:EndConnection',
                 'icon-endConnector',
                 'Connect using End connection'
@@ -209,7 +198,7 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
     if(is(businessObject, 'bpmn:DataObjectReference') 
     && element.type !== 'label') {
         assign(actions, {
-            'connect14': appendConnectAction(
+            'connect12': appendConnectAction(
                 'PPINOT:RFCStateConnection',
                 'icon-dashed-line',
                 'Connect using RFC state connection'
@@ -219,7 +208,7 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
 
     if(isAny(businessObject, myConnectionElements) && element.type !== 'label') {
         assign(actions, {
-            'connect9': appendConnectAction(
+            'connect13': appendConnectAction(
                 'PPINOT:MyConnection',
                 'bpmn-icon-connection',
                 'PPINOT connection'
