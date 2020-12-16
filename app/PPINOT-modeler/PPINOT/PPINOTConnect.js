@@ -44,6 +44,7 @@ export default function PPINOTConnect(eventBus, dragging, modeling, rules) {
         context.canExecute = false;
     });
 
+    // This is util if you want to create a connection that includes an element 
     eventBus.on('connect.end', function(event) {
         var context = event.context,
             source = context.source,
@@ -66,17 +67,9 @@ export default function PPINOTConnect(eventBus, dragging, modeling, rules) {
                 connectionEnd: targetPosition
             };
 
+        // Here, you must to define your connection
         if (typeof canExecute === 'object') {
             if(canExecute.type1) {
-                // crea shape
-                let shape = elementFactory.createShape({ type: 'PPINOT:TimeSlot' });
-                let pos = {
-                    x: (sourcePosition.x + targetPosition.x)/2,
-                    y: (sourcePosition.y + targetPosition.y)/2,
-                }
-                let newShape = modeling.appendShape(source, shape, pos, source.parent, {
-                    connection: { type: canExecute.type1}
-                });
 
                 hints = {
                     connectionStart: pos,
