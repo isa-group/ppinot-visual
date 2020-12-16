@@ -19,6 +19,8 @@ import { directEdit, label} from "./Types";
 
 import LabelEditingProvider from "bpmn-js/lib/features/label-editing/LabelEditingProvider";
 
+
+// This module is used to define properties of label text
 export default function PPINOTLabelEditingProvider(
     eventBus, canvas, directEditing,
     modeling, resizeHandles, textRenderer) {
@@ -136,18 +138,11 @@ PPINOTLabelEditingProvider.prototype.activate = function(element) {
     // PPINOT
     if(isAny(element, label) && !text)
         text = '';
-    //END_PPINOT
 
-
-    if(is(element, 'PPINOT:MyConnection')){
-        text= 'Prueba texto conexión'
-    }
-
-    if(is(element, 'PPINOT:AggregatedMeasure')){
-        text= 'Prueba texto elemento'
-    }
-    if(is(element, 'PPINOT:ToConnection')){
-        text= 'to'
+    // Here you can define default text for your elements, so when you draw the element in the diagram
+    // default text appears in the diagram
+    if(is(element, 'PPINOT:ToConnection')){ // in this case, for ToConnection 
+        text= 'to' // appears the text "to" when you click on the connection
     }
     if(is(element, 'PPINOT:FromConnection')){
         text= 'from'
@@ -156,7 +151,13 @@ PPINOTLabelEditingProvider.prototype.activate = function(element) {
         text= 'aggregates'
     }
     if(is(element, 'PPINOT:GroupedBy')){
-        text= 'isGroupedBy         attribute'
+        text= 'isGroupedBy'
+    }
+    if(is(element, 'PPINOT:StartConnection')){
+        text= 'start'
+    }
+    if(is(element, 'PPINOT:EndConnection')){
+        text= 'end'
     }
 
     if (text === undefined) {
@@ -279,7 +280,7 @@ PPINOTLabelEditingProvider.prototype.getEditingBBox = function(element) {
 
     // internal labels for tasks and collapsed call activities,
     // sub processes and participants
-    if (isAny(element, [ 'bpmn:Task', 'bpmn:CallActivity', 'PPINOT:TimeSlot']) ||
+    if (isAny(element, [ 'bpmn:Task', 'bpmn:CallActivity']) ||
         isCollapsedPool(element) ||
         isCollapsedSubProcess(element)) {
 
