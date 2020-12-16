@@ -5,7 +5,7 @@ import PPINOTPalette from './PPINOTPalette';
 import PPINOTRenderer from './PPINOTRenderer';
 import PPINOTRules from './PPINOTRules';
 import PPINOTUpdater from './PPINOTUpdater';
-import PPINOTLabelEditingProvider from "./PPINOTLabelEdingProvider";
+import PPINOTLabelEditingProvider from "./PPINOTLabelEditingProvider";
 import PPINOTModeling from "./PPINOTModeling";
 import PPINOTConnect from "./PPINOTConnect";
 import PPINOTReplaceConnectionBehavior from "./behaviour/ReplaceConnectionBehaviour";
