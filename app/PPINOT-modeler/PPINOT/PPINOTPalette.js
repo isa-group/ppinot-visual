@@ -5,6 +5,7 @@ import {
 
 /**
  * A palette that allows you to create BPMN _and_ PPINOT elements.
+ * This module is used to select what elements you want to show in the palette
  */
 export default function PaletteProvider(
     palette, create, elementFactory,
@@ -98,6 +99,7 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
   }
 
   assign(actions, {
+    // First, bpmn utilities are created in the palette
     'hand-tool': {
       group: 'tools',
       className: 'bpmn-icon-hand-tool',
@@ -142,6 +144,8 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
       group: 'tools',
       separator: true
     },
+
+    // Second, bpmn elements are created in the palette using createAction
     'create.start-event': createAction(
         'bpmn:StartEvent', 'event', 'bpmn-icon-start-event-none',
         translate('Create StartEvent')
@@ -192,50 +196,27 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
         'bpmn:Group', 'artifact', 'bpmn-icon-group',
         translate('Create Group')
     ),
+
+    // 'PPINOT-separator' is a line to separate bpmn elements from PPINOT elements
     'PPINOT-separator': {
       group: 'PPINOT',
       separator: true
     },
+
+    // Finally, PPINOT elements are created in the palette using createAction
+    // createAction(type, group, className)
     'PPINOT-baseMeasure': createAction(
       'PPINOT:BaseMeasure', 'PPINOT', 'icon-baseMeasure'
     ), 
     'PPINOT-aggregatedMeasure': createAction(
       'PPINOT:AggregatedMeasure', 'PPINOT', 'icon-PPINOT-aggregatedMeasure'
     ),
-    // 'PPINOT-countAggregatedMeasure': createAction(
-    //   'PPINOT:CountAggregatedMeasure', 'PPINOT', 'icon-PPINOT-countAggregatedMeasure'
-    // ),
-    // 'PPINOT-countMeasure': createAction(
-    //   'PPINOT:CountMeasure', 'PPINOT', 'icon-PPINOT-countMeasure'
-    // ),
-    // 'PPINOT-dataAggregatedMeasure': createAction(
-    //   'PPINOT:DataAggregatedMeasure', 'PPINOT', 'icon-PPINOT-dataAggregatedMeasure'
-    // ),
-    // 'PPINOT-dataMeasure': createAction(
-    //   'PPINOT:DataMeasure', 'PPINOT', 'icon-PPINOT-dataMeasure'
-    // ),
-    // 'PPINOT-dataPropertyConditionAggregatedMeasure': createAction(
-    //   'PPINOT:DataPropertyConditionAggregatedMeasure', 'PPINOT', 'icon-PPINOT-dataPropertyConditionAggregatedMeasure'
-    // ),
-    // 'PPINOT-dataPropertyConditionMeasure': createAction(
-    //   'PPINOT:DataPropertyConditionMeasure', 'PPINOT', 'icon-PPINOT-dataPropertyConditionMeasure'
-    // ),
     'PPINOT-derivedSingleInstanceMeasure': createAction(
       'PPINOT:DerivedSingleInstanceMeasure', 'PPINOT', 'icon-PPINOT-derivedSingleInstanceMeasure'
     ),
     'PPINOT-derivedMultiInstanceMeasure': createAction(
       'PPINOT:DerivedMultiInstanceMeasure', 'PPINOT', 'icon-PPINOT-derivedMultiInstanceMeasure'
     ),
-    
-    // 'PPINOT-timeMeasure': createAction(
-    //   'PPINOT:TimeMeasure', 'PPINOT', 'icon-PPINOT-timeMeasure'
-    // ),
-    // 'PPINOT-stateConditionMeasure': createAction(
-    //   'PPINOT:StateConditionMeasure', 'PPINOT', 'icon-PPINOT-stateConditionMeasure'
-    // ),
-    // 'PPINOT-stateConditionAggregatedMeasure': createAction(
-    //   'PPINOT:StateConditionAggregatedMeasure', 'PPINOT', 'icon-PPINOT-stateConditionAggregatedMeasure'
-    // ),
     'PPINOT-ppi': createAction(
       'PPINOT:Ppi', 'PPINOT', 'icon-PPINOT-ppi'
     ),
@@ -245,11 +226,7 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     'PPINOT-scope': createAction(
       'PPINOT:Scope', 'PPINOT', 'icon-scope'
     ), 
-    // 'PPINOT-cyclicTimeMeasure': createAction(
-    //   'PPINOT:CyclicTimeMeasure', 'PPINOT', 'icon-PPINOT-cyclicTimeMeasure'
-    // ),
-    
-    
+  
   });
 
   return actions;

@@ -17,6 +17,7 @@ import {PPINOT, isPPINOTShape} from "./Types";
 
 /**
  * A PPINOT factory that knows how to create BPMN _and_ PPINOT elements.
+ * You can define the properties of your custom elements 
  */
 export default function PPINOTElementFactory(bpmnFactory, moddle, translate) {
   BpmnElementFactory.call(this, bpmnFactory, moddle, translate);
@@ -151,18 +152,11 @@ PPINOTElementFactory.prototype.createPPINOTElement = function(elementType, attrs
   return this.baseCreate(elementType, attrs);
 };
 
+// Here, you can define the dimensions of you custom elements
+// If you don not define some dimensions, the default values are width: 100, height: 80
 PPINOTElementFactory.prototype._getPPINOTElementSize = function(type) {
   var shapes = {
     __default: { width: 100, height: 80 },
-    'PPINOT:Clock': { width: 50, height: 50 },
-    'PPINOT:TimeSlot': { width: 100, height: 30 },
-    'PPINOT:Resource': { width: 50, height: 75 },
-    'PPINOT:ResourceAbsence': { width: 50, height: 75 },
-    'PPINOT:Role': { width: 50, height: 75 },
-    'PPINOT:RoleAbsence': { width: 50, height: 75 },
-    'PPINOT:Group': { width: 60, height: 80 },
-    'PPINOT:GroupAbsence': { width: 60, height: 80 },
-    'PPINOT:Avion':{width: 50, height: 50},
     'PPINOT:AggregatedMeasure':{width: 120, height: 100},
     'PPINOT:CountAggregatedMeasure':{width: 140, height: 130},
     'PPINOT:TimeAggregatedMeasure':{width: 130, height: 125},
