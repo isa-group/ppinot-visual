@@ -111,12 +111,12 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
             'connect1': appendConnectAction(
                 'PPINOT:AggregatedConnection', // Connection type that you want to append to element
                 'icon-aggregates', // Icon displayed on element as button
-                'Aggregated connection' // Description that appears if you put the mouse over the button
+                'Connect using aggregates connection' // Description that appears if you put the mouse over the button
             ),
             'connect2': appendConnectAction( // Append second connection to element
                 'PPINOT:IsGroupedBy',
                 'icon-isGroupedBy',
-                'GroupedBy connection'
+                'Connect using isGroupedBy connection'
             ),
         });
     }
@@ -131,30 +131,11 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
             'connect3': appendConnectAction(
                 'PPINOT:DashedLine',
                 'icon-dashed-line',
-                'State connection'
+                'Connect using State connection'
             ),        
         });
     }
     
-    if(is(businessObject, 'bpmn:BaseElement') && element.type !== 'label') {
-        assign(actions, {
-            'connect4': appendConnectAction(
-                'PPINOT:ConsequenceFlow',
-                'bpmn-icon-connection-multi',
-                'Connect using PPINOT connection'
-            ),
-            'connect5': appendConnectAction(
-                'PPINOT:ConsequenceTimedFlow',
-                'bpmn-icon-connection-multi',
-                'Connection'
-            ),
-            'connect6': appendConnectAction(
-                'PPINOT:TimeDistance',
-                'bpmn-icon-connection-multi',
-                'Connect using PPINOT connection'
-            ),
-        });
-    }
 
     if(is(businessObject, 'PPINOT:TimeMeasure') 
     || is(businessObject, 'PPINOT:CyclicTimeMeasure')
@@ -173,7 +154,7 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
             'connect9': appendConnectAction(
                 'PPINOT:MyConnection',
                 'bpmn-icon-connection',
-                'PPINOT connection'
+                'Connection between PPINOT elements'
             ),
         });
     }
@@ -195,8 +176,7 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
         });
     }
 
-    if(is(businessObject, 'bpmn:DataObjectReference') 
-    && element.type !== 'label') {
+    if(is(businessObject, 'bpmn:DataObjectReference') && element.type !== 'label') {
         assign(actions, {
             'connect12': appendConnectAction(
                 'PPINOT:RFCStateConnection',
@@ -211,7 +191,7 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
             'connect13': appendConnectAction(
                 'PPINOT:MyConnection',
                 'bpmn-icon-connection',
-                'PPINOT connection'
+                'Connection between PPINOT elements'
             ),
         });
     }
