@@ -100,6 +100,7 @@ if (is(businessObject, 'PPINOT:BaseMeasure')
 if (is(businessObject, 'PPINOT:CountAggregatedMeasure') 
 || is(businessObject, 'PPINOT:AggregatedMeasure') 
 || is(businessObject, 'PPINOT:TimeAggregatedMeasure') 
+|| is(businessObject, 'PPINOT:CyclicTimeAggregatedMeasure')
 //|| is(businessObject, 'PPINOT:DataPropertyConditionAggregatedMeasure') 
 //|| is(businessObject, 'PPINOT:StateConditionAggregatedMeasure') 
 || is(businessObject, 'PPINOT:DataAggregatedMeasure')) {
