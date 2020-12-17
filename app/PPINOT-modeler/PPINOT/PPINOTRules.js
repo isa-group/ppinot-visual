@@ -10,7 +10,7 @@ import {
 
 import RuleProvider from 'diagram-js/lib/features/rules/RuleProvider';
 import {isAny} from "bpmn-js/lib/features/modeling/util/ModelingUtil";
-import {isPPINOTResourceArcElement, isPPINOTShape, isPPINOTMyConnectionElement, isPPINOTAggregatedElement, isPPINOTConnection} from "./Types";
+import {isPPINOTResourceArcElement, isPPINOTShape, isPPINOTAggregatedElement, isPPINOTConnection} from "./Types";
 import {isLabel} from "bpmn-js/lib/util/LabelUtil";
 
 var HIGH_PRIORITY = 1500;
@@ -40,38 +40,7 @@ PPINOTRules.$inject = [ 'eventBus' ];
 function canConnect(source, target, connection) {
 
   // only judge about PPINOT elements
-  if (!isPPINOT(source) && !isPPINOT(target)) {
-    if(connection === 'PPINOT:ConsequenceFlow') {
-      if(isDefaultValid(source) && isDefaultValid(target))
-        return { type: connection }
-      else
-        return false
-    }
-    else
-      return; // utilizza canConnect standard
-  }
-  else if(is(source, 'PPINOT:TimeSlot')) {
-    if(isDefaultValid(target)) {
-      if(connection === 'PPINOT:ConsequenceFlow' || connection === 'PPINOT:TimeDistandEndArc')
-        return { type: connection }
-      else
-        return false
-    }
-    else
-      return false
-  }
-  else if(is(target, 'PPINOT:TimeSlot')) {
-    if(isDefaultValid(source)) {
-      if(connection === 'PPINOT:TimeDistandStartArc')
-        return { type: connection }
-      else
-        return { type: 'PPINOT:ResourceArc' }
-    }
-    else
-      return false
-  }
-
-  else if(is(source, 'PPINOT:TimeMeasure') || is(source, 'PPINOT:CyclicTimeMeasure')) {
+  if(is(source, 'PPINOT:TimeMeasure') || is(source, 'PPINOT:CyclicTimeMeasure')) {
     if(isDefaultValid(target) || is(target, 'bpmn:Participant')) {
       if(connection === 'PPINOT:ToConnection' || connection === 'PPINOT:FromConnection')
         return { type: connection }
@@ -99,7 +68,7 @@ function canConnect(source, target, connection) {
   else if((isPPINOTShape(source) && (isPPINOTShape(target) )))
     return { type: 'PPINOT:MyConnection'
   }
-  else if((is(source, 'bpmn:DataObjectReference') && (isPPINOTConnection(target) )))
+  else if((is(source, 'bpmn:DataReferenceObject') && (isPPINOTShape(target) )))
     return { type: 'PPINOT:RFCStateConnection'
   }
   else if(is(source, 'PPINOT:StateConditionMeasure') 
@@ -131,6 +100,10 @@ function canConnect2(source, target, connection) {
   }
   
   if(connection === 'PPINOT:MyConnection'){
+    return {type: connection}
+  }
+
+  if(connection === 'PPINOT:RFCStateConnection'){
     return {type: connection}
   }
 
@@ -180,12 +153,12 @@ function canConnect2(source, target, connection) {
     else
       return false
   }
-  else if(connection === 'PPINOT:RFCStateConnection') {
-    if(is(source, 'bpmn:DataObjectReference')  && isPPINOTConnection(target) )
-      return { type: connection }
-    else
-      return false
-  }
+  // else if(connection === 'PPINOT:RFCStateConnection') {
+  //   if(is(source, 'PPINOT:BaseMeasure')  && isPPINOTConnection(target) )
+  //     return { type: connection }
+  //   else
+  //     return false
+  // }
   else {
     if (!isPPINOT(source) && !isPPINOT(target))
       return;
@@ -241,9 +214,6 @@ PPINOTRules.prototype.init = function() {
       else if(type === 'PPINOT:TimeDistance')
         return {type1: 'PPINOT:TimeDistanceArcStart', type2:'PPINOT:TimeDistanceArcEnd'}
     }
-    // }else if(is(source, 'bpmn:Task') && isDefaultValid(target)){
-    //   return {type1: 'PPINOT:ConsequenceTimedFlow', type2:'PPINOT:RFCStateReference'}
-    // }
   }
 
 
