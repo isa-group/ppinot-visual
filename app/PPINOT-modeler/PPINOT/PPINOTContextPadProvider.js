@@ -14,7 +14,7 @@ import {
 } from 'min-dash';
 import {isLabel} from "./utils/LabelUtil";
 
-import {resourceArcElements, myConnectionElements, aggreagatedElements, isPPINOTConnection} from "./Types";
+import {resourceArcElements, myConnectionElements, aggreagatedElements, baseMeasureElements} from "./Types";
 import { remove, replace } from 'tiny-svg';
 import {
     isDifferentType
@@ -204,6 +204,23 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
                 action: {
                     click: function(event, element){
                         let newElementData = elementFactory.createShape({ type: 'PPINOT:DerivedMultiInstanceMeasure'});
+                        newElementData.x = element.x + (newElementData.width || element.width) / 2;
+                        newElementData.y = element.y + (newElementData.height || element.height) / 2;
+                        modeling.replaceShape(element, newElementData);
+                    }
+                }
+            }   
+        })
+    } 
+
+    if(isAny(businessObject, baseMeasureElements)) {
+        assign(actions, {
+            'replaceDerivedSingle': {
+                className: 'icon-derivedSingle-menu',
+                title: translate('Replace with Derived Multi Instance Measure'),
+                action: {
+                    click: function(event, element){
+                        let newElementData = elementFactory.createShape({ type: 'PPINOT:DerivedSingleInstanceMeasure'});
                         newElementData.x = element.x + (newElementData.width || element.width) / 2;
                         newElementData.y = element.y + (newElementData.height || element.height) / 2;
                         modeling.replaceShape(element, newElementData);

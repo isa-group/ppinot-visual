@@ -188,6 +188,15 @@ export const aggreagatedElements = [
     
 ]
 
+export const baseMeasureElements = [
+    'PPINOT:BaseMeasure',
+    'PPINOT:TimeMeasure',
+    'PPINOT:CyclicTimeMeasure',
+    'PPINOT:CountMeasure',
+    'PPINOT:DataMeasure',
+    'PPINOT:StateConditionMeasure'    
+]
+
 export const timeMeasuresElements = [
     //'PPINOT:TimeMeasure'  //no esta implementada
 ]
@@ -322,6 +331,13 @@ export function isPPINOTAggregatedElement(type) {
         type = type.type
     }
     return aggreagatedElements.includes(type)
+}
+
+export function isPPINOTBaseMeasureElement(type) {
+    if (typeof type === 'object') {
+        type = type.type
+    }
+    return baseMeasureElements.includes(type)
 }
 
 export function isPPINOTTimeMeasureElement(type) {
