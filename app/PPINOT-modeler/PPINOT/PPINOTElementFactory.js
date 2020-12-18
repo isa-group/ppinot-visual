@@ -166,7 +166,7 @@ PPINOTElementFactory.prototype._getPPINOTElementSize = function(type) {
     'PPINOT:DataMeasure':{width: 120, height: 120}, 
     'PPINOT:DataPropertyConditionAggregatedMeasure':{width: 130, height: 140},
     'PPINOT:DataPropertyConditionMeasure':{width: 130, height: 130},
-    'PPINOT:DerivedMultiInstanceMeasure':{width: 140, height: 110},
+    'PPINOT:DerivedMultiInstanceMeasure':{width: 120, height: 100},
     'PPINOT:DerivedSingleInstanceMeasure':{width: 130, height: 120},
     'PPINOT:TimeMeasure':{width: 120, height: 110},
     'PPINOT:CyclicTimeMeasure':{width: 120, height: 110},
