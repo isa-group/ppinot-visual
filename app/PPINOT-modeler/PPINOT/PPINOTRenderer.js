@@ -76,14 +76,15 @@ export default function PPINOTRenderer(eventBus, styles, canvas, textRenderer) {
   }
 
   // This function uses renderLabel function to render a default label INTO an element.
-  function renderEmbeddedDefaultLabel(parentGfx, element, align, label) {
+  function renderEmbeddedDefaultLabel(parentGfx, element, align, label, size, weight) {
     return renderLabel(parentGfx, label, {
       box: element,
       align: align,
       padding: 5,
       style: {
         fill: element.color,
-        fontSize:  30 + 'px',
+        fontSize:  size + 'px',
+        fontWeight: weight
       }
     });
   }
@@ -598,6 +599,26 @@ export default function PPINOTRenderer(eventBus, styles, canvas, textRenderer) {
       renderEmbeddedLabel(p, element, 'center-middle');
       return cyclicTimeAggregatedMeasure;
     },
+    'PPINOT:CyclicTimeMeasureSUM': (p, element) => {
+      var sum = renderer('PPINOT:CyclicTimeMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'top', '\xa0\xa0\xa0\xa0\xa0'+'SUM', 15, 'bold');
+      return sum;
+    },
+    'PPINOT:CyclicTimeMeasureAVG': (p, element) => {
+      var avg = renderer('PPINOT:CyclicTimeMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'top', '\xa0\xa0\xa0\xa0\xa0'+'AVG', 15, 'bold');
+      return avg;
+    },
+    'PPINOT:CyclicTimeMeasureMIN': (p, element) => {
+      var min = renderer('PPINOT:CyclicTimeMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'top', '\xa0\xa0\xa0\xa0\xa0'+'MIN', 15, 'bold');
+      return min;
+    },
+    'PPINOT:CyclicTimeMeasureMAX': (p, element) => {
+      var max = renderer('PPINOT:CyclicTimeMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'top', '\xa0\xa0\xa0\xa0\xa0'+'MAX', 15, 'bold');
+      return max;
+    },
     'PPINOT:CountAggregatedMeasure': (p, element) => {
       let countAggregatedMeasure = drawCountAggregatedMeasure(element)
       svgAppend(p, countAggregatedMeasure);
@@ -666,27 +687,27 @@ export default function PPINOTRenderer(eventBus, styles, canvas, textRenderer) {
     },
     'PPINOT:StateCondAggMeasureNumber': (p, element) => {
       var number = renderer('PPINOT:StateConditionAggregatedMeasure')(p, element); 
-      renderEmbeddedDefaultLabel(p, element, 'center-middle', '#');
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', '#', 30);
       return number; 
     },
     'PPINOT:StateCondAggMeasurePercentage': (p, element) => {
       var percentage = renderer('PPINOT:StateConditionAggregatedMeasure')(p, element); 
-      renderEmbeddedDefaultLabel(p, element, 'center-middle', '%');
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', '%', 30);
       return percentage; 
     },
     'PPINOT:StateCondAggMeasureAll': (p, element) => {
       var all = renderer('PPINOT:StateConditionAggregatedMeasure')(p, element); 
-      renderEmbeddedDefaultLabel(p, element, 'center-middle', '∀'); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', '∀', 30); 
       return all; 
     },
     'PPINOT:StateCondAggMeasureAtLeastOne': (p, element) => {
       var one = renderer('PPINOT:StateConditionAggregatedMeasure')(p, element); 
-      renderEmbeddedDefaultLabel(p, element, 'center-middle', '∃');    
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', '∃', 30);    
       return one; 
     },
     'PPINOT:StateCondAggMeasureNo': (p, element) => {
       var no = renderer('PPINOT:StateConditionAggregatedMeasure')(p, element); 
-      renderEmbeddedDefaultLabel(p, element, 'center-middle', '∄');    
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', '∄', 30);    
       return no; 
     },
     'PPINOT:Ppi': (p, element) => {
