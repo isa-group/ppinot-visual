@@ -211,9 +211,6 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     'PPINOT-aggregatedMeasure': createAction(
       'PPINOT:AggregatedMeasure', 'PPINOT', 'icon-PPINOT-aggregatedMeasure'
     ),
-    'PPINOT-derivedSingleInstanceMeasure': createAction(
-      'PPINOT:DerivedSingleInstanceMeasure', 'PPINOT', 'icon-PPINOT-derivedSingleInstanceMeasure'
-    ),
     'PPINOT-ppi': createAction(
       'PPINOT:Ppi', 'PPINOT', 'icon-PPINOT-ppi'
     ),
