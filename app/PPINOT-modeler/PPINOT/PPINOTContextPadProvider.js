@@ -196,6 +196,23 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
         });
     }
 
+    if(isAny(businessObject, aggreagatedElements)) {
+        assign(actions, {
+            'replaceDerivedMulti': {
+                className: 'icon-derivedMulti-menu',
+                title: translate('Replace with Derived Multi Instance Measure'),
+                action: {
+                    click: function(event, element){
+                        let newElementData = elementFactory.createShape({ type: 'PPINOT:DerivedMultiInstanceMeasure'});
+                        newElementData.x = element.x + (newElementData.width || element.width) / 2;
+                        newElementData.y = element.y + (newElementData.height || element.height) / 2;
+                        modeling.replaceShape(element, newElementData);
+                    }
+                }
+            }   
+        })
+    } 
+
     return actions;
   };
 }
