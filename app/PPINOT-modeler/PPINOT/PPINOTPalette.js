@@ -214,9 +214,6 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     'PPINOT-derivedSingleInstanceMeasure': createAction(
       'PPINOT:DerivedSingleInstanceMeasure', 'PPINOT', 'icon-PPINOT-derivedSingleInstanceMeasure'
     ),
-    'PPINOT-derivedMultiInstanceMeasure': createAction(
-      'PPINOT:DerivedMultiInstanceMeasure', 'PPINOT', 'icon-PPINOT-derivedMultiInstanceMeasure'
-    ),
     'PPINOT-ppi': createAction(
       'PPINOT:Ppi', 'PPINOT', 'icon-PPINOT-ppi'
     ),
