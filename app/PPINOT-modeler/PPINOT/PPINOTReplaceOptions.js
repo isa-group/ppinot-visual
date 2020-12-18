@@ -127,6 +127,48 @@ export var STATE = [
   }
 ];
 
+export var CYCLIC_FUNCTION = [
+  {
+    label: 'Base measure',
+    actionName: 'replace-with-base-measure',
+    target: {
+      type: 'PPINOT:BaseMeasure'
+    }
+  },
+  {
+    label: 'SUM',
+    actionName: 'replace-with-sum',
+    //className: 'icon-state-number-menu',
+    target: {
+      type: 'PPINOT:CyclicTimeMeasureSUM'
+    }
+  },
+  {
+    label: 'MIN',
+    actionName: 'replace-with-min',
+    //className: 'icon-state-percentage-menu',
+    target: {
+      type: 'PPINOT:CyclicTimeMeasureMIN',
+    }
+  }, 
+  {
+    label: 'MAX',
+    actionName: 'replace-with-max',
+    //className: 'icon-state-all-menu',
+    target: {
+      type: 'PPINOT:CyclicTimeMeasureMAX',
+    }
+  },
+  {
+    label: 'AVG',
+    actionName: 'replace-with-avg',
+    //className: 'icon-state-atLeast-menu',
+    target: {
+      type: 'PPINOT:CyclicTimeMeasureAVG',
+    }
+  },
+];
+
 export var START_EVENT = [
   
   {

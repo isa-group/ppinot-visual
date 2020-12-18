@@ -89,7 +89,7 @@ var differentType = isDifferentType(element);
 if (is(businessObject, 'PPINOT:BaseMeasure') 
 || is(businessObject, 'PPINOT:CountMeasure') 
 || is(businessObject, 'PPINOT:TimeMeasure') 
-|| is(businessObject, 'PPINOT:CyclicTimeMeasure') 
+//|| is(businessObject, 'PPINOT:CyclicTimeMeasure') 
 || is(businessObject, 'PPINOT:StateConditionMeasure')
 //|| is(businessObject, 'PPINOT:DataPropertyConditionMeasure')
 || is(businessObject, 'PPINOT:DataMeasure')) {
@@ -115,6 +115,15 @@ if (is(businessObject, 'PPINOT:StateConditionAggregatedMeasure')
 || is(businessObject, 'PPINOT:StateCondAggMeasureAll') 
 || is(businessObject, 'PPINOT:StateCondAggMeasureNo')) {
   entries = filter(replaceOptions.STATE, differentType);
+  return this._createEntries(element, entries);
+}
+
+if (is(businessObject, 'PPINOT:CyclicTimeMeasure')
+||  is(businessObject, 'PPINOT:CyclicTimeMeasureSUM') 
+||  is(businessObject, 'PPINOT:CyclicTimeMeasureMIN')
+||  is(businessObject, 'PPINOT:CyclicTimeMeasureMAX')
+||  is(businessObject, 'PPINOT:CyclicTimeMeasureAVG')) {
+  entries = filter(replaceOptions.CYCLIC_FUNCTION, differentType);
   return this._createEntries(element, entries);
 }
 //-------------------------------------------------------------------------
