@@ -89,7 +89,11 @@ var differentType = isDifferentType(element);
 if (is(businessObject, 'PPINOT:BaseMeasure') 
 || is(businessObject, 'PPINOT:CountMeasure') 
 || is(businessObject, 'PPINOT:TimeMeasure') 
-//|| is(businessObject, 'PPINOT:CyclicTimeMeasure') 
+|| is(businessObject, 'PPINOT:CyclicTimeMeasure') 
+||  is(businessObject, 'PPINOT:CyclicTimeMeasureSUM') 
+||  is(businessObject, 'PPINOT:CyclicTimeMeasureMIN')
+||  is(businessObject, 'PPINOT:CyclicTimeMeasureMAX')
+||  is(businessObject, 'PPINOT:CyclicTimeMeasureAVG')
 || is(businessObject, 'PPINOT:StateConditionMeasure')
 //|| is(businessObject, 'PPINOT:DataPropertyConditionMeasure')
 || is(businessObject, 'PPINOT:DataMeasure')) {
@@ -109,6 +113,10 @@ if (is(businessObject, 'PPINOT:CountAggregatedMeasure')
 || is(element, 'PPINOT:TimeAggregatedMeasureMAX')
 || is(element, 'PPINOT:TimeAggregatedMeasureAVG')
 || is(businessObject, 'PPINOT:CyclicTimeAggregatedMeasure')
+|| is(businessObject, 'PPINOT:CyclicTimeAggregatedMeasureSUM')
+|| is(businessObject, 'PPINOT:CyclicTimeAggregatedMeasureMAX')
+|| is(businessObject, 'PPINOT:CyclicTimeAggregatedMeasureMIN')
+|| is(businessObject, 'PPINOT:CyclicTimeAggregatedMeasureAVG')
 //|| is(businessObject, 'PPINOT:DataPropertyConditionAggregatedMeasure') 
 //|| is(businessObject, 'PPINOT:StateConditionAggregatedMeasure') 
 || is(businessObject, 'PPINOT:DataAggregatedMeasure')
@@ -127,15 +135,6 @@ if (is(businessObject, 'PPINOT:StateConditionAggregatedMeasure')
 || is(businessObject, 'PPINOT:StateCondAggMeasureAll') 
 || is(businessObject, 'PPINOT:StateCondAggMeasureNo')) {
   entries = filter(replaceOptions.STATE, differentType);
-  return this._createEntries(element, entries);
-}
-
-if (is(businessObject, 'PPINOT:CyclicTimeMeasure')
-||  is(businessObject, 'PPINOT:CyclicTimeMeasureSUM') 
-||  is(businessObject, 'PPINOT:CyclicTimeMeasureMIN')
-||  is(businessObject, 'PPINOT:CyclicTimeMeasureMAX')
-||  is(businessObject, 'PPINOT:CyclicTimeMeasureAVG')) {
-  entries = filter(replaceOptions.CYCLIC_FUNCTION, differentType);
   return this._createEntries(element, entries);
 }
 
@@ -310,14 +309,11 @@ ReplaceMenuProvider.prototype.getHeaderEntries = function(element) {
 
 var headerEntries = [];
 
-//ESTO ES PARA LAS 3 OPCIONES QUE SALEN ARRIBA EN EL MENÚ---------
+//ESTO ES PARA LAS 3 OPCIONES QUE SALEN ARRIBA EN EL MENÚ-----------------------------------
 if (is(element, 'PPINOT:TimeMeasure')) {
-  headerEntries = headerEntries.concat(this._getCyclicTime(element));
+  headerEntries = headerEntries.concat(this._getCyclicTimeMeasure(element));
 }
 
-// if (is(element, 'PPINOT:TimeAggregatedMeasure')) {
-//   headerEntries = headerEntries.concat(this._getCyclicTimeAggregated(element));
-// }
 
 if (is(element, 'PPINOT:TimeAggregatedMeasure')
 || is(element, 'PPINOT:TimeAggregatedMeasureSUM')
@@ -341,6 +337,22 @@ if (is(element, 'PPINOT:DataAggregatedMeasure')
 || is(element, 'PPINOT:DataAggregatedMeasureMAX')
 || is(element, 'PPINOT:DataAggregatedMeasureAVG')){
   headerEntries = headerEntries.concat(this._getFunctionsDataAgg(element));
+}
+
+if (is(element, 'PPINOT:CyclicTimeMeasure')
+|| is(element, 'PPINOT:CyclicTimeMeasureSUM')
+|| is(element, 'PPINOT:CyclicTimeMeasureMIN')
+|| is(element, 'PPINOT:CyclicTimeMeasureMAX')
+|| is(element, 'PPINOT:CyclicTimeMeasureAVG')){
+  headerEntries = headerEntries.concat(this._getFunctionsCyclicTimeMeasure(element));
+}
+
+if (is(element, 'PPINOT:CyclicTimeAggregatedMeasure')
+|| is(element, 'PPINOT:CyclicTimeAggregatedMeasureSUM')
+|| is(element, 'PPINOT:CyclicTimeAggregatedMeasureMIN')
+|| is(element, 'PPINOT:CyclicTimeAggregatedMeasureMAX')
+|| is(element, 'PPINOT:CyclicTimeAggregatedMeasureAVG')){
+  headerEntries = headerEntries.concat(this._getFunctionsCyclicTimeAggregatedMeasure(element));
 }
 //----------------------------------------------------------------
 
@@ -592,7 +604,7 @@ return loopEntries;
 };
 
 
-ReplaceMenuProvider.prototype._getCyclicTime = function(element) {
+ReplaceMenuProvider.prototype._getCyclicTimeMeasure = function(element) {
 
 var translate = this._translate;
 var replace = this._replace;
@@ -615,6 +627,9 @@ ReplaceMenuProvider.prototype._getFunctionsTimeAgg = function(element) {
 
   var translate = this._translate;
   var replace = this._replace;
+  var replaceActionCyclic = function() {
+    return replace.replaceElement(element, { type: 'PPINOT:CyclicTimeAggregatedMeasure' });
+  };
   var replaceActionSUM = function() {
     return replace.replaceElement(element, { type: 'PPINOT:TimeAggregatedMeasureSUM' });
   };
@@ -629,6 +644,12 @@ ReplaceMenuProvider.prototype._getFunctionsTimeAgg = function(element) {
   };
   
   var timeEntry = [
+    {
+      id: 'replace-with-cyclic-time-agg',
+      className: 'icon-cyclic-time-menu',
+      label: translate('\xa0\xa0\xa0\xa0\xa0' + 'Cyclic'),
+      action: replaceActionCyclic
+    },
     {
       id: 'replace-with-time-agg-sum',
       label: translate('SUM'),
@@ -653,6 +674,51 @@ ReplaceMenuProvider.prototype._getFunctionsTimeAgg = function(element) {
   
   return timeEntry;
   };
+
+
+  ReplaceMenuProvider.prototype._getFunctionsCyclicTimeMeasure = function(element) {
+
+    var translate = this._translate;
+    var replace = this._replace;
+    var replaceActionSUM = function() {
+      return replace.replaceElement(element, { type: 'PPINOT:CyclicTimeMeasureSUM' });
+    };
+    var replaceActionMAX = function() {
+      return replace.replaceElement(element, { type: 'PPINOT:CyclicTimeMeasureMAX' });
+    };
+    var replaceActionMIN = function() {
+      return replace.replaceElement(element, { type: 'PPINOT:CyclicTimeMeasureMIN' });
+    };
+    var replaceActionAVG = function() {
+      return replace.replaceElement(element, { type: 'PPINOT:CyclicTimeMeasureAVG' });
+    };
+    
+    var timeEntry = [
+      {
+        id: 'replace-with-time-sum',
+        label: translate('SUM'),
+        action: replaceActionSUM
+      },
+      {
+        id: 'replace-with-time-max',
+        label: translate('MAX'),
+        action: replaceActionMAX
+      },
+      {
+        id: 'replace-with-time-min',
+        label: translate('MIN'),
+        action: replaceActionMIN
+      },
+      {
+        id: 'replace-with-time-avg',
+        label: translate('AVG'),
+        action: replaceActionAVG
+      }
+    ];
+    
+    return timeEntry;
+  };
+  
 
   ReplaceMenuProvider.prototype._getFunctionsCountAgg = function(element) {
 
@@ -741,29 +807,71 @@ ReplaceMenuProvider.prototype._getFunctionsDataAgg = function(element) {
   };
 
 
-ReplaceMenuProvider.prototype._getCyclicTimeAggregated = function(element) {
+// ReplaceMenuProvider.prototype._getCyclicTimeAggregated = function(element) {
 
-  var translate = this._translate;
-  var replace = this._replace;
-  var replaceAction = function() {
-    return replace.replaceElement(element, { type: 'PPINOT:CyclicTimeAggregatedMeasure' });
-  };
+//   var translate = this._translate;
+//   var replace = this._replace;
+//   var replaceAction = function() {
+//     return replace.replaceElement(element, { type: 'PPINOT:CyclicTimeAggregatedMeasure' });
+//   };
 
-  var timeEntry = {
-    id: 'replace-with-cyclic-time-aggregated-measure',
-    className: 'icon-cyclic-time-menu',
-    label: translate('\xa0\xa0\xa0\xa0\xa0\xa0\xa0' + 'Cyclic'),
-    action: replaceAction
-  };
+//   var timeEntry = {
+//     id: 'replace-with-cyclic-time-aggregated-measure',
+//     className: 'icon-cyclic-time-menu',
+//     label: translate('\xa0\xa0\xa0\xa0\xa0\xa0\xa0' + 'Cyclic'),
+//     action: replaceAction
+//   };
   
-  return timeEntry;
+//   return timeEntry;
+//   };
+
+
+  ReplaceMenuProvider.prototype._getFunctionsCyclicTimeAggregatedMeasure = function(element) {
+
+    var translate = this._translate;
+    var replace = this._replace;
+    var replaceActionSUM = function() {
+      return replace.replaceElement(element, { type: 'PPINOT:CyclicTimeAggregatedMeasureSUM' });
+    };
+    var replaceActionMAX = function() {
+      return replace.replaceElement(element, { type: 'PPINOT:CyclicTimeAggregatedMeasureMAX' });
+    };
+    var replaceActionMIN = function() {
+      return replace.replaceElement(element, { type: 'PPINOT:CyclicTimeAggregatedMeasureMIN' });
+    };
+    var replaceActionAVG = function() {
+      return replace.replaceElement(element, { type: 'PPINOT:CyclicTimeAggregatedMeasureAVG' });
+    };
+    
+    var timeEntry = [
+      {
+        id: 'replace-with-cyclic-time-agg-sum',
+        label: translate('SUM'),
+        action: replaceActionSUM
+      },
+      {
+        id: 'replace-with-cyclic-time-agg-max',
+        label: translate('MAX'),
+        action: replaceActionMAX
+      },
+      {
+        id: 'replace-with-cyclic-time-agg-min',
+        label: translate('MIN'),
+        action: replaceActionMIN
+      },
+      {
+        id: 'replace-with-cyclic-time-agg-avg',
+        label: translate('AVG'),
+        action: replaceActionAVG
+      }
+    ];
+    
+    return timeEntry;
   };
-
-
 
 
 /**
-* Get the menu items containing a button for the ad hoc marker
+* Get the menu items containing a button for the ad hoc marker 
 *
 * @param  {djs.model.Base} element
 *

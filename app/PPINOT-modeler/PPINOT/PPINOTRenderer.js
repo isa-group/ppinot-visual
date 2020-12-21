@@ -619,6 +619,26 @@ export default function PPINOTRenderer(eventBus, styles, canvas, textRenderer) {
       renderEmbeddedLabel(p, element, 'center-middle');
       return cyclicTimeAggregatedMeasure;
     },
+    'PPINOT:CyclicTimeAggregatedMeasureSUM': (p, element) => {
+      var sum = renderer('PPINOT:CyclicTimeAggregatedMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', 'SUM', 15, 'bold');
+      return sum;
+    },
+    'PPINOT:CyclicTimeAggregatedMeasureMAX': (p, element) => {
+      var max = renderer('PPINOT:CyclicTimeAggregatedMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', 'MAX', 15, 'bold');
+      return max;
+    },
+    'PPINOT:CyclicTimeAggregatedMeasureMIN': (p, element) => {
+      var min = renderer('PPINOT:CyclicTimeAggregatedMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', 'MIN', 15, 'bold');
+      return min;
+    },
+    'PPINOT:CyclicTimeAggregatedMeasureAVG': (p, element) => {
+      var avg = renderer('PPINOT:CyclicTimeAggregatedMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', 'AVG', 15, 'bold');
+      return avg;
+    },
     'PPINOT:CyclicTimeMeasureSUM': (p, element) => {
       var sum = renderer('PPINOT:CyclicTimeMeasure')(p, element); 
       renderEmbeddedDefaultLabel(p, element, 'top', '\xa0\xa0\xa0\xa0\xa0'+'SUM', 15, 'bold');
