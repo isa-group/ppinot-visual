@@ -40,8 +40,27 @@ export const label = [
     'PPINOT:StateCondAggMeasurePercentage',
     'PPINOT:StateCondAggMeasureAll',
     'PPINOT:StateCondAggMeasureAtLeastOne',
-    'PPINOT:StateCondAggMeasureNo'
-    
+    'PPINOT:StateCondAggMeasureNo',
+    'PPINOT:CyclicTimeAggregatedMeasureMAX',
+    'PPINOT:CyclicTimeAggregatedMeasureSUM',
+    'PPINOT:CyclicTimeAggregatedMeasureMIN',
+    'PPINOT:CyclicTimeAggregatedMeasureAVG',
+    'PPINOT:CyclicTimeMeasureSUM',
+    'PPINOT:CyclicTimeMeasureMAX',
+    'PPINOT:CyclicTimeMeasureMIN',
+    'PPINOT:CyclicTimeMeasureAVG',
+    'PPINOT:TimeAggregatedMeasureSUM',
+    'PPINOT:TimeAggregatedMeasureMAX',
+    'PPINOT:TimeAggregatedMeasureMIN',
+    'PPINOT:TimeAggregatedMeasureAVG',
+    'PPINOT:CountAggregatedMeasureSUM',
+    'PPINOT:CountAggregatedMeasureMAX',
+    'PPINOT:CountAggregatedMeasureMIN',
+    'PPINOT:CountAggregatedMeasureAVG',
+    'PPINOT:DataAggregatedMeasureSUM',
+    'PPINOT:DataAggregatedMeasureMAX',
+    'PPINOT:DataAggregatedMeasureMIN',
+    'PPINOT:DataAggregatedMeasureAVG'
 ]
 
 export const externalLabel = [
@@ -80,9 +99,27 @@ export const externalLabel = [
     'PPINOT:StateCondAggMeasurePercentage',
     'PPINOT:StateCondAggMeasureAll',
     'PPINOT:StateCondAggMeasureAtLeastOne',
-    'PPINOT:StateCondAggMeasureNo'
-    
-
+    'PPINOT:StateCondAggMeasureNo',
+    'PPINOT:CyclicTimeAggregatedMeasureMAX',
+    'PPINOT:CyclicTimeAggregatedMeasureSUM',
+    'PPINOT:CyclicTimeAggregatedMeasureMIN',
+    'PPINOT:CyclicTimeAggregatedMeasureAVG',
+    'PPINOT:CyclicTimeMeasureSUM',
+    'PPINOT:CyclicTimeMeasureMAX',
+    'PPINOT:CyclicTimeMeasureMIN',
+    'PPINOT:CyclicTimeMeasureAVG',
+    'PPINOT:TimeAggregatedMeasureSUM',
+    'PPINOT:TimeAggregatedMeasureMAX',
+    'PPINOT:TimeAggregatedMeasureMIN',
+    'PPINOT:TimeAggregatedMeasureAVG',
+    'PPINOT:CountAggregatedMeasureSUM',
+    'PPINOT:CountAggregatedMeasureMAX',
+    'PPINOT:CountAggregatedMeasureMIN',
+    'PPINOT:CountAggregatedMeasureAVG',
+    'PPINOT:DataAggregatedMeasureSUM',
+    'PPINOT:DataAggregatedMeasureMAX',
+    'PPINOT:DataAggregatedMeasureMIN',
+    'PPINOT:DataAggregatedMeasureAVG'
 ]
 
 export const connections = [
@@ -140,7 +177,27 @@ export const directEdit = [
     'PPINOT:StateCondAggMeasurePercentage',
     'PPINOT:StateCondAggMeasureAll',
     'PPINOT:StateCondAggMeasureAtLeastOne',
-    'PPINOT:StateCondAggMeasureNo'
+    'PPINOT:StateCondAggMeasureNo',
+    'PPINOT:CyclicTimeAggregatedMeasureMAX',
+    'PPINOT:CyclicTimeAggregatedMeasureSUM',
+    'PPINOT:CyclicTimeAggregatedMeasureMIN',
+    'PPINOT:CyclicTimeAggregatedMeasureAVG',
+    'PPINOT:CyclicTimeMeasureSUM',
+    'PPINOT:CyclicTimeMeasureMAX',
+    'PPINOT:CyclicTimeMeasureMIN',
+    'PPINOT:CyclicTimeMeasureAVG',
+    'PPINOT:TimeAggregatedMeasureSUM',
+    'PPINOT:TimeAggregatedMeasureMAX',
+    'PPINOT:TimeAggregatedMeasureMIN',
+    'PPINOT:TimeAggregatedMeasureAVG',
+    'PPINOT:CountAggregatedMeasureSUM',
+    'PPINOT:CountAggregatedMeasureMAX',
+    'PPINOT:CountAggregatedMeasureMIN',
+    'PPINOT:CountAggregatedMeasureAVG',
+    'PPINOT:DataAggregatedMeasureSUM',
+    'PPINOT:DataAggregatedMeasureMAX',
+    'PPINOT:DataAggregatedMeasureMIN',
+    'PPINOT:DataAggregatedMeasureAVG'
     
 ]
 
@@ -165,8 +222,27 @@ export const myConnectionElements = [
     'PPINOT:StateCondAggMeasurePercentage',
     'PPINOT:StateCondAggMeasureAll',
     'PPINOT:StateCondAggMeasureAtLeastOne',
-    'PPINOT:StateCondAggMeasureNo'
-    
+    'PPINOT:StateCondAggMeasureNo',
+    'PPINOT:CyclicTimeAggregatedMeasureMAX',
+    'PPINOT:CyclicTimeAggregatedMeasureSUM',
+    'PPINOT:CyclicTimeAggregatedMeasureMIN',
+    'PPINOT:CyclicTimeAggregatedMeasureAVG',
+    'PPINOT:CyclicTimeMeasureSUM',
+    'PPINOT:CyclicTimeMeasureMAX',
+    'PPINOT:CyclicTimeMeasureMIN',
+    'PPINOT:CyclicTimeMeasureAVG',
+    'PPINOT:TimeAggregatedMeasureSUM',
+    'PPINOT:TimeAggregatedMeasureMAX',
+    'PPINOT:TimeAggregatedMeasureMIN',
+    'PPINOT:TimeAggregatedMeasureAVG',
+    'PPINOT:CountAggregatedMeasureSUM',
+    'PPINOT:CountAggregatedMeasureMAX',
+    'PPINOT:CountAggregatedMeasureMIN',
+    'PPINOT:CountAggregatedMeasureAVG',
+    'PPINOT:DataAggregatedMeasureSUM',
+    'PPINOT:DataAggregatedMeasureMAX',
+    'PPINOT:DataAggregatedMeasureMIN',
+    'PPINOT:DataAggregatedMeasureAVG'
     
 ]
 
@@ -184,7 +260,23 @@ export const aggreagatedElements = [
     'PPINOT:StateCondAggMeasurePercentage',
     'PPINOT:StateCondAggMeasureAll',
     'PPINOT:StateCondAggMeasureAtLeastOne',
-    'PPINOT:StateCondAggMeasureNo'
+    'PPINOT:StateCondAggMeasureNo',
+    'PPINOT:CyclicTimeAggregatedMeasureMAX',
+    'PPINOT:CyclicTimeAggregatedMeasureSUM',
+    'PPINOT:CyclicTimeAggregatedMeasureMIN',
+    'PPINOT:CyclicTimeAggregatedMeasureAVG',
+    'PPINOT:TimeAggregatedMeasureSUM',
+    'PPINOT:TimeAggregatedMeasureMAX',
+    'PPINOT:TimeAggregatedMeasureMIN',
+    'PPINOT:TimeAggregatedMeasureAVG',
+    'PPINOT:CountAggregatedMeasureSUM',
+    'PPINOT:CountAggregatedMeasureMAX',
+    'PPINOT:CountAggregatedMeasureMIN',
+    'PPINOT:CountAggregatedMeasureAVG',
+    'PPINOT:DataAggregatedMeasureSUM',
+    'PPINOT:DataAggregatedMeasureMAX',
+    'PPINOT:DataAggregatedMeasureMIN',
+    'PPINOT:DataAggregatedMeasureAVG'
     
 ]
 
@@ -194,7 +286,12 @@ export const baseMeasureElements = [
     'PPINOT:CyclicTimeMeasure',
     'PPINOT:CountMeasure',
     'PPINOT:DataMeasure',
-    'PPINOT:StateConditionMeasure'    
+    'PPINOT:StateConditionMeasure',
+    'PPINOT:CyclicTimeMeasureSUM',
+    'PPINOT:CyclicTimeMeasureMAX',
+    'PPINOT:CyclicTimeMeasureMIN',
+    'PPINOT:CyclicTimeMeasureAVG',
+   
 ]
 
 export const timeMeasuresElements = [
@@ -239,24 +336,32 @@ export const resourceArcElements = [
     'PPINOT:StateCondAggMeasurePercentage',
     'PPINOT:StateCondAggMeasureAll',
     'PPINOT:StateCondAggMeasureAtLeastOne',
-    'PPINOT:StateCondAggMeasureNo'
+    'PPINOT:StateCondAggMeasureNo',
+    'PPINOT:CyclicTimeAggregatedMeasureMAX',
+    'PPINOT:CyclicTimeAggregatedMeasureSUM',
+    'PPINOT:CyclicTimeAggregatedMeasureMIN',
+    'PPINOT:CyclicTimeAggregatedMeasureAVG',
+    'PPINOT:CyclicTimeMeasureSUM',
+    'PPINOT:CyclicTimeMeasureMAX',
+    'PPINOT:CyclicTimeMeasureMIN',
+    'PPINOT:CyclicTimeMeasureAVG',
+    'PPINOT:TimeAggregatedMeasureSUM',
+    'PPINOT:TimeAggregatedMeasureMAX',
+    'PPINOT:TimeAggregatedMeasureMIN',
+    'PPINOT:TimeAggregatedMeasureAVG',
+    'PPINOT:CountAggregatedMeasureSUM',
+    'PPINOT:CountAggregatedMeasureMAX',
+    'PPINOT:CountAggregatedMeasureMIN',
+    'PPINOT:CountAggregatedMeasureAVG',
+    'PPINOT:DataAggregatedMeasureSUM',
+    'PPINOT:DataAggregatedMeasureMAX',
+    'PPINOT:DataAggregatedMeasureMIN',
+    'PPINOT:DataAggregatedMeasureAVG'
     
 ]
 
 export const PPINOT = [
-    'PPINOT:Clock',
-    'PPINOT:Resource',
-    'PPINOT:ResourceAbsence',
-    'PPINOT:Role',
-    'PPINOT:RoleAbsence',
-    'PPINOT:Group',
-    'PPINOT:GroupAbsence',
-    'PPINOT:TimeSlot',
     'PPINOT:ResourceArc',
-    'PPINOT:ConsequenceFlow',
-    'PPINOT:TimeDistanceArcStart',
-    'PPINOT:TimeDistanceArcEnd',
-    'PPINOT:Avion',
     'PPINOT:AggregatedMeasure',
     'PPINOT:TimeAggregatedMeasure',
     'PPINOT:CyclicTimeAggregatedMeasure',
@@ -287,7 +392,27 @@ export const PPINOT = [
     'PPINOT:StateCondAggMeasurePercentage',
     'PPINOT:StateCondAggMeasureAll',
     'PPINOT:StateCondAggMeasureAtLeastOne',
-    'PPINOT:StateCondAggMeasureNo'
+    'PPINOT:StateCondAggMeasureNo',
+    'PPINOT:CyclicTimeAggregatedMeasureMAX',
+    'PPINOT:CyclicTimeAggregatedMeasureSUM',
+    'PPINOT:CyclicTimeAggregatedMeasureMIN',
+    'PPINOT:CyclicTimeAggregatedMeasureAVG',
+    'PPINOT:CyclicTimeMeasureSUM',
+    'PPINOT:CyclicTimeMeasureMAX',
+    'PPINOT:CyclicTimeMeasureMIN',
+    'PPINOT:CyclicTimeMeasureAVG',
+    'PPINOT:TimeAggregatedMeasureSUM',
+    'PPINOT:TimeAggregatedMeasureMAX',
+    'PPINOT:TimeAggregatedMeasureMIN',
+    'PPINOT:TimeAggregatedMeasureAVG',
+    'PPINOT:CountAggregatedMeasureSUM',
+    'PPINOT:CountAggregatedMeasureMAX',
+    'PPINOT:CountAggregatedMeasureMIN',
+    'PPINOT:CountAggregatedMeasureAVG',
+    'PPINOT:DataAggregatedMeasureSUM',
+    'PPINOT:DataAggregatedMeasureMAX',
+    'PPINOT:DataAggregatedMeasureMIN',
+    'PPINOT:DataAggregatedMeasureAVG'
         
 ]
 
