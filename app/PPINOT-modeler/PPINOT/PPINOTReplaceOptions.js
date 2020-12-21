@@ -86,6 +86,13 @@ export var AGGREGATED_MEASURE = [
 
 export var STATE = [
   {
+    label: 'Aggregated measure',
+    actionName: 'replace-with-aggregated-measure',
+    target: {
+      type: 'PPINOT:AggregatedMeasure'
+    }
+  },
+  {
     label: '\xa0\xa0\xa0\xa0' +'Number of process instances',
     actionName: 'replace-with-number-state',
     className: 'icon-state-number-menu',
