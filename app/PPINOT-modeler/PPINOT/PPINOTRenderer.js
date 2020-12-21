@@ -691,6 +691,26 @@ export default function PPINOTRenderer(eventBus, styles, canvas, textRenderer) {
       renderEmbeddedLabel(p, element, 'center-middle');
       return dataAggregatedMeasure;
     },
+    'PPINOT:DataAggregatedMeasureSUM': (p, element) => {
+      var sum = renderer('PPINOT:DataAggregatedMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', 'SUM', 15, 'bold');
+      return sum;
+    },
+    'PPINOT:DataAggregatedMeasureMAX': (p, element) => {
+      var max = renderer('PPINOT:DataAggregatedMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', 'MAX', 15, 'bold');
+      return max;
+    },
+    'PPINOT:DataAggregatedMeasureMIN': (p, element) => {
+      var min = renderer('PPINOT:DataAggregatedMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', 'MIN', 15, 'bold');
+      return min;
+    },
+    'PPINOT:DataAggregatedMeasureAVG': (p, element) => {
+      var avg = renderer('PPINOT:DataAggregatedMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', 'AVG', 15, 'bold');
+      return avg;
+    },
     'PPINOT:DataMeasure': (p, element) => {
       let dataMeasure = drawDataMeasure(element)
       svgAppend(p, dataMeasure);

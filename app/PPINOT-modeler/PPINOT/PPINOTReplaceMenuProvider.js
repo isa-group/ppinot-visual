@@ -111,7 +111,11 @@ if (is(businessObject, 'PPINOT:CountAggregatedMeasure')
 || is(businessObject, 'PPINOT:CyclicTimeAggregatedMeasure')
 //|| is(businessObject, 'PPINOT:DataPropertyConditionAggregatedMeasure') 
 //|| is(businessObject, 'PPINOT:StateConditionAggregatedMeasure') 
-|| is(businessObject, 'PPINOT:DataAggregatedMeasure')) {
+|| is(businessObject, 'PPINOT:DataAggregatedMeasure')
+|| is(businessObject, 'PPINOT:DataAggregatedMeasureSUM')
+|| is(businessObject, 'PPINOT:DataAggregatedMeasureMIN')
+|| is(businessObject, 'PPINOT:DataAggregatedMeasureMAX')
+|| is(businessObject, 'PPINOT:DataAggregatedMeasureAVG')) {
   entries = filter(replaceOptions.AGGREGATED_MEASURE, differentType);
   return this._createEntries(element, entries);
 }
@@ -329,6 +333,14 @@ if (is(element, 'PPINOT:CountAggregatedMeasure')
 || is(element, 'PPINOT:CountAggregatedMeasureMAX')
 || is(element, 'PPINOT:CountAggregatedMeasureAVG')){
   headerEntries = headerEntries.concat(this._getFunctionsCountAgg(element));
+}
+
+if (is(element, 'PPINOT:DataAggregatedMeasure')
+|| is(element, 'PPINOT:DataAggregatedMeasureSUM')
+|| is(element, 'PPINOT:DataAggregatedMeasureMIN')
+|| is(element, 'PPINOT:DataAggregatedMeasureMAX')
+|| is(element, 'PPINOT:DataAggregatedMeasureAVG')){
+  headerEntries = headerEntries.concat(this._getFunctionsDataAgg(element));
 }
 //----------------------------------------------------------------
 
@@ -677,6 +689,49 @@ ReplaceMenuProvider.prototype._getFunctionsTimeAgg = function(element) {
     },
     {
       id: 'replace-with-count-agg-avg',
+      label: translate('AVG'),
+      action: replaceActionAVG
+    }
+  ];
+  
+  return timeEntry;
+  };
+
+ReplaceMenuProvider.prototype._getFunctionsDataAgg = function(element) {
+
+  var translate = this._translate;
+  var replace = this._replace;
+  var replaceActionSUM = function() {
+    return replace.replaceElement(element, { type: 'PPINOT:DataAggregatedMeasureSUM' });
+  };
+  var replaceActionMAX = function() {
+    return replace.replaceElement(element, { type: 'PPINOT:DataAggregatedMeasureMAX' });
+  };
+  var replaceActionMIN = function() {
+    return replace.replaceElement(element, { type: 'PPINOT:DataAggregatedMeasureMIN' });
+  };
+  var replaceActionAVG = function() {
+    return replace.replaceElement(element, { type: 'PPINOT:DataAggregatedMeasureAVG' });
+  };
+  
+  var timeEntry = [
+    {
+      id: 'replace-with-data-agg-sum',
+      label: translate('SUM'),
+      action: replaceActionSUM
+    },
+    {
+      id: 'replace-with-data-agg-max',
+      label: translate('MAX'),
+      action: replaceActionMAX
+    },
+    {
+      id: 'replace-with-data-agg-min',
+      label: translate('MIN'),
+      action: replaceActionMIN
+    },
+    {
+      id: 'replace-with-data-agg-avg',
       label: translate('AVG'),
       action: replaceActionAVG
     }

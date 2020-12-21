@@ -193,6 +193,10 @@ PPINOTElementFactory.prototype._getPPINOTElementSize = function(type) {
     'PPINOT:CountAggregatedMeasureMAX':{width: 120, height: 100},
     'PPINOT:CountAggregatedMeasureMIN':{width: 120, height: 100},
     'PPINOT:CountAggregatedMeasureAVG':{width: 120, height: 100},
+    'PPINOT:DataAggregatedMeasureSUM':{width: 120, height: 100},
+    'PPINOT:DataAggregatedMeasureMAX':{width: 120, height: 100},
+    'PPINOT:DataAggregatedMeasureMIN':{width: 120, height: 100},
+    'PPINOT:DataAggregatedMeasureAVG':{width: 120, height: 100},
   };
 
   return shapes[type] || shapes.__default;
