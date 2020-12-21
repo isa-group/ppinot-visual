@@ -95,7 +95,6 @@ if (is(businessObject, 'PPINOT:BaseMeasure')
 ||  is(businessObject, 'PPINOT:CyclicTimeMeasureMAX')
 ||  is(businessObject, 'PPINOT:CyclicTimeMeasureAVG')
 || is(businessObject, 'PPINOT:StateConditionMeasure')
-//|| is(businessObject, 'PPINOT:DataPropertyConditionMeasure')
 || is(businessObject, 'PPINOT:DataMeasure')) {
   entries = filter(replaceOptions.MEASURE, differentType);
   return this._createEntries(element, entries);
@@ -117,8 +116,12 @@ if (is(businessObject, 'PPINOT:CountAggregatedMeasure')
 || is(businessObject, 'PPINOT:CyclicTimeAggregatedMeasureMAX')
 || is(businessObject, 'PPINOT:CyclicTimeAggregatedMeasureMIN')
 || is(businessObject, 'PPINOT:CyclicTimeAggregatedMeasureAVG')
-//|| is(businessObject, 'PPINOT:DataPropertyConditionAggregatedMeasure') 
-//|| is(businessObject, 'PPINOT:StateConditionAggregatedMeasure') 
+|| is(businessObject, 'PPINOT:StateConditionAggregatedMeasure') 
+|| is(businessObject, 'PPINOT:StateCondAggMeasureNumber') 
+|| is(businessObject, 'PPINOT:StateCondAggMeasurePercentage') 
+|| is(businessObject, 'PPINOT:StateCondAggMeasureAtLeastOne') 
+|| is(businessObject, 'PPINOT:StateCondAggMeasureAll') 
+|| is(businessObject, 'PPINOT:StateCondAggMeasureNo')
 || is(businessObject, 'PPINOT:DataAggregatedMeasure')
 || is(businessObject, 'PPINOT:DataAggregatedMeasureSUM')
 || is(businessObject, 'PPINOT:DataAggregatedMeasureMIN')
@@ -128,15 +131,15 @@ if (is(businessObject, 'PPINOT:CountAggregatedMeasure')
   return this._createEntries(element, entries);
 }
 
-if (is(businessObject, 'PPINOT:StateConditionAggregatedMeasure') 
-|| is(businessObject, 'PPINOT:StateCondAggMeasureNumber') 
-|| is(businessObject, 'PPINOT:StateCondAggMeasurePercentage') 
-|| is(businessObject, 'PPINOT:StateCondAggMeasureAtLeastOne') 
-|| is(businessObject, 'PPINOT:StateCondAggMeasureAll') 
-|| is(businessObject, 'PPINOT:StateCondAggMeasureNo')) {
-  entries = filter(replaceOptions.STATE, differentType);
-  return this._createEntries(element, entries);
-}
+// if (is(businessObject, 'PPINOT:StateConditionAggregatedMeasure') 
+// || is(businessObject, 'PPINOT:StateCondAggMeasureNumber') 
+// || is(businessObject, 'PPINOT:StateCondAggMeasurePercentage') 
+// || is(businessObject, 'PPINOT:StateCondAggMeasureAtLeastOne') 
+// || is(businessObject, 'PPINOT:StateCondAggMeasureAll') 
+// || is(businessObject, 'PPINOT:StateCondAggMeasureNo')) {
+//   entries = filter(replaceOptions.STATE, differentType);
+//   return this._createEntries(element, entries);
+// }
 
 //-------------------------------------------------------------------------
 
@@ -353,6 +356,15 @@ if (is(element, 'PPINOT:CyclicTimeAggregatedMeasure')
 || is(element, 'PPINOT:CyclicTimeAggregatedMeasureMAX')
 || is(element, 'PPINOT:CyclicTimeAggregatedMeasureAVG')){
   headerEntries = headerEntries.concat(this._getFunctionsCyclicTimeAggregatedMeasure(element));
+}
+
+if (is(element, 'PPINOT:StateConditionAggregatedMeasure')
+|| is(element, 'PPINOT:StateCondAggMeasureNumber') 
+|| is(element, 'PPINOT:StateCondAggMeasurePercentage') 
+|| is(element, 'PPINOT:StateCondAggMeasureAtLeastOne') 
+|| is(element, 'PPINOT:StateCondAggMeasureAll') 
+|| is(element, 'PPINOT:StateCondAggMeasureNo')){
+  headerEntries = headerEntries.concat(this._getFunctionsStateCondition(element));
 }
 //----------------------------------------------------------------
 
@@ -807,25 +819,6 @@ ReplaceMenuProvider.prototype._getFunctionsDataAgg = function(element) {
   };
 
 
-// ReplaceMenuProvider.prototype._getCyclicTimeAggregated = function(element) {
-
-//   var translate = this._translate;
-//   var replace = this._replace;
-//   var replaceAction = function() {
-//     return replace.replaceElement(element, { type: 'PPINOT:CyclicTimeAggregatedMeasure' });
-//   };
-
-//   var timeEntry = {
-//     id: 'replace-with-cyclic-time-aggregated-measure',
-//     className: 'icon-cyclic-time-menu',
-//     label: translate('\xa0\xa0\xa0\xa0\xa0\xa0\xa0' + 'Cyclic'),
-//     action: replaceAction
-//   };
-  
-//   return timeEntry;
-//   };
-
-
   ReplaceMenuProvider.prototype._getFunctionsCyclicTimeAggregatedMeasure = function(element) {
 
     var translate = this._translate;
@@ -863,6 +856,58 @@ ReplaceMenuProvider.prototype._getFunctionsDataAgg = function(element) {
         id: 'replace-with-cyclic-time-agg-avg',
         label: translate('AVG'),
         action: replaceActionAVG
+      }
+    ];
+    
+    return timeEntry;
+  };
+
+
+ReplaceMenuProvider.prototype._getFunctionsStateCondition = function(element) {
+
+    var translate = this._translate;
+    var replace = this._replace;
+    var replaceActionNumber = function() {
+      return replace.replaceElement(element, { type: 'PPINOT:StateCondAggMeasureNumber' });
+    };
+    var replaceActionPercentage = function() {
+      return replace.replaceElement(element, { type: 'PPINOT:StateCondAggMeasurePercentage' });
+    };
+    var replaceActionAll = function() {
+      return replace.replaceElement(element, { type: 'PPINOT:StateCondAggMeasureAll' });
+    };
+    var replaceActionAtLeastOne = function() {
+      return replace.replaceElement(element, { type: 'PPINOT:StateCondAggMeasureAtLeastOne' });
+    };
+    var replaceActionNo = function() {
+      return replace.replaceElement(element, { type: 'PPINOT:StateCondAggMeasureNo' });
+    };
+    
+    var timeEntry = [
+      {
+        id: 'replace-with-state-number',
+        label: translate('#'),
+        action: replaceActionNumber
+      },
+      {
+        id: 'replace-with-state-percentage',
+        label: translate('%'),
+        action: replaceActionPercentage
+      },
+      {
+        id: 'replace-with-state-all',
+        label: translate('∀'),
+        action: replaceActionAll
+      },
+      {
+        id: 'replace-with-state-atLeastOne',
+        label: translate('∃'),
+        action: replaceActionAtLeastOne
+      },
+      {
+        id: 'replace-with-state-no',
+        label: translate('∄'),
+        action: replaceActionNo
       }
     ];
     
