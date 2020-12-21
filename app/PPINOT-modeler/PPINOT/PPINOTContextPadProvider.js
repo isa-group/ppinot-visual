@@ -213,6 +213,40 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
         })
     } 
 
+    if(is(businessObject, 'PPINOT:DerivedMultiInstanceMeasure')) {
+        assign(actions, {
+            'replaceAggregatedMeasure': {
+                className: 'icon-aggregatedMeasure-menu',
+                title: translate('Replace with Aggregated Measure'),
+                action: {
+                    click: function(event, element){
+                        let newElementData = elementFactory.createShape({ type: 'PPINOT:AggregatedMeasure'});
+                        newElementData.x = element.x + (newElementData.width || element.width) / 2;
+                        newElementData.y = element.y + (newElementData.height || element.height) / 2;
+                        modeling.replaceShape(element, newElementData);
+                    }
+                }
+            }   
+        })
+    }
+
+    if(is(businessObject, 'PPINOT:DerivedSingleInstanceMeasure')) {
+        assign(actions, {
+            'replaceBaseMeasure': {
+                className: 'icon-baseMeasure-menu',
+                title: translate('Replace with Base Measure'),
+                action: {
+                    click: function(event, element){
+                        let newElementData = elementFactory.createShape({ type: 'PPINOT:BaseMeasure'});
+                        newElementData.x = element.x + (newElementData.width || element.width) / 2;
+                        newElementData.y = element.y + (newElementData.height || element.height) / 2;
+                        modeling.replaceShape(element, newElementData);
+                    }
+                }
+            }   
+        })
+    }
+
     if(isAny(businessObject, baseMeasureElements)) {
         assign(actions, {
             'replaceDerivedSingle': {
