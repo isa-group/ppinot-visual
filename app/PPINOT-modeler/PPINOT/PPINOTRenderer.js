@@ -593,6 +593,26 @@ export default function PPINOTRenderer(eventBus, styles, canvas, textRenderer) {
       renderEmbeddedLabel(p, element, 'center-middle');
       return timeAggregatedMeasure;
     },
+    'PPINOT:TimeAggregatedMeasureSUM': (p, element) => {
+      var sum = renderer('PPINOT:TimeAggregatedMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', 'SUM', 15, 'bold');
+      return sum;
+    },
+    'PPINOT:TimeAggregatedMeasureMAX': (p, element) => {
+      var max = renderer('PPINOT:TimeAggregatedMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', 'MAX', 15, 'bold');
+      return max;
+    },
+    'PPINOT:TimeAggregatedMeasureMIN': (p, element) => {
+      var min = renderer('PPINOT:TimeAggregatedMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', 'MIN', 15, 'bold');
+      return min;
+    },
+    'PPINOT:TimeAggregatedMeasureAVG': (p, element) => {
+      var avg = renderer('PPINOT:TimeAggregatedMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', 'AVG', 15, 'bold');
+      return avg;
+    },
     'PPINOT:CyclicTimeAggregatedMeasure': (p, element) => {
       let cyclicTimeAggregatedMeasure = drawCyclicTimeAggregatedMeasure(element)
       svgAppend(p, cyclicTimeAggregatedMeasure);
