@@ -185,6 +185,11 @@ PPINOTElementFactory.prototype._getPPINOTElementSize = function(type) {
     'PPINOT:StateCondAggMeasureAll':{width: 120, height: 100},
     'PPINOT:StateCondAggMeasureAtLeastOne':{width: 120, height: 100},
     'PPINOT:StateCondAggMeasureNo':{width: 120, height: 100},
+    'PPINOT:TimeAggregatedMeasureSUM':{width: 120, height: 100},
+    'PPINOT:TimeAggregatedMeasureMAX':{width: 120, height: 100},
+    'PPINOT:TimeAggregatedMeasureMIN':{width: 120, height: 100},
+    'PPINOT:TimeAggregatedMeasureAVG':{width: 120, height: 100},
+
   };
 
   return shapes[type] || shapes.__default;
