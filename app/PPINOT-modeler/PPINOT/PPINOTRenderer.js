@@ -556,13 +556,11 @@ export default function PPINOTRenderer(eventBus, styles, canvas, textRenderer) {
     'PPINOT:AggregatedMeasure': (p, element) => {
       let aggregatedMeasure = drawAggregatedMeasure(element)
       svgAppend(p, aggregatedMeasure);
-      renderEmbeddedLabel(p, element, 'center-middle');
       return aggregatedMeasure;
     },
     'PPINOT:TimeAggregatedMeasure': (p, element) => {
       let timeAggregatedMeasure = drawTimeAggregatedMeasure(element)
       svgAppend(p, timeAggregatedMeasure);
-      renderEmbeddedLabel(p, element, 'center-middle');
       return timeAggregatedMeasure;
     },
     'PPINOT:TimeAggregatedMeasureSUM': (p, element) => {
@@ -588,7 +586,6 @@ export default function PPINOTRenderer(eventBus, styles, canvas, textRenderer) {
     'PPINOT:CyclicTimeAggregatedMeasure': (p, element) => {
       let cyclicTimeAggregatedMeasure = drawCyclicTimeAggregatedMeasure(element)
       svgAppend(p, cyclicTimeAggregatedMeasure);
-      renderEmbeddedLabel(p, element, 'center-middle');
       return cyclicTimeAggregatedMeasure;
     },
     'PPINOT:CyclicTimeAggregatedMeasureSUM': (p, element) => {
@@ -634,7 +631,6 @@ export default function PPINOTRenderer(eventBus, styles, canvas, textRenderer) {
     'PPINOT:CountAggregatedMeasure': (p, element) => {
       let countAggregatedMeasure = drawCountAggregatedMeasure(element)
       svgAppend(p, countAggregatedMeasure);
-      renderEmbeddedLabel(p, element, 'center-middle');
       return countAggregatedMeasure;
     },
     'PPINOT:CountAggregatedMeasureSUM': (p, element) => {
@@ -680,7 +676,6 @@ export default function PPINOTRenderer(eventBus, styles, canvas, textRenderer) {
     'PPINOT:DataAggregatedMeasure': (p, element) => {
       let dataAggregatedMeasure = drawDataAggregatedMeasure(element)
       svgAppend(p, dataAggregatedMeasure);
-      renderEmbeddedLabel(p, element, 'center-middle');
       return dataAggregatedMeasure;
     },
     'PPINOT:DataAggregatedMeasureSUM': (p, element) => {
@@ -734,7 +729,6 @@ export default function PPINOTRenderer(eventBus, styles, canvas, textRenderer) {
     'PPINOT:StateConditionAggregatedMeasure': (p, element) => {
       let stateConditionAggregatedMeasure = drawStateConditionAggregatedMeasure(element)
       svgAppend(p, stateConditionAggregatedMeasure);    
-      renderEmbeddedLabel(p, element, 'center-middle');
       return stateConditionAggregatedMeasure; 
     },
     'PPINOT:StateCondAggMeasureNumber': (p, element) => {
