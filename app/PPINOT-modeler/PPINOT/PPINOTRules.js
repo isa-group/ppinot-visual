@@ -40,7 +40,9 @@ PPINOTRules.$inject = [ 'eventBus' ];
 function canConnect(source, target, connection) {
 
   // only judge about PPINOT elements
-  if(is(source, 'PPINOT:TimeMeasure') || is(source, 'PPINOT:CyclicTimeMeasure')) {
+  if(is(source, 'PPINOT:TimeMeasure') || is(source, 'PPINOT:CyclicTimeMeasure')
+  || is(source, 'PPINOT:CyclicTimeMeasureSUM') || is(source, 'PPINOT:CyclicTimeMeasureMAX')
+  || is(source, 'PPINOT:CyclicTimeMeasureMIN') || is(source, 'PPINOT:CyclicTimeMeasureAVG')) {
     if(isDefaultValid(target) || is(target, 'bpmn:Participant')) {
       if(connection === 'PPINOT:ToConnection' || connection === 'PPINOT:FromConnection')
         return { type: connection }
@@ -51,7 +53,9 @@ function canConnect(source, target, connection) {
       return false
   }
 
-  else if(is(source, 'PPINOT:CounteMeasure') || is(source, 'PPINOT:CountAggregatedMeasure')) {
+  else if(is(source, 'PPINOT:CounteMeasure') || is(source, 'PPINOT:CountAggregatedMeasure')
+  || is(source, 'PPINOT:CountAggregatedMeasureSUM') || is(source, 'PPINOT:CountAggregatedMeasureMAX')
+  || is(source, 'PPINOT:CountAggregatedMeasureMIN') || is(source, 'PPINOT:CountAggregatedMeasureAVG')) {
     if(isDefaultValid(target) || is(target, 'bpmn:Participant')) {
       if(connection === 'PPINOT:StartConnection' || connection === 'PPINOT:EndConnection')
         return { type: connection }
@@ -62,7 +66,8 @@ function canConnect(source, target, connection) {
       return false
   }
 
-  else if((isDefaultValid(source) && isPPINOTShape(target) && isPPINOTResourceArcElement(source))  || (isPPINOTShape(source) && isDefaultValid(target) && isPPINOTResourceArcElement(target)))
+  else if((isDefaultValid(source) && isPPINOTShape(target) && isPPINOTResourceArcElement(source))  
+  || (isPPINOTShape(source) && isDefaultValid(target) && isPPINOTResourceArcElement(target)))
     return { type: 'PPINOT:ResourceArc'
   }
   else if((isPPINOTShape(source) && (isPPINOTShape(target) )))
@@ -72,7 +77,9 @@ function canConnect(source, target, connection) {
     return { type: 'PPINOT:RFCStateConnection'
   }
   else if(is(source, 'PPINOT:StateConditionMeasure') 
-  || is(source, 'PPINOT:StateConditionAggregatedMeasure')
+  || is(source, 'PPINOT:StateConditionAggregatedMeasure') || is(source, 'PPINOT:StateCondAggMeasurePercentage')
+  || is(source, 'PPINOT:StateCondAggMeasureNumber') || is(source, 'PPINOT:StateCondAggMeasureAll')
+  || is(source, 'PPINOT:StateCondAggMeasureAtLeastOne') || is(source, 'PPINOT:StateCondAggMeasureNo')
   || is(source, 'PPINOT:CountMeasure') || is(source, 'PPINOT:DataMeasure'))
     return { type: 'PPINOT:DashedLine'
   }
@@ -109,7 +116,9 @@ function canConnect2(source, target, connection) {
 
   else if(connection === 'PPINOT:DashedLine') {
     if(isPPINOT(target) && is(source, 'PPINOT:StateConditionMeasure') 
-    || is(source, 'PPINOT:StateCondStateConditionAggregatedMeasureitionMeasure')
+    || is(source, 'PPINOT:StateConditionAggregatedMeasure') || is(source, 'PPINOT:StateCondAggMeasureNumber')
+    || is(source, 'PPINOT:StateCondAggMeasurePercentage') || is(source, 'PPINOT:StateCondAggMeasureAll')
+    || is(source, 'PPINOT:StateCondAggMeasureAtLeastOne') || is(source, 'PPINOT:StateCondAggMeasureNo')
     || is(source, 'PPINOT:CountMeasure') || is(source, 'PPINOT:DataMeasure'))
       return { type: connection }
     else
@@ -129,40 +138,47 @@ function canConnect2(source, target, connection) {
   }
 
   else if(connection === 'PPINOT:ToConnection') {
-    if(isDefaultValid(target) || is(target, 'bpmn:Participant') && is(source, 'PPINOT:TimeMeasure') || is(source, 'PPINOT:CyclicTimeMeasure'))
+    if(isDefaultValid(target) || is(target, 'bpmn:Participant') 
+    && is(source, 'PPINOT:TimeMeasure') || is(source, 'PPINOT:CyclicTimeMeasure')
+    || is(source, 'PPINOT:CyclicTimeMeasureSUM') || is(source, 'PPINOT:CyclicTimeMeasureMAX')
+    || is(source, 'PPINOT:CyclicTimeMeasureMIN') || is(source, 'PPINOT:CyclicTimeMeasureAVG'))
       return { type: connection }
     else
       return false
   }
   else if(connection === 'PPINOT:FromConnection') {
-    if(isDefaultValid(target) || is(target, 'bpmn:Participant') && is(source, 'PPINOT:TimeMeasure') || is(source, 'PPINOT:CyclicTimeMeasure'))
+    if(isDefaultValid(target) || is(target, 'bpmn:Participant') 
+    && is(source, 'PPINOT:TimeMeasure') || is(source, 'PPINOT:CyclicTimeMeasure')
+    || is(source, 'PPINOT:CyclicTimeMeasureSUM') || is(source, 'PPINOT:CyclicTimeMeasureMAX')
+    || is(source, 'PPINOT:CyclicTimeMeasureMIN') || is(source, 'PPINOT:CyclicTimeMeasureAVG'))
       return { type: connection }
     else
       return false
   }
 
   else if(connection === 'PPINOT:StartConnection') {
-    if(isDefaultValid(target) || is(target, 'bpmn:Participant') && is(source, 'PPINOT:CountMeasure') || is(source, 'PPINOT:CountAggregatedMeasure'))
+    if(isDefaultValid(target) || is(target, 'bpmn:Participant') && is(source, 'PPINOT:CountMeasure') 
+    || is(source, 'PPINOT:CountAggregatedMeasure') || is(source, 'PPINOT:CountAggregatedMeasureSUM')
+    || is(source, 'PPINOT:CountAggregatedMeasureMAX') || is(source, 'PPINOT:CountAggregatedMeasureMIN')
+    || is(source, 'PPINOT:CountAggregatedMeasureAVG'))
       return { type: connection }
     else
       return false
   }
   else if(connection === 'PPINOT:EndConnection') {
-    if(isDefaultValid(target) || is(target, 'bpmn:Participant') && is(source, 'PPINOT:CountMeasure') || is(source, 'PPINOT:CountAggregatedMeasure'))
+    if(isDefaultValid(target) || is(target, 'bpmn:Participant') && is(source, 'PPINOT:CountMeasure') 
+    || is(source, 'PPINOT:CountAggregatedMeasure') || is(source, 'PPINOT:CountAggregatedMeasureSUM')
+    || is(source, 'PPINOT:CountAggregatedMeasureMAX') || is(source, 'PPINOT:CountAggregatedMeasureMIN')
+    || is(source, 'PPINOT:CountAggregatedMeasureAVG'))
       return { type: connection }
     else
       return false
   }
-  // else if(connection === 'PPINOT:RFCStateConnection') {
-  //   if(is(source, 'PPINOT:BaseMeasure')  && isPPINOTConnection(target) )
-  //     return { type: connection }
-  //   else
-  //     return false
-  // }
   else {
     if (!isPPINOT(source) && !isPPINOT(target))
       return;
-    else if((isDefaultValid(source) && isPPINOTResourceArcElement(target)) || (isDefaultValid(target) && isPPINOTResourceArcElement(source))) {
+    else if((isDefaultValid(source) && isPPINOTResourceArcElement(target)) 
+    || (isDefaultValid(target) && isPPINOTResourceArcElement(source))) {
       return {type: 'PPINOT:ResourceArc'}
     }
     else if((isPPINOTAggregatedElement(source) && isPPINOTShape(target)) )

@@ -124,6 +124,11 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
     // In this case, if the element (businessObject) is some of these and it is not a label,
     // the follow button appear in the element when you click on it
     if(is(businessObject, 'PPINOT:StateConditionAggregatedMeasure')
+        ||  is(businessObject, 'PPINOT:StateCondAggMeasureNumber') 
+        ||  is(businessObject, 'PPINOT:StateCondAggMeasurePercentage')
+        ||  is(businessObject, 'PPINOT:StateCondAggMeasureAll')
+        ||  is(businessObject, 'PPINOT:StateCondAggMeasureAtLeastOne')
+        ||  is(businessObject, 'PPINOT:StateCondAggMeasureNo')
         ||  is(businessObject, 'PPINOT:StateConditionMeasure')
         ||  is(businessObject, 'PPINOT:CountMeasure') 
         ||  is(businessObject, 'PPINOT:DataMeasure')&& element.type !== 'label') {
@@ -131,7 +136,7 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
             'connect3': appendConnectAction(
                 'PPINOT:DashedLine',
                 'icon-dashed-line',
-                'Connect using State connection'
+                'Connect using dashed line'
             ),        
         });
     }
@@ -139,6 +144,10 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
 
     if(is(businessObject, 'PPINOT:TimeMeasure') 
     || is(businessObject, 'PPINOT:CyclicTimeMeasure')
+    || is(businessObject, 'PPINOT:CyclicTimeMeasureSUM')
+    || is(businessObject, 'PPINOT:CyclicTimeMeasureMAX')
+    || is(businessObject, 'PPINOT:CyclicTimeMeasureMIN')
+    || is(businessObject, 'PPINOT:CyclicTimeMeasureAVG')
     && element.type !== 'label') {
         assign(actions, {
             'connect7': appendConnectAction(
@@ -161,6 +170,10 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
 
     if(is(businessObject, 'PPINOT:CountMeasure') 
     || is(businessObject, 'PPINOT:CountAggregatedMeasure')
+    || is(businessObject, 'PPINOT:CountAggregatedMeasureSUM')
+    || is(businessObject, 'PPINOT:CountAggregatedMeasureMAX')
+    || is(businessObject, 'PPINOT:CountAggregatedMeasureMIN')
+    || is(businessObject, 'PPINOT:CountAggregatedMeasureAVG')
     && element.type !== 'label') {
         assign(actions, {
             'connect10': appendConnectAction(
