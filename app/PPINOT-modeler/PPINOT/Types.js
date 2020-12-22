@@ -1,3 +1,7 @@
+// In this module you have to define groups of elements which you will use them to 
+// create connection and to add labels to elements
+
+// The elements which are included in "label" will have a label
 export const label = [
     'PPINOT:Resource',
     'PPINOT:ResourceAbsence',
@@ -63,6 +67,7 @@ export const label = [
     'PPINOT:DataAggregatedMeasureAVG'
 ]
 
+// The elements which are included in "externalLabel" will have an external label
 export const externalLabel = [
     'PPINOT:Resource',
     'PPINOT:ResourceAbsence',
@@ -86,14 +91,13 @@ export const externalLabel = [
     'PPINOT:CyclicTimeAggregatedMeasure',
     'PPINOT:CountAggregatedMeasure',
     'PPINOT:CountMeasure',
-    //'PPINOT:DataAggregatedMeasure',
+    'PPINOT:DataAggregatedMeasure',
     'PPINOT:DataMeasure',
     'PPINOT:TimeMeasure',
     'PPINOT:CyclicTimeMeasure',
     'PPINOT:BaseMeasure',
-    // 'PPINOT:DataPropertyConditionAggregatedMeasure'
     'PPINOT:StateConditionMeasure',
-    //'PPINOT:StateConditionAggregatedMeasure',
+    'PPINOT:StateConditionAggregatedMeasure',
     'PPINOT:RFCStateConnection',
     'PPINOT:StateCondAggMeasureNumber',
     'PPINOT:StateCondAggMeasurePercentage',
@@ -122,6 +126,7 @@ export const externalLabel = [
     'PPINOT:DataAggregatedMeasureAVG'
 ]
 
+// The elements which are included in "connections" will be connections 
 export const connections = [
     'PPINOT:ResourceArc',
     'PPINOT:ConsequenceFlow',
@@ -138,13 +143,8 @@ export const connections = [
     'PPINOT:EndConnection',    
 ]
 
+// The elements which are included in "directEdit" will have an editable label
 export const directEdit = [
-    // 'PPINOT:Resource',
-    // 'PPINOT:Role',
-    // 'PPINOT:Group',
-    'PPINOT:Clock',
-    'PPINOT:TimeSlot',
-    'PPINOT:Avion',
     'PPINOT:Target',
     'PPINOT:Scope',
     'PPINOT:AggregatedMeasure',
@@ -201,8 +201,8 @@ export const directEdit = [
     
 ]
 
+// The elements which are included in "myConnectionElements" could be connect by 'PPINOT:MyConnection'
 export const myConnectionElements = [
-    'PPINOT:Avion',
     'PPINOT:AggregatedMeasure',
     'PPINOT:TimeAggregatedMeasure',
     'PPINOT:CyclicTimeAggregatedMeasure',
@@ -247,7 +247,8 @@ export const myConnectionElements = [
 ]
 
 
-
+// The elements which are included in "aggregatedElements" could be connect by the connections of 
+// the aggregated measures
 export const aggreagatedElements = [
     'PPINOT:AggregatedMeasure',
     'PPINOT:TimeAggregatedMeasure',
@@ -280,6 +281,8 @@ export const aggreagatedElements = [
     
 ]
 
+// The elements which are included in "baseMeasureElements" could be connect by the connections of 
+// the base measures
 export const baseMeasureElements = [
     'PPINOT:BaseMeasure',
     'PPINOT:TimeMeasure',
@@ -294,28 +297,21 @@ export const baseMeasureElements = [
    
 ]
 
-export const timeMeasuresElements = [
-    //'PPINOT:TimeMeasure'  //no esta implementada
-]
-export const countMeasuresElements = [
-    'PPINOT:CountMeasure'  //no esta implementada
-]
-export const ppiElement = [
-    'PPINOT:Ppi',
-    // 'PPINOT:CountMeasure',
-    // 'PPINOT:DataMeasure'
+// export const timeMeasuresElements = [
+//     //'PPINOT:TimeMeasure'  //no esta implementada
+// ]
+// export const countMeasuresElements = [
+//     'PPINOT:CountMeasure'  //no esta implementada
+// ]
+// export const ppiElement = [
+//     'PPINOT:Ppi',
+//     // 'PPINOT:CountMeasure',
+//     // 'PPINOT:DataMeasure'
 
-]
+// ]
+
+// The elements which are included in "resourceArcElements" could be connect by 'PPINOT:ResourceArc' 
 export const resourceArcElements = [
-    'PPINOT:Clock',
-    'PPINOT:Resource',
-    'PPINOT:ResourceAbsence',
-    'PPINOT:Role',
-    'PPINOT:RoleAbsence',
-    'PPINOT:Group',
-    'PPINOT:GroupAbsence',
-    'PPINOT:TimeSlot',
-    'PPINOT:Avion',
     'PPINOT:AggregatedMeasure',
     'PPINOT:TimeAggregatedMeasure',
     'PPINOT:CyclicTimeAggregatedMeasure',
@@ -360,6 +356,8 @@ export const resourceArcElements = [
     
 ]
 
+
+// // The elements which are included in "PPINOT" are PPINOT elements
 export const PPINOT = [
     'PPINOT:ResourceArc',
     'PPINOT:AggregatedMeasure',
@@ -465,22 +463,22 @@ export function isPPINOTBaseMeasureElement(type) {
     return baseMeasureElements.includes(type)
 }
 
-export function isPPINOTTimeMeasureElement(type) {
-    if (typeof type === 'object') {
-        type = type.type
-    }
-    return timeMeasuresElements.includes(type)
-}
-export function isPPINOTCountMeasureElement(type) {
-    if (typeof type === 'object') {
-        type = type.type
-    }
-    return countMeasuresElements.includes(type)
-}
+// export function isPPINOTTimeMeasureElement(type) {
+//     if (typeof type === 'object') {
+//         type = type.type
+//     }
+//     return timeMeasuresElements.includes(type)
+// }
+// export function isPPINOTCountMeasureElement(type) {
+//     if (typeof type === 'object') {
+//         type = type.type
+//     }
+//     return countMeasuresElements.includes(type)
+// }
 
-export function isPPINOTPpi(type) {
-    if (typeof type === 'object') {
-        type = type.type
-    }
-    return ppiElement.includes(type)
-}
+// export function isPPINOTPpi(type) {
+//     if (typeof type === 'object') {
+//         type = type.type
+//     }
+//     return ppiElement.includes(type)
+// }
