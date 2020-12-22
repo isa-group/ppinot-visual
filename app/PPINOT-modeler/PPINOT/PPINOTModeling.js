@@ -8,6 +8,8 @@ import PPINOTUpdateLabelHandler from "./handlers/PPINOTUpdateLabelHandler";
 import PPINOTCreateConnectionHandler from "./handlers/PPINOTCreateConnectionHandler";
 import CreateConnectionHandler from "diagram-js/lib/features/modeling/cmd/CreateConnectionHandler";
 
+
+// This module is used to update labels
 export default class PPINOTModeling extends Modeling {
     constructor(eventBus, elementFactory, commandStack,
                 bpmnRules) {
@@ -36,43 +38,6 @@ export default class PPINOTModeling extends Modeling {
         });
     }
 
-    // createShape(shape, position, target, parentIndex, hints) {
-    //     //se shape !== PPINOT chiama super, altrimenti...
-    //     let val = super.createShape(shape, position, target, parentIndex, hints)
-    //     console.log(val)
-    //     return val
-    // }
-
-    // createConnection(source, target, parentIndex, connection, parent, hints) {
-    //
-    //     if (typeof parentIndex === 'object') {
-    //         hints = parent;
-    //         parent = connection;
-    //         connection = parentIndex;
-    //         parentIndex = undefined;
-    //     }
-    //
-    //     console.log(connection)
-    //
-    //     connection = this._create('connection', connection);
-    //
-    //     var context = {
-    //         source: source,
-    //         target: target,
-    //         parent: parent,
-    //         parentIndex: parentIndex,
-    //         connection: connection,
-    //         hints: hints
-    //     };
-    //
-    //     this._commandStack.execute('connection.create', context);
-    //
-    //     return context.connection;
-    // };
-    //
-    // connect(source, target, attrs, hints) {
-    //     return this.createConnection(source, target,attrs || {}, source.parent, hints);
-    // };
 };
 
 PPINOTModeling.$inject = [

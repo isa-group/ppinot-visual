@@ -17,8 +17,6 @@ import {isPPINOTConnection, isPPINOTShape, label} from "./Types";
 
 import Svg from './svg';
 
-// import * as svg from 'tiny-svg'
-
 var RENDERER_IDS = new Ids();
 
 var COLOR_GREEN = '#52B415',
@@ -110,16 +108,6 @@ export default function PPINOTRenderer(eventBus, styles, canvas, textRenderer) {
       )
     });
   }
-
-  // function createPathFromConnection(connection) {
-  //   var waypoints = connection.waypoints;
-
-  //   var pathData = 'm  ' + waypoints[0].x + ',' + waypoints[0].y;
-  //   for (var i = 1; i < waypoints.length; i++) {
-  //     pathData += 'L' + waypoints[i].x + ',' + waypoints[i].y + ' ';
-  //   }
-  //   return pathData;
-  // }
 
   function addMarker( id, options) {
     var attrs = assign({
@@ -332,26 +320,10 @@ export default function PPINOTRenderer(eventBus, styles, canvas, textRenderer) {
     }
   }
 
-  // function drawPath(parentGfx, d, attrs) {
-
-  //   attrs = computeStyle(attrs, [ 'no-fill' ], {
-  //     strokeWidth: 2,
-  //     stroke: 'black'
-  //   });
-
-  //   var path = svgCreate('path');
-  //   svgAttr(path, { d: d });
-  //   svgAttr(path, attrs);
-
-  //   svgAppend(parentGfx, path);
-
-  //   return path;
-  // }
-
   
   // The following functions define the shape of the element to be rendered 
   // You have to define x, y, width, height and href (this format is the same for all elements)
-  // --> href is the svg element defined in svg > index.js
+  // --> href is the svg element defined in svg -> index.js
   function drawBaseMeasure(element){
     var baseMeasure = svgCreate('image', {
       x: 0,
@@ -904,7 +876,8 @@ export default function PPINOTRenderer(eventBus, styles, canvas, textRenderer) {
     },
   };
 
-
+  // Finally, you have to define the paths
+  // Using this property you define and delimit the connectivity area of the element
   var paths = this.paths = {
     'PPINOT:BaseMeasure': (element) => {
       var x = element.x,
