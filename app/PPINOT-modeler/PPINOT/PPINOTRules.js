@@ -13,15 +13,19 @@ import {isAny} from "bpmn-js/lib/features/modeling/util/ModelingUtil";
 import {isPPINOTResourceArcElement, isPPINOTShape, isPPINOTAggregatedElement, isPPINOTConnection} from "./Types";
 import {isLabel} from "bpmn-js/lib/util/LabelUtil";
 
+// This module defines the rules of connection for the different types of connectors and elements created
+
 var HIGH_PRIORITY = 1500;
 
-
+//To create restrictions of connection you have to use these functions
+//this function checks if an element is some of PPINOT elements
 function isPPINOT(element) {
   return element && /^PPINOT:/.test(element.type);
 }
 
+//this function checks if an element is a task or event
 function isDefaultValid(element) {
-  return element && (is(element, 'bpmn:Task') || is(element, 'bpmn:Event'))
+  return element && (is(element, 'bpmn:Task') || is(element, 'bpmn:Event') || is(element, 'bpmn:Pool') || is(element, 'bpmn:DataObjectReference')) 
 }
 
 
@@ -37,73 +41,13 @@ inherits(PPINOTRules, RuleProvider);
 
 PPINOTRules.$inject = [ 'eventBus' ];
 
-function canConnect(source, target, connection) {
 
-  // only judge about PPINOT elements
-  if(is(source, 'PPINOT:TimeMeasure') || is(source, 'PPINOT:CyclicTimeMeasure')
-  || is(source, 'PPINOT:CyclicTimeMeasureSUM') || is(source, 'PPINOT:CyclicTimeMeasureMAX')
-  || is(source, 'PPINOT:CyclicTimeMeasureMIN') || is(source, 'PPINOT:CyclicTimeMeasureAVG')) {
-    if(isDefaultValid(target) || is(target, 'bpmn:Participant')) {
-      if(connection === 'PPINOT:ToConnection' || connection === 'PPINOT:FromConnection')
-        return { type: connection }
-      else
-        return false
-    }
-    else
-      return false
-  }
-
-  else if(is(source, 'PPINOT:CounteMeasure') || is(source, 'PPINOT:CountAggregatedMeasure')
-  || is(source, 'PPINOT:CountAggregatedMeasureSUM') || is(source, 'PPINOT:CountAggregatedMeasureMAX')
-  || is(source, 'PPINOT:CountAggregatedMeasureMIN') || is(source, 'PPINOT:CountAggregatedMeasureAVG')) {
-    if(isDefaultValid(target) || is(target, 'bpmn:Participant')) {
-      if(connection === 'PPINOT:StartConnection' || connection === 'PPINOT:EndConnection')
-        return { type: connection }
-      else
-        return false
-    }
-    else
-      return false
-  }
-
-  else if((isDefaultValid(source) && isPPINOTShape(target) && isPPINOTResourceArcElement(source))  
-  || (isPPINOTShape(source) && isDefaultValid(target) && isPPINOTResourceArcElement(target)))
-    return { type: 'PPINOT:ResourceArc'
-  }
-  else if((isPPINOTShape(source) && (isPPINOTShape(target) )))
-    return { type: 'PPINOT:MyConnection'
-  }
-  else if((is(source, 'bpmn:DataReferenceObject') && (isPPINOTShape(target) )))
-    return { type: 'PPINOT:RFCStateConnection'
-  }
-  else if(is(source, 'PPINOT:StateConditionMeasure') 
-  || is(source, 'PPINOT:StateConditionAggregatedMeasure') || is(source, 'PPINOT:StateCondAggMeasurePercentage')
-  || is(source, 'PPINOT:StateCondAggMeasureNumber') || is(source, 'PPINOT:StateCondAggMeasureAll')
-  || is(source, 'PPINOT:StateCondAggMeasureAtLeastOne') || is(source, 'PPINOT:StateCondAggMeasureNo')
-  || is(source, 'PPINOT:CountMeasure') || is(source, 'PPINOT:DataMeasure'))
-    return { type: 'PPINOT:DashedLine'
-  }
-  else if((isPPINOTAggregatedElement(source) && isPPINOTShape(target)) )
-    return {type: 'PPINOT:AggregatedConnection'
-  }
-  else if (isPPINOTAggregatedElement(source) && is(target, 'bpmn:DataObjectReference') )
-    return {type: 'PPINOT:GroupedBy'
-  }
-  else
-    return;
-}
-
-function canConnect2(source, target, connection) {
+// This function defines the connection
+// you must define some conditions and check these conditions for the target, the source and the connection type 
+// and if all conditions are correct, the connection will be created without problemas 
+function connect(source, target, connection) {
   if (nonExistingOrLabel(source) || nonExistingOrLabel(target)) {
     return null;
-  }
-  if(connection === 'PPINOT:ConsequenceFlow') {
-    if(isDefaultValid(source) && isDefaultValid(target))
-      return { type: connection }
-    else if(is(source, 'PPINOT:TimeSlot') && isDefaultValid(target))
-      return { type: connection }
-    else
-      return false
   }
   
   if(connection === 'PPINOT:MyConnection'){
@@ -115,61 +59,56 @@ function canConnect2(source, target, connection) {
   }
 
   else if(connection === 'PPINOT:DashedLine') {
-    if(isPPINOT(target) && is(source, 'PPINOT:StateConditionMeasure') 
+    if(isDefaultValid(target) && (is(source, 'PPINOT:StateConditionMeasure') 
     || is(source, 'PPINOT:StateConditionAggregatedMeasure') || is(source, 'PPINOT:StateCondAggMeasureNumber')
     || is(source, 'PPINOT:StateCondAggMeasurePercentage') || is(source, 'PPINOT:StateCondAggMeasureAll')
     || is(source, 'PPINOT:StateCondAggMeasureAtLeastOne') || is(source, 'PPINOT:StateCondAggMeasureNo')
-    || is(source, 'PPINOT:CountMeasure') || is(source, 'PPINOT:DataMeasure'))
-      return { type: connection }
-    else
-      return false
-  }
-  else if(connection === 'PPINOT:TimeDistanceArcStart') {
-    if(isDefaultValid(source) && is(target, 'PPINOT:TimeSlot'))
-      return { type: connection }
-    else
-      return false
-  }
-  else if(connection === 'PPINOT:TimeDistanceArcEnd') {
-    if(isDefaultValid(target) && is(source, 'PPINOT:TimeSlot'))
+    || is(source, 'PPINOT:CountMeasure') || is(source, 'PPINOT:DataMeasure') || is(source, 'PPINOT:TimeMeasure')
+    || is(source, 'PPINOT:CountAggregatedMeasure') || is(source, 'PPINOT:DataAggregatedMeasure') || is(source, 'PPINOT:TimeAggregatedMeasure')))
       return { type: connection }
     else
       return false
   }
 
   else if(connection === 'PPINOT:ToConnection') {
-    if(isDefaultValid(target) || is(target, 'bpmn:Participant') 
-    && is(source, 'PPINOT:TimeMeasure') || is(source, 'PPINOT:CyclicTimeMeasure')
+    if((isDefaultValid(target) || is(target, 'bpmn:Participant') )
+    && ( is(source, 'PPINOT:TimeMeasure') || is(source, 'PPINOT:CyclicTimeMeasure')
     || is(source, 'PPINOT:CyclicTimeMeasureSUM') || is(source, 'PPINOT:CyclicTimeMeasureMAX')
-    || is(source, 'PPINOT:CyclicTimeMeasureMIN') || is(source, 'PPINOT:CyclicTimeMeasureAVG'))
+    || is(source, 'PPINOT:CyclicTimeMeasureMIN') || is(source, 'PPINOT:CyclicTimeMeasureAVG')
+    || is(source, 'PPINOT:CyclicTimeAggregatedMeasureSUM') || is(source, 'PPINOT:CyclicTimeAggregatedMeasureMAX')
+    || is(source, 'PPINOT:CyclicTimeAggregatedMeasureMIN') || is(source, 'PPINOT:CyclicTimeAggregatedMeasureAVG')
+    || is(source, 'PPINOT:CyclicTimeAggregatedMeasure') || is(source, 'PPINOT:TimeAggregatedMeasure')))
       return { type: connection }
     else
       return false
   }
   else if(connection === 'PPINOT:FromConnection') {
-    if(isDefaultValid(target) || is(target, 'bpmn:Participant') 
-    && is(source, 'PPINOT:TimeMeasure') || is(source, 'PPINOT:CyclicTimeMeasure')
+    if((isDefaultValid(target) || is(target, 'bpmn:Participant') )
+    && (is(source, 'PPINOT:TimeMeasure') || is(source, 'PPINOT:CyclicTimeMeasure')
     || is(source, 'PPINOT:CyclicTimeMeasureSUM') || is(source, 'PPINOT:CyclicTimeMeasureMAX')
-    || is(source, 'PPINOT:CyclicTimeMeasureMIN') || is(source, 'PPINOT:CyclicTimeMeasureAVG'))
+    || is(source, 'PPINOT:CyclicTimeMeasureMIN') || is(source, 'PPINOT:CyclicTimeMeasureAVG')
+    || is(source, 'PPINOT:CyclicTimeAggregatedMeasureSUM') || is(source, 'PPINOT:CyclicTimeAggregatedMeasureMAX')
+    || is(source, 'PPINOT:CyclicTimeAggregatedMeasureMIN') || is(source, 'PPINOT:CyclicTimeAggregatedMeasureAVG')
+    || is(source, 'PPINOT:CyclicTimeAggregatedMeasure') || is(source, 'PPINOT:TimeAggregatedMeasure')))
       return { type: connection }
     else
       return false
   }
 
   else if(connection === 'PPINOT:StartConnection') {
-    if(isDefaultValid(target) || is(target, 'bpmn:Participant') && is(source, 'PPINOT:CountMeasure') 
+    if((isDefaultValid(target) || is(target, 'bpmn:Participant')) && (is(source, 'PPINOT:CountMeasure') 
     || is(source, 'PPINOT:CountAggregatedMeasure') || is(source, 'PPINOT:CountAggregatedMeasureSUM')
     || is(source, 'PPINOT:CountAggregatedMeasureMAX') || is(source, 'PPINOT:CountAggregatedMeasureMIN')
-    || is(source, 'PPINOT:CountAggregatedMeasureAVG'))
+    || is(source, 'PPINOT:CountAggregatedMeasureAVG')))
       return { type: connection }
     else
       return false
   }
   else if(connection === 'PPINOT:EndConnection') {
-    if(isDefaultValid(target) || is(target, 'bpmn:Participant') && is(source, 'PPINOT:CountMeasure') 
+    if((isDefaultValid(target) || is(target, 'bpmn:Participant')) && (is(source, 'PPINOT:CountMeasure') 
     || is(source, 'PPINOT:CountAggregatedMeasure') || is(source, 'PPINOT:CountAggregatedMeasureSUM')
     || is(source, 'PPINOT:CountAggregatedMeasureMAX') || is(source, 'PPINOT:CountAggregatedMeasureMIN')
-    || is(source, 'PPINOT:CountAggregatedMeasureAVG'))
+    || is(source, 'PPINOT:CountAggregatedMeasureAVG')))
       return { type: connection }
     else
       return false
@@ -196,6 +135,7 @@ PPINOTRules.prototype.init = function() {
 
   /**
    * Can shape be created on target container?
+   * This function defines which elements may contain other elements
    */
   function canCreate(shape, target) {
 
@@ -206,10 +146,7 @@ PPINOTRules.prototype.init = function() {
 
     var allowedContainer = is(target, 'bpmn:Process') || is(target, 'bpmn:Participant') || is(target, 'bpmn:Collaboration');
 
-    // if (shape.type === 'PPINOT:AggregatedMeasure') {
-    //   allowedContainer = allowedContainer || is(target, 'PPINOT:Ppi');
-    // }
-
+    //In this case, we define that Ppi element can contain any PPINOT element
     if (isPPINOT(shape)) {
       allowedContainer = allowedContainer || is(target, 'PPINOT:Ppi');
     }
@@ -218,45 +155,6 @@ PPINOTRules.prototype.init = function() {
     return allowedContainer;
   }
 
-  /**
-   * Can source and target be connected?
-   */
-
-
-  function canConnectMultiple(source, target, type) {
-    if (is(target, 'bpmn:Task') && is(source, 'bpmn:Task')) {
-      if(type === 'PPINOT:ConsequenceTimedFlow')
-        return {type1: 'PPINOT:ResourceArc', type2:'PPINOT:ConsequenceFlow'}
-      else if(type === 'PPINOT:TimeDistance')
-        return {type1: 'PPINOT:TimeDistanceArcStart', type2:'PPINOT:TimeDistanceArcEnd'}
-    }
-  }
-
-
-  function canReconnect(source, target, connection) {
-    if(!isPPINOT(connection) && !isPPINOT(source) && !isPPINOT(target))
-      return;
-    else {
-      if(connection.type === 'PPINOT:ConsequenceFlow') {
-        if(!isPPINOT(source) && !isPPINOT(target))
-          return { type: connection.type }
-        else if(is(source, 'PPINOT:TimeSlot') && !isPPINOT(target))
-          return { type: connection.type }
-        else
-          return false
-      }
-      else if(connection.type === 'PPINOT:ResourceArc') {
-        if((!isPPINOT(source) && isPPINOTShape(target)) || (isPPINOTShape(source) && !isPPINOT(target) ))
-          return { type: connection.type }
-        else
-          return;
-      }
-      else {
-        return canConnect(source, target, connection.type)
-      }
-    }
-
-  }
 
   this.addRule('elements.move', HIGH_PRIORITY, function(context) {
 
@@ -294,8 +192,8 @@ PPINOTRules.prototype.init = function() {
   this.addRule('shape.resize', HIGH_PRIORITY, function(context) {
     var shape = context.shape;
 
+    // it lets resize PPINOT elements  
     if (isPPINOT(shape)) {
-      // cannot resize PPINOT elements
       return true;
     }
   });
@@ -305,10 +203,7 @@ PPINOTRules.prototype.init = function() {
         target = context.target,
         type = context.type;
 
-    if(type === 'PPINOT:ConsequenceTimedFlow' || type === 'PPINOT:TimeDistance')
-      return canConnectMultiple(source, target, type)
-
-    return canConnect2(source, target, type);
+    return connect(source, target, type);
   });
 
   this.addRule('connection.reconnectStart', HIGH_PRIORITY*2, function(context) {
@@ -316,14 +211,14 @@ PPINOTRules.prototype.init = function() {
         source = context.hover || context.source,
         target = connection.target;
 
-    return canConnect2(source, target, connection.type);
+    return connect(source, target, connection.type);
   });
 
   this.addRule('connection.reconnectEnd', HIGH_PRIORITY*2, function(context) {
     var connection = context.connection,
         source = connection.source,
         target = context.hover || context.target;
-    return canConnect2(source, target, connection.type);
+    return connect(source, target, connection.type);
   });
 
 };
@@ -336,6 +231,6 @@ PPINOTRules.prototype.canConnect = function (source, target, connection) {
   if (nonExistingOrLabel(source) || nonExistingOrLabel(target)) {
     return null;
   }
-  return canConnect2(source, target, connection.type)
+  return connect(source, target, connection.type)
 
 }

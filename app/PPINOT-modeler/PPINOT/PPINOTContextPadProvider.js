@@ -14,7 +14,7 @@ import {
 } from 'min-dash';
 import {isLabel} from "./utils/LabelUtil";
 
-import {resourceArcElements, myConnectionElements, aggreagatedElements, baseMeasureElements} from "./Types";
+import {myConnectionElements, aggreagatedElements, baseMeasureElements} from "./Types";
 import { remove, replace } from 'tiny-svg';
 import {
     isDifferentType
@@ -131,7 +131,11 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
         ||  is(businessObject, 'PPINOT:StateCondAggMeasureNo')
         ||  is(businessObject, 'PPINOT:StateConditionMeasure')
         ||  is(businessObject, 'PPINOT:CountMeasure') 
-        ||  is(businessObject, 'PPINOT:DataMeasure')&& element.type !== 'label') {
+        ||  is(businessObject, 'PPINOT:CountAggregatedMeasure') 
+        ||  is(businessObject, 'PPINOT:TimeMeasure') 
+        ||  is(businessObject, 'PPINOT:TimeAggregatedMeasure') 
+        ||  is(businessObject, 'PPINOT:DataMeasure')
+        ||  is(businessObject, 'PPINOT:DataAggregatedMeasure') && element.type !== 'label') {
         assign(actions, {
             'connect3': appendConnectAction(
                 'PPINOT:DashedLine',
@@ -143,11 +147,17 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
     
 
     if(is(businessObject, 'PPINOT:TimeMeasure') 
+    || is(businessObject, 'PPINOT:TimeAggregatedMeasure')
     || is(businessObject, 'PPINOT:CyclicTimeMeasure')
     || is(businessObject, 'PPINOT:CyclicTimeMeasureSUM')
     || is(businessObject, 'PPINOT:CyclicTimeMeasureMAX')
     || is(businessObject, 'PPINOT:CyclicTimeMeasureMIN')
     || is(businessObject, 'PPINOT:CyclicTimeMeasureAVG')
+    || is(businessObject, 'PPINOT:CyclicTimeAggregatedMeasure')
+    || is(businessObject, 'PPINOT:CyclicTimeAggregatedMeasureSUM')
+    || is(businessObject, 'PPINOT:CyclicTimeAggregatedMeasureMAX')
+    || is(businessObject, 'PPINOT:CyclicTimeAggregatedMeasureMIN')
+    || is(businessObject, 'PPINOT:CyclicTimeAggregatedMeasureAVG')
     && element.type !== 'label') {
         assign(actions, {
             'connect7': appendConnectAction(
@@ -209,6 +219,9 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
         });
     }
 
+    //The following conditions defines buttons to replace elements
+    // In this case, the menu button is only in aggregated measures and its function is replace these elements 
+    // by derived multi instance measure
     if(isAny(businessObject, aggreagatedElements)) {
         assign(actions, {
             'replaceDerivedMulti': {
@@ -226,6 +239,8 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
         })
     } 
 
+    // Conversely, this menu button is for derived multi instance measures and its function is replace these elements 
+    // by aggregated measure
     if(is(businessObject, 'PPINOT:DerivedMultiInstanceMeasure')) {
         assign(actions, {
             'replaceAggregatedMeasure': {
@@ -243,6 +258,27 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
         })
     }
 
+    // In this case, the menu button is only for base measures and its function is replace these elements 
+    // by derived single instance measure
+    if(isAny(businessObject, baseMeasureElements)) {
+        assign(actions, {
+            'replaceDerivedSingle': {
+                className: 'icon-derivedSingle-menu',
+                title: translate('Replace with Derived Single Instance Measure'),
+                action: {
+                    click: function(event, element){
+                        let newElementData = elementFactory.createShape({ type: 'PPINOT:DerivedSingleInstanceMeasure'});
+                        newElementData.x = element.x + (newElementData.width || element.width) / 2;
+                        newElementData.y = element.y + (newElementData.height || element.height) / 2;
+                        modeling.replaceShape(element, newElementData);
+                    }
+                }
+            }   
+        })
+    } 
+
+    // Conversely, this menu button is for derived single instance measures and its function is replace these elements 
+    // by base measure
     if(is(businessObject, 'PPINOT:DerivedSingleInstanceMeasure')) {
         assign(actions, {
             'replaceBaseMeasure': {
@@ -260,22 +296,6 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
         })
     }
 
-    if(isAny(businessObject, baseMeasureElements)) {
-        assign(actions, {
-            'replaceDerivedSingle': {
-                className: 'icon-derivedSingle-menu',
-                title: translate('Replace with Derived Multi Instance Measure'),
-                action: {
-                    click: function(event, element){
-                        let newElementData = elementFactory.createShape({ type: 'PPINOT:DerivedSingleInstanceMeasure'});
-                        newElementData.x = element.x + (newElementData.width || element.width) / 2;
-                        newElementData.y = element.y + (newElementData.height || element.height) / 2;
-                        modeling.replaceShape(element, newElementData);
-                    }
-                }
-            }   
-        })
-    } 
 
     return actions;
   };
