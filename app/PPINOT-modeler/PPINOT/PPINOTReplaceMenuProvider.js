@@ -85,7 +85,11 @@ if (!rules.allowed('shape.replace', { element: element })) {
 
 var differentType = isDifferentType(element);
 
-// ------------------------------------------------------------------------
+// The elements which will have the popmuo menu with the options included in PPINOTReplaceOptions.js 
+// are defined here.
+
+// In this case, if the element is one of these, the options of MEASURE will appear in the popup menu
+// of these elements
 if (is(businessObject, 'PPINOT:BaseMeasure') 
 || is(businessObject, 'PPINOT:CountMeasure') 
 || is(businessObject, 'PPINOT:TimeMeasure') 
@@ -130,18 +134,6 @@ if (is(businessObject, 'PPINOT:CountAggregatedMeasure')
   entries = filter(replaceOptions.AGGREGATED_MEASURE, differentType);
   return this._createEntries(element, entries);
 }
-
-// if (is(businessObject, 'PPINOT:StateConditionAggregatedMeasure') 
-// || is(businessObject, 'PPINOT:StateCondAggMeasureNumber') 
-// || is(businessObject, 'PPINOT:StateCondAggMeasurePercentage') 
-// || is(businessObject, 'PPINOT:StateCondAggMeasureAtLeastOne') 
-// || is(businessObject, 'PPINOT:StateCondAggMeasureAll') 
-// || is(businessObject, 'PPINOT:StateCondAggMeasureNo')) {
-//   entries = filter(replaceOptions.STATE, differentType);
-//   return this._createEntries(element, entries);
-// }
-
-//-------------------------------------------------------------------------
 
 // start events outside event sub processes
 if (is(businessObject, 'bpmn:StartEvent') && !isEventSubProcess(businessObject.$parent)) {
@@ -312,12 +304,15 @@ ReplaceMenuProvider.prototype.getHeaderEntries = function(element) {
 
 var headerEntries = [];
 
-//ESTO ES PARA LAS 3 OPCIONES QUE SALEN ARRIBA EN EL MENÚ-----------------------------------
+// 
 if (is(element, 'PPINOT:TimeMeasure')) {
   headerEntries = headerEntries.concat(this._getCyclicTimeMeasure(element));
 }
 
+// The elements which are defined here will have a header menu options in the popup menu
 
+// In this case, if the element is one of these, the options of _getFunctionsTimeAgg will appear in the
+// header of the popup menu of these elements.
 if (is(element, 'PPINOT:TimeAggregatedMeasure')
 || is(element, 'PPINOT:TimeAggregatedMeasureSUM')
 || is(element, 'PPINOT:TimeAggregatedMeasureMIN')
@@ -366,7 +361,6 @@ if (is(element, 'PPINOT:StateConditionAggregatedMeasure')
 || is(element, 'PPINOT:StateCondAggMeasureNo')){
   headerEntries = headerEntries.concat(this._getFunctionsStateCondition(element));
 }
-//----------------------------------------------------------------
 
 if (is(element, 'bpmn:Activity') && !isEventSubProcess(element)) {
   headerEntries = headerEntries.concat(this._getLoopEntries(element));
@@ -380,8 +374,6 @@ if (is(element, 'bpmn:SubProcess') &&
 
 return headerEntries;
 };
-
-
 
 
 /**
@@ -475,19 +467,6 @@ forEach(replaceOptions, function(entry) {
       }));
     }
 
-    if (is(businessObject, 'PPINOT:CountMeasure')){
-
-      return menuEntries.push(self._createMenuEntry(entry, element, function() {
-        modeling.updateProperties(element.source, { default: undefined });
-      }));
-    }
-
-    if (is(businessObject, 'PPINOT:AggregatedMeasure')){
-
-      return menuEntries.push(self._createMenuEntry(entry, element, function() {
-        modeling.updateProperties(element.source, { default: undefined });
-      }));
-    }
   }
 });
 
@@ -506,7 +485,8 @@ return menuEntries;
 * @return {Object} menu entry item
 */
 
-//-------------------------------------------------------------------------------
+
+//This function defines the replacement logic for popup menu options
 
 ReplaceMenuProvider.prototype._createMenuEntry = function(definition, element, action) {
 var translate = this._translate;
@@ -531,11 +511,10 @@ var menuEntry = {
   id: definition.actionName,
   action: action
 };
-//console.log(menuEntry);
+
 return menuEntry;
 };
 
-//---------------------------------------------------------------------------------------
 
 /**
 * Get a list of menu items containing buttons for multi instance markers
@@ -615,6 +594,8 @@ var loopEntries = [
 return loopEntries;
 };
 
+
+// This functions defines the replacement for header popup menu options
 
 ReplaceMenuProvider.prototype._getCyclicTimeMeasure = function(element) {
 

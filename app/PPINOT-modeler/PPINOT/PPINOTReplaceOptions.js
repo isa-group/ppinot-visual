@@ -1,3 +1,8 @@
+// This module contains the options to replace an element by other element 
+// The variables include the options and then the replacement logic (PPINOTReplaceMenuProvider.js) 
+// will use them to replace the elements. These options will be shown in the menu options of diagram 
+// in the element
+
 export var MEASURE = [
   {
     label: 'Base measure',
