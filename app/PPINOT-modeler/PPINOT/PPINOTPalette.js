@@ -214,12 +214,17 @@ PaletteProvider.prototype.getPaletteEntries = function(element) {
     'PPINOT-ppi': createAction(
       'PPINOT:Ppi', 'PPINOT', 'icon-PPINOT-ppi'
     ),
+    'PPINOT-ppi-space': createAction(
+      'PPINOT:Ppi', 'PPINOT'
+    ),
     'PPINOT-target': createAction(
       'PPINOT:Target', 'PPINOT', 'icon-target'
-    ), 
+    ),
     'PPINOT-scope': createAction(
       'PPINOT:Scope', 'PPINOT', 'icon-scope'
     ), 
+    
+    
   
   });
 
