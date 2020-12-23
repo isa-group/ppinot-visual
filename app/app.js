@@ -52,6 +52,7 @@ function openDiagram(xml, cbpmn) {
         .removeClass('with-diagram')
         .addClass('with-error');
 
+      modeler.addPPINOTElements(PPINOT);
       modeler.setModelOpen(false);
       container.find('.error pre').text(err.message);
 
@@ -111,6 +112,7 @@ function saveDiagram(done) {
 
   modeler.saveXML({ format: true }, function(err, xml) {
     moddle.fromXML(xml, (err, def) => {
+      def.getPPINOTElements();
       def.get("rootElements").forEach((obj) => {
         if(obj.$type.includes('Process')) {
           obj.get('flowElements').forEach((el) => {
