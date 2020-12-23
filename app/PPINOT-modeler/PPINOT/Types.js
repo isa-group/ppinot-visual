@@ -205,6 +205,8 @@ export const directEdit = [
 export const myConnectionElements = [
     'PPINOT:AggregatedMeasure',
     'PPINOT:TimeAggregatedMeasure',
+    'PPINOT:TimeMeasure',
+    'PPINOT:CyclicTimeMeasure',
     'PPINOT:CyclicTimeAggregatedMeasure',
     'PPINOT:CountAggregatedMeasure',
     'PPINOT:CountMeasure',

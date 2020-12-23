@@ -170,11 +170,6 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
                 'icon-fromConnector',
                 'Connect using From connection'
             ),
-            'connect9': appendConnectAction(
-                'PPINOT:MyConnection',
-                'bpmn-icon-connection',
-                'Connection between PPINOT elements'
-            ),
         });
     }
 
