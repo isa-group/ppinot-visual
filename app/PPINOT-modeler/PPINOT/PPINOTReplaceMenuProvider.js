@@ -99,6 +99,7 @@ if (is(businessObject, 'PPINOT:BaseMeasure')
 ||  is(businessObject, 'PPINOT:CyclicTimeMeasureMAX')
 ||  is(businessObject, 'PPINOT:CyclicTimeMeasureAVG')
 || is(businessObject, 'PPINOT:StateConditionMeasure')
+|| is(businessObject, 'PPINOT:DerivedSingleInstanceMeasure')
 || is(businessObject, 'PPINOT:DataMeasure')) {
   entries = filter(replaceOptions.MEASURE, differentType);
   return this._createEntries(element, entries);
@@ -130,7 +131,8 @@ if (is(businessObject, 'PPINOT:CountAggregatedMeasure')
 || is(businessObject, 'PPINOT:DataAggregatedMeasureSUM')
 || is(businessObject, 'PPINOT:DataAggregatedMeasureMIN')
 || is(businessObject, 'PPINOT:DataAggregatedMeasureMAX')
-|| is(businessObject, 'PPINOT:DataAggregatedMeasureAVG')) {
+|| is(businessObject, 'PPINOT:DataAggregatedMeasureAVG')
+|| is(businessObject, 'PPINOT:DerivedMultiInstanceMeasure')) {
   entries = filter(replaceOptions.AGGREGATED_MEASURE, differentType);
   return this._createEntries(element, entries);
 }

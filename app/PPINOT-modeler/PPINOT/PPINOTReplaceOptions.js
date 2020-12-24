@@ -43,6 +43,14 @@ export var MEASURE = [
       type: 'PPINOT:StateConditionMeasure'
     }
   },
+  {
+    label: '\xa0\xa0\xa0\xa0\xa0' + 'Derived single instance measure',
+    actionName: 'replace-with-derived-single-instance-measure',
+    className: 'icon-state-menu',
+    target: {
+      type: 'PPINOT:DerivedSingleInstanceMeasure',
+    }
+  },
   
 ];
 
@@ -84,6 +92,14 @@ export var AGGREGATED_MEASURE = [
     className: 'icon-state-menu',
     target: {
       type: 'PPINOT:StateConditionAggregatedMeasure',
+    }
+  },
+  {
+    label: '\xa0\xa0\xa0\xa0\xa0' + 'Derived multi instance measure',
+    actionName: 'replace-with-derived-multi-instance-measure',
+    className: 'icon-state-menu',
+    target: {
+      type: 'PPINOT:DerivedMultiInstanceMeasure',
     }
   },
   

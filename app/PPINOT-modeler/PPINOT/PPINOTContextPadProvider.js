@@ -217,79 +217,22 @@ export default function PPINOTContextPadProvider(contextPad, popupMenu, canvas, 
     //The following conditions defines buttons to replace elements
     // In this case, the menu button is only in aggregated measures and its function is replace these elements 
     // by derived multi instance measure
-    if(isAny(businessObject, aggreagatedElements)) {
-        assign(actions, {
-            'replaceDerivedMulti': {
-                className: 'icon-derivedMulti-menu',
-                title: translate('Replace with Derived Multi Instance Measure'),
-                action: {
-                    click: function(event, element){
-                        let newElementData = elementFactory.createShape({ type: 'PPINOT:DerivedMultiInstanceMeasure'});
-                        newElementData.x = element.x + (newElementData.width || element.width) / 2;
-                        newElementData.y = element.y + (newElementData.height || element.height) / 2;
-                        modeling.replaceShape(element, newElementData);
-                    }
-                }
-            }   
-        })
-    } 
-
-    // Conversely, this menu button is for derived multi instance measures and its function is replace these elements 
-    // by aggregated measure
-    if(is(businessObject, 'PPINOT:DerivedMultiInstanceMeasure')) {
-        assign(actions, {
-            'replaceAggregatedMeasure': {
-                className: 'icon-aggregatedMeasure-menu',
-                title: translate('Replace with Aggregated Measure'),
-                action: {
-                    click: function(event, element){
-                        let newElementData = elementFactory.createShape({ type: 'PPINOT:AggregatedMeasure'});
-                        newElementData.x = element.x + (newElementData.width || element.width) / 2;
-                        newElementData.y = element.y + (newElementData.height || element.height) / 2;
-                        modeling.replaceShape(element, newElementData);
-                    }
-                }
-            }   
-        })
-    }
-
-    // In this case, the menu button is only for base measures and its function is replace these elements 
-    // by derived single instance measure
-    if(isAny(businessObject, baseMeasureElements)) {
-        assign(actions, {
-            'replaceDerivedSingle': {
-                className: 'icon-derivedSingle-menu',
-                title: translate('Replace with Derived Single Instance Measure'),
-                action: {
-                    click: function(event, element){
-                        let newElementData = elementFactory.createShape({ type: 'PPINOT:DerivedSingleInstanceMeasure'});
-                        newElementData.x = element.x + (newElementData.width || element.width) / 2;
-                        newElementData.y = element.y + (newElementData.height || element.height) / 2;
-                        modeling.replaceShape(element, newElementData);
-                    }
-                }
-            }   
-        })
-    } 
-
-    // Conversely, this menu button is for derived single instance measures and its function is replace these elements 
-    // by base measure
-    if(is(businessObject, 'PPINOT:DerivedSingleInstanceMeasure')) {
-        assign(actions, {
-            'replaceBaseMeasure': {
-                className: 'icon-baseMeasure-menu',
-                title: translate('Replace with Base Measure'),
-                action: {
-                    click: function(event, element){
-                        let newElementData = elementFactory.createShape({ type: 'PPINOT:BaseMeasure'});
-                        newElementData.x = element.x + (newElementData.width || element.width) / 2;
-                        newElementData.y = element.y + (newElementData.height || element.height) / 2;
-                        modeling.replaceShape(element, newElementData);
-                    }
-                }
-            }   
-        })
-    }
+    // if(isAny(businessObject, aggreagatedElements)) {
+    //     assign(actions, {
+    //         'replaceDerivedMulti': {
+    //             className: 'icon-derivedMulti-menu',
+    //             title: translate('Replace with Derived Multi Instance Measure'),
+    //             action: {
+    //                 click: function(event, element){
+    //                     let newElementData = elementFactory.createShape({ type: 'PPINOT:DerivedMultiInstanceMeasure'});
+    //                     newElementData.x = element.x + (newElementData.width || element.width) / 2;
+    //                     newElementData.y = element.y + (newElementData.height || element.height) / 2;
+    //                     modeling.replaceShape(element, newElementData);
+    //                 }
+    //             }
+    //         }   
+    //     })
+    // } 
 
 
     return actions;
