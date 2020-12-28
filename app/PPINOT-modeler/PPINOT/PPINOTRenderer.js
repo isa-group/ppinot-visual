@@ -558,6 +558,26 @@ export default function PPINOTRenderer(eventBus, styles, canvas, textRenderer) {
       svgAppend(p, aggregatedMeasure);
       return aggregatedMeasure;
     },
+    'PPINOT:AggregatedMeasureSUM': (p, element) => {
+      var sum = renderer('PPINOT:AggregatedMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', 'SUM', 15, 'bold');
+      return sum;
+    },
+    'PPINOT:AggregatedMeasureMAX': (p, element) => {
+      var max = renderer('PPINOT:AggregatedMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', 'MAX', 15, 'bold');
+      return max;
+    },
+    'PPINOT:AggregatedMeasureMIN': (p, element) => {
+      var min = renderer('PPINOT:AggregatedMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', 'MIN', 15, 'bold');
+      return min;
+    },
+    'PPINOT:AggregatedMeasureAVG': (p, element) => {
+      var avg = renderer('PPINOT:AggregatedMeasure')(p, element); 
+      renderEmbeddedDefaultLabel(p, element, 'center-middle', 'AVG', 15, 'bold');
+      return avg;
+    },
     'PPINOT:TimeAggregatedMeasure': (p, element) => {
       let timeAggregatedMeasure = drawTimeAggregatedMeasure(element)
       svgAppend(p, timeAggregatedMeasure);

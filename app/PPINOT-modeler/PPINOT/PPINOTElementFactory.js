@@ -158,6 +158,10 @@ PPINOTElementFactory.prototype._getPPINOTElementSize = function(type) {
   var shapes = {
     __default: { width: 100, height: 80 },
     'PPINOT:AggregatedMeasure':{width: 120, height: 100},
+    'PPINOT:AggregatedMeasureMAX':{width: 120, height: 100},
+    'PPINOT:AggregatedMeasureAVG':{width: 120, height: 100},
+    'PPINOT:AggregatedMeasureMIN':{width: 120, height: 100},
+    'PPINOT:AggregatedMeasureSUM':{width: 120, height: 100},
     'PPINOT:CountAggregatedMeasure':{width: 120, height: 100},
     'PPINOT:TimeAggregatedMeasure':{width: 120, height: 100},
     'PPINOT:CyclicTimeAggregatedMeasure':{width: 120, height: 100},

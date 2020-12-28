@@ -106,16 +106,20 @@ if (is(businessObject, 'PPINOT:BaseMeasure')
 }
 
 if (is(businessObject, 'PPINOT:CountAggregatedMeasure') 
-|| is(element, 'PPINOT:CountAggregatedMeasureSUM')
-|| is(element, 'PPINOT:CountAggregatedMeasureMIN')
-|| is(element, 'PPINOT:CountAggregatedMeasureMAX')
-|| is(element, 'PPINOT:CountAggregatedMeasureAVG')
+|| is(businessObject, 'PPINOT:CountAggregatedMeasureSUM')
+|| is(businessObject, 'PPINOT:CountAggregatedMeasureMIN')
+|| is(businessObject, 'PPINOT:CountAggregatedMeasureMAX')
+|| is(businessObject, 'PPINOT:CountAggregatedMeasureAVG')
 || is(businessObject, 'PPINOT:AggregatedMeasure') 
+|| is(businessObject, 'PPINOT:AggregatedMeasureSUM')
+|| is(businessObject, 'PPINOT:AggregatedMeasureMIN')
+|| is(businessObject, 'PPINOT:AggregatedMeasureMAX')
+|| is(businessObject, 'PPINOT:AggregatedMeasureAVG')
 || is(businessObject, 'PPINOT:TimeAggregatedMeasure') 
-|| is(element, 'PPINOT:TimeAggregatedMeasureSUM')
-|| is(element, 'PPINOT:TimeAggregatedMeasureMIN')
-|| is(element, 'PPINOT:TimeAggregatedMeasureMAX')
-|| is(element, 'PPINOT:TimeAggregatedMeasureAVG')
+|| is(businessObject, 'PPINOT:TimeAggregatedMeasureSUM')
+|| is(businessObject, 'PPINOT:TimeAggregatedMeasureMIN')
+|| is(businessObject, 'PPINOT:TimeAggregatedMeasureMAX')
+|| is(businessObject, 'PPINOT:TimeAggregatedMeasureAVG')
 || is(businessObject, 'PPINOT:CyclicTimeAggregatedMeasure')
 || is(businessObject, 'PPINOT:CyclicTimeAggregatedMeasureSUM')
 || is(businessObject, 'PPINOT:CyclicTimeAggregatedMeasureMAX')
@@ -321,6 +325,14 @@ if (is(element, 'PPINOT:TimeAggregatedMeasure')
 || is(element, 'PPINOT:TimeAggregatedMeasureMAX')
 || is(element, 'PPINOT:TimeAggregatedMeasureAVG')){
   headerEntries = headerEntries.concat(this._getFunctionsTimeAgg(element));
+}
+
+if (is(element, 'PPINOT:AggregatedMeasure')
+|| is(element, 'PPINOT:AggregatedMeasureSUM')
+|| is(element, 'PPINOT:AggregatedMeasureMIN')
+|| is(element, 'PPINOT:AggregatedMeasureMAX')
+|| is(element, 'PPINOT:AggregatedMeasureAVG')){
+  headerEntries = headerEntries.concat(this._getFunctionsAgg(element));
 }
 
 if (is(element, 'PPINOT:CountAggregatedMeasure')
@@ -669,6 +681,51 @@ ReplaceMenuProvider.prototype._getFunctionsTimeAgg = function(element) {
   
   return timeEntry;
   };
+
+  ReplaceMenuProvider.prototype._getFunctionsAgg = function(element) {
+
+    var translate = this._translate;
+    var replace = this._replace;
+
+    var replaceActionSUM = function() {
+      return replace.replaceElement(element, { type: 'PPINOT:AggregatedMeasureSUM' });
+    };
+    var replaceActionMAX = function() {
+      return replace.replaceElement(element, { type: 'PPINOT:AggregatedMeasureMAX' });
+    };
+    var replaceActionMIN = function() {
+      return replace.replaceElement(element, { type: 'PPINOT:AggregatedMeasureMIN' });
+    };
+    var replaceActionAVG = function() {
+      return replace.replaceElement(element, { type: 'PPINOT:AggregatedMeasureAVG' });
+    };
+    
+    var timeEntry = [
+    
+      {
+        id: 'replace-with-agg-sum',
+        label: translate('SUM'),
+        action: replaceActionSUM
+      },
+      {
+        id: 'replace-with-agg-max',
+        label: translate('MAX'),
+        action: replaceActionMAX
+      },
+      {
+        id: 'replace-with-agg-min',
+        label: translate('MIN'),
+        action: replaceActionMIN
+      },
+      {
+        id: 'replace-with-agg-avg',
+        label: translate('AVG'),
+        action: replaceActionAVG
+      }
+    ];
+    
+    return timeEntry;
+    };
 
 
   ReplaceMenuProvider.prototype._getFunctionsCyclicTimeMeasure = function(element) {
