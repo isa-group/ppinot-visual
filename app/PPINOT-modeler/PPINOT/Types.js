@@ -64,7 +64,11 @@ export const label = [
     'PPINOT:DataAggregatedMeasureSUM',
     'PPINOT:DataAggregatedMeasureMAX',
     'PPINOT:DataAggregatedMeasureMIN',
-    'PPINOT:DataAggregatedMeasureAVG'
+    'PPINOT:DataAggregatedMeasureAVG',
+    'PPINOT:AggregatedMeasureSUM',
+    'PPINOT:AggregatedMeasureMAX',
+    'PPINOT:AggregatedMeasureMIN',
+    'PPINOT:AggregatedMeasureAVG'
 ]
 
 // The elements which are included in "externalLabel" will have an external label
@@ -123,7 +127,11 @@ export const externalLabel = [
     'PPINOT:DataAggregatedMeasureSUM',
     'PPINOT:DataAggregatedMeasureMAX',
     'PPINOT:DataAggregatedMeasureMIN',
-    'PPINOT:DataAggregatedMeasureAVG'
+    'PPINOT:DataAggregatedMeasureAVG',
+    'PPINOT:AggregatedMeasureSUM',
+    'PPINOT:AggregatedMeasureMAX',
+    'PPINOT:AggregatedMeasureMIN',
+    'PPINOT:AggregatedMeasureAVG'
 ]
 
 // The elements which are included in "connections" will be connections 
@@ -197,7 +205,11 @@ export const directEdit = [
     'PPINOT:DataAggregatedMeasureSUM',
     'PPINOT:DataAggregatedMeasureMAX',
     'PPINOT:DataAggregatedMeasureMIN',
-    'PPINOT:DataAggregatedMeasureAVG'
+    'PPINOT:DataAggregatedMeasureAVG',
+    'PPINOT:AggregatedMeasureSUM',
+    'PPINOT:AggregatedMeasureMAX',
+    'PPINOT:AggregatedMeasureMIN',
+    'PPINOT:AggregatedMeasureAVG'
     
 ]
 
@@ -244,7 +256,11 @@ export const myConnectionElements = [
     'PPINOT:DataAggregatedMeasureSUM',
     'PPINOT:DataAggregatedMeasureMAX',
     'PPINOT:DataAggregatedMeasureMIN',
-    'PPINOT:DataAggregatedMeasureAVG'
+    'PPINOT:DataAggregatedMeasureAVG',
+    'PPINOT:AggregatedMeasureSUM',
+    'PPINOT:AggregatedMeasureMAX',
+    'PPINOT:AggregatedMeasureMIN',
+    'PPINOT:AggregatedMeasureAVG'
     
 ]
 
@@ -279,7 +295,11 @@ export const aggreagatedElements = [
     'PPINOT:DataAggregatedMeasureSUM',
     'PPINOT:DataAggregatedMeasureMAX',
     'PPINOT:DataAggregatedMeasureMIN',
-    'PPINOT:DataAggregatedMeasureAVG'
+    'PPINOT:DataAggregatedMeasureAVG',
+    'PPINOT:AggregatedMeasureSUM',
+    'PPINOT:AggregatedMeasureMAX',
+    'PPINOT:AggregatedMeasureMIN',
+    'PPINOT:AggregatedMeasureAVG'
     
 ]
 
@@ -354,7 +374,11 @@ export const resourceArcElements = [
     'PPINOT:DataAggregatedMeasureSUM',
     'PPINOT:DataAggregatedMeasureMAX',
     'PPINOT:DataAggregatedMeasureMIN',
-    'PPINOT:DataAggregatedMeasureAVG'
+    'PPINOT:DataAggregatedMeasureAVG',
+    'PPINOT:AggregatedMeasureSUM',
+    'PPINOT:AggregatedMeasureMAX',
+    'PPINOT:AggregatedMeasureMIN',
+    'PPINOT:AggregatedMeasureAVG'
     
 ]
 
@@ -412,7 +436,11 @@ export const PPINOT = [
     'PPINOT:DataAggregatedMeasureSUM',
     'PPINOT:DataAggregatedMeasureMAX',
     'PPINOT:DataAggregatedMeasureMIN',
-    'PPINOT:DataAggregatedMeasureAVG'
+    'PPINOT:DataAggregatedMeasureAVG',
+    'PPINOT:AggregatedMeasureSUM',
+    'PPINOT:AggregatedMeasureMAX',
+    'PPINOT:AggregatedMeasureMIN',
+    'PPINOT:AggregatedMeasureAVG'
         
 ]
 
