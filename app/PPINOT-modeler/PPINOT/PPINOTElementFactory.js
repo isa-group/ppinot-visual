@@ -182,7 +182,7 @@ PPINOTElementFactory.prototype._getPPINOTElementSize = function(type) {
     'PPINOT:CyclicTimeMeasureMIN':{width: 110, height: 90},
     'PPINOT:CyclicTimeMeasureMAX':{width: 110, height: 90},
     'PPINOT:CyclicTimeMeasureAVG':{width: 110, height: 90},
-    'PPINOT:Ppi':{width: 310, height: 250},
+    'PPINOT:Ppi':{width: 350, height: 300},
     'PPINOT:StateConditionMeasure':{width: 110, height: 90},
     'PPINOT:StateConditionAggregatedMeasure':{width: 120, height: 100},
     'PPINOT:Target':{width: 100, height: 40},
