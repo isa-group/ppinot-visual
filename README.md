@@ -5,6 +5,10 @@ VISUAL PPINOT is a graphical notation for defining PPIs together with business p
 
 In this repository, BPMN io (https://github.com/bpmn-io) has been extended to implement VISUAL PPINOT.
 
+<p align="center">
+  <img src="VISUAL_PPINOT.GIF" alt="animated" />
+</p>
+
 ### Building
 To use this editor, you must follow these steps:
 1. Install Visual Studio Code first (https://code.visualstudio.com/)
