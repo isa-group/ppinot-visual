@@ -6,7 +6,7 @@ VISUAL PPINOT is a graphical notation for defining PPIs together with business p
 In this repository, BPMN io (https://github.com/bpmn-io) has been extended to implement VISUAL PPINOT.
 
 <p align="center">
-  <img src="PPINOT.gif" alt="animated" />
+  <img src="PPINOT_tutorial2.gif" alt="animated" />
 </p>
 
 ### Building
