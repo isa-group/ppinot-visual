@@ -1,7 +1,7 @@
 {
-  "name": "bpmn-js-example-modeler",
-  "version": "0.0.0",
-  "description": "A simple modeler built with bpmn-js",
+  "name": "ppinot-visual",
+  "version": "0.5.0",
+  "description": "A visual modeler of Process Performance Indicators based on PPINOT and built with bpmn-js",
   "scripts": {
     "all": "run-s lint build",
     "build": "webpack --mode production",
@@ -11,19 +11,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bpmn-io/bpmn-js-examples"
+    "url": "https://github.com/isa-group/ppinot-visual"
   },
   "keywords": [
-    "bpmnjs-example"
+    "ppinot", "visual ppinot", "bpmn", "ppis"
   ],
   "author": {
-    "name": "Nico Rehwaldt",
-    "url": "https://github.com/nikku"
+    "name": "ISA Group",
+    "url": "https://github.com/isa-group"
   },
   "contributors": [
     {
-      "name": "bpmn.io contributors",
-      "url": "https://github.com/bpmn-io"
+      "name": "ISA Group contributors",
+      "url": "https://github.com/isa-group"
     }
   ],
   "license": "MIT",

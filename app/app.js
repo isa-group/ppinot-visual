@@ -1,9 +1,5 @@
 import $ from 'jquery';
 
-import BpmnModeler from 'bpmn-js/lib/Modeler';
-
-import pizzaDiagram from '../resources/diag.bpmn';
-
 import PPINOTModeler from './PPINOT-modeler';
 
 import BpmnModdle from 'bpmn-moddle';
